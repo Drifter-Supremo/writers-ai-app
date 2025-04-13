@@ -98,7 +98,7 @@ This document outlines the remaining tasks required to complete and polish the W
 
 ## Phase 3: Feature Enhancements
 
-### 2.1. Rich Text Editor for Notes
+### 3.1. Rich Text Editor for Notes
 - [ ] **Choose Editor:** Select and install a rich text editor library (e.g., Tiptap or Quill).
 - [ ] **Integrate Editor:** Replace the basic textarea in the Notes section (`ProjectDetail.jsx`) with the chosen editor component.
 - [ ] **Implement Toolbar:** Add a simple toolbar with basic formatting options (e.g., Bold, Italic, Underline, Lists).
@@ -107,7 +107,7 @@ This document outlines the remaining tasks required to complete and polish the W
     - [ ] Ensure existing notes are correctly loaded and displayed in the editor.
     - [ ] Handle potential data format changes if migrating from plain text.
 
-### 2.2. Dynamic Document Viewer
+### 3.2. Dynamic Document Viewer
 - [ ] **Choose Viewer Library:** Research and select a suitable library for rendering common document types (PDF, DOCX, TXT) in the browser (e.g., `react-pdf`, `mammoth.js` for DOCX).
 - [ ] **Integrate Viewer:**
     - [ ] Create a new component (e.g., `DocumentViewer.jsx`).
@@ -120,7 +120,7 @@ This document outlines the remaining tasks required to complete and polish the W
     - [ ] Add loading state while fetching/rendering the document.
     - [ ] Add error handling if a document fails to load or render.
 
-### 2.3. Drag-and-Drop Functionality
+### 3.3. Drag-and-Drop Functionality
 - [ ] **File Upload:**
     - [ ] Implement a drag-and-drop zone for file uploads in the Files section.
     - [ ] Provide visual feedback during drag-over and on drop.
@@ -136,7 +136,7 @@ This document outlines the remaining tasks required to complete and polish the W
 
 ## Phase 4: AI Integration
 
-### 3.1. Backend Setup (if needed)
+### 4.1. Backend Setup (if needed)
 - [ ] **Secure API Key:** Evaluate if the Gemini API key needs to be moved to a secure backend function (e.g., Firebase Cloud Functions) instead of being exposed client-side (HIGHLY RECOMMENDED).
     - [ ] Create Firebase Cloud Function endpoint to handle Gemini API calls.
     - [ ] Update client-side code to call the Cloud Function endpoint.
@@ -145,7 +145,7 @@ This document outlines the remaining tasks required to complete and polish the W
     - [ ] Implement logic to retrieve relevant context from Firestore based on the current project.
     - [ ] Consider token limits and context summarization techniques.
 
-### 3.2. AI Chatbox Implementation
+### 4.2. AI Chatbox Implementation
 - [ ] **Create Chat Component:** Build a dedicated `Chatbox.jsx` component.
 - [ ] **UI Elements:**
     - [ ] Message display area (showing user and AI messages).
@@ -161,7 +161,7 @@ This document outlines the remaining tasks required to complete and polish the W
     - [ ] Decide if chat history needs to be persisted in Firestore.
     - [ ] If yes, implement logic to save and load chat messages for each project.
 
-### 3.3. AI-Powered Features (Beyond Chat)
+### 4.3. AI-Powered Features (Beyond Chat)
 - [ ] **Contextual Suggestions:** Plan and implement specific AI features (e.g., "Suggest plot points," "Analyze character consistency," "Rewrite this paragraph").
 - [ ] **Trigger Points:** Determine how users will invoke these features (e.g., buttons within the notes editor, context menus).
 - [ ] **UI Integration:** Integrate these features into the relevant UI sections.
@@ -170,7 +170,7 @@ This document outlines the remaining tasks required to complete and polish the W
 
 ## Phase 5: Testing & Quality Assurance
 
-### 4.1. Unit Testing
+### 5.1. Unit Testing
 - [ ] **Setup:** Configure a testing framework (e.g., Vitest, React Testing Library).
 - [ ] **Component Tests:** Write unit tests for key components (e.g., `ProjectCard`, `FileUploader`, `NotesList`, `SettingsForm`, `Chatbox`).
     - [ ] Test rendering based on props.
@@ -178,14 +178,14 @@ This document outlines the remaining tasks required to complete and polish the W
     - [ ] Mock Firebase/API calls where necessary.
 - [ ] **Utility/Hook Tests:** Write tests for any utility functions or custom hooks.
 
-### 4.2. Integration Testing
+### 5.2. Integration Testing
 - [ ] **Firebase Interaction:** Test the integration between components and Firebase services.
     - [ ] Test data fetching logic (e.g., ensuring `Projects.jsx` correctly fetches and displays projects).
     - [ ] Test data writing logic (e.g., creating a project, adding a note, uploading a file).
     - [ ] Test data deletion logic.
 - [ ] **Routing:** Test navigation between different routes and dynamic route handling (`ProjectDetail`).
 
-### 4.3. End-to-End (E2E) Testing
+### 5.3. End-to-End (E2E) Testing
 - [ ] **Setup:** Configure an E2E testing framework (e.g., Cypress, Playwright).
 - [ ] **Key User Flows:** Write E2E tests for critical user journeys:
     - [ ] Creating a new project.
@@ -194,7 +194,7 @@ This document outlines the remaining tasks required to complete and polish the W
     - [ ] Updating user settings.
     - [ ] Searching/filtering projects (if implemented).
 
-### 4.4. Manual Testing & QA
+### 5.4. Manual Testing & QA
 - [ ] **Cross-Browser Testing:** Test the application on major browsers (Chrome, Firefox, Safari, Edge).
 - [ ] **Responsive Testing:** Test thoroughly on different screen sizes (desktop, tablet, mobile).
 - [ ] **Usability Testing:** Perform manual walkthroughs focusing on ease of use and identifying UX friction points.
@@ -204,7 +204,7 @@ This document outlines the remaining tasks required to complete and polish the W
 
 ## Phase 6: Final Polish & Deployment Prep
 
-### 5.1. UI/UX Refinements
+### 6.1. UI/UX Refinements
 - [ ] **Consistency Check:** Review the entire application for UI consistency (spacing, typography, colors, component styles).
 - [ ] **Animation Polish:** Refine existing animations and add subtle transitions where appropriate (e.g., sidebar collapse if implemented, section transitions).
 - [ ] **Accessibility (A11y):**
@@ -215,24 +215,26 @@ This document outlines the remaining tasks required to complete and polish the W
 - [ ] **Empty States:** Ensure all areas with dynamic content have well-designed empty states (e.g., no projects, no files, no notes).
 - [ ] **Feedback States:** Enhance visual feedback for user actions (e.g., clearer success messages, more distinct loading indicators).
 
-### 5.2. Performance Optimization
+### 6.2. Performance Optimization
 - [ ] **Bundle Analysis:** Analyze the production build bundle size and identify potential areas for optimization.
 - [ ] **Code Splitting:** Ensure route-based code splitting is working effectively. Consider component-level splitting if needed.
 - [ ] **Image Optimization:** Optimize any static image assets.
 - [ ] **Firebase Query Optimization:** Review Firestore queries for efficiency. Ensure necessary indexes are created (`firestore.indexes.json`).
 - [ ] **Lazy Loading:** Implement lazy loading for components or libraries where appropriate.
 
-### 5.3. Documentation Updates
+### 6.3. Documentation Updates
 - [ ] **Memory Bank:** Update all `memory-bank/` files to reflect the final state of the application.
 - [ ] **README.md:** Update the main `README.md` with final setup instructions, feature overview, and deployment notes.
 - [ ] **Code Comments:** Review and add necessary code comments, especially for complex logic.
 - [ ] **.clinerules:** Populate the `.clinerules` file with learned patterns and project intelligence.
 
-### 5.4. Deployment
-- [ ] **Firebase Hosting Setup:** Configure Firebase Hosting for deployment.
-- [ ] **Build Process:** Ensure the `npm run build` command generates the production-ready assets correctly.
-- [ ] **Security Rules:** Finalize and deploy Firestore and Storage security rules.
-- [ ] **Environment Variables:** Manage API keys and environment-specific configurations securely.
-- [ ] **CI/CD Pipeline (Optional):** Set up a CI/CD pipeline (e.g., using GitHub Actions) for automated testing and deployment.
+### 6.4. Deployment (Target: Railway)
+- [ ] **Railway Project Setup:** Configure project on Railway, connecting to the GitHub repository.
+- [ ] **Build Configuration:** Ensure Railway uses the correct build command (`npm run build`) and publish directory (`dist`).
+- [ ] **Build Process:** Verify the `npm run build` command generates the production-ready assets correctly in the `dist` folder.
+- [ ] **Firebase Security Rules:** Finalize and deploy Firestore and Storage security rules (as Firebase services are still used).
+- [ ] **Environment Variables:** Manage API keys and environment-specific configurations securely within Railway's environment variable settings.
+- [ ] **Custom Domain (Optional):** Configure a custom domain on Railway if needed.
+- [ ] **CI/CD Pipeline (Optional):** Set up a CI/CD pipeline (e.g., using GitHub Actions) for automated testing and deployment triggers if Railway's default GitHub integration isn't sufficient.
 
 ---
