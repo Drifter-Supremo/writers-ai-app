@@ -1,0 +1,65 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    @apply antialiased;
+  }
+
+  body {
+    @apply bg-gradient-to-br from-gray-50 to-creative-purple-50 min-h-screen text-gray-900 m-0 p-0;
+    font-family: system-ui, -apple-system, sans-serif;
+  }
+
+  #root {
+    @apply min-h-screen w-full;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-semibold;
+  }
+}
+
+@layer components {
+  .btn-creative {
+    @apply bg-gradient-to-r from-creative-purple-500 to-creative-blue-500 
+           text-white px-6 py-3 rounded-lg shadow-md 
+           hover:from-creative-purple-600 hover:to-creative-blue-600 
+           transform hover:-translate-y-0.5 transition-all duration-200
+           font-medium disabled:opacity-50 disabled:cursor-not-allowed
+           disabled:hover:transform-none;
+  }
+  
+  .btn-creative-secondary {
+    @apply px-6 py-3 text-creative-purple-600 hover:bg-creative-purple-50 
+           rounded-lg transition-colors duration-200 font-medium;
+  }
+
+  .card-creative {
+    @apply bg-white/80 backdrop-blur-sm rounded-xl 
+           shadow-creative border border-creative-purple-100 
+           hover:shadow-creative-lg transition-all duration-300;
+  }
+
+  .input-creative {
+    @apply w-full p-3 border-2 border-creative-purple-100 rounded-lg 
+           focus:outline-none focus:border-purple-300
+           focus:ring-2 focus:ring-purple-200 focus:ring-offset-2
+           transition-all duration-200 placeholder-creative-purple-300;
+  }
+
+  .tag-creative {
+    @apply bg-gradient-to-r from-creative-purple-100 to-creative-blue-50 
+           px-4 py-2 rounded-full text-creative-purple-700 font-medium 
+           shadow-sm hover:shadow transition-shadow duration-200;
+  }
+}
+
+.border-gradient {
+  border-image: linear-gradient(to right, theme('colors.creative-purple.500'), theme('colors.creative-blue.500')) 1;
+}
+
+.text-gradient {
+  @apply bg-gradient-to-r from-creative-purple-900 to-creative-blue-600 bg-clip-text text-transparent;
+}
