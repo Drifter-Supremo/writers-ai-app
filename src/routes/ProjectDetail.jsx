@@ -331,30 +331,25 @@ export default function ProjectDetail() {
               </div>
             </form>
 
-            {files.length === 0 ? (
-              <p className="text-creative-purple-400 text-center py-8">No files uploaded yet</p>
-            ) : (
-              <ul className="space-y-2">
-                {files.map(file => (
-                  <li key={file.id} className="flex items-center justify-between p-3 bg-white rounded-lg border border-creative-purple-100 hover:border-creative-purple-200 transition-colors duration-200">
-                    <a 
-                      href={file.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-creative-purple-600 hover:text-creative-purple-800 transition-colors duration-200 flex items-center"
-                    >
-                      📄 {file.name}
-                    </a>
-                    <button
-                      onClick={() => handleDelete(file)}
-                      className="text-red-400 hover:text-red-600 transition-colors duration-200"
-                    >
-                      🗑️ Delete
-                    </button>
-                  </li>
-                ))}
-              </ul>
-            )}
+          {files.length === 0 ? (
+            <p className="text-creative-purple-400 text-center py-8">No files uploaded yet</p>
+          ) : (
+            <ul className="space-y-2">
+              {files.map(file => (
+                <li key={file.id} className="flex items-center justify-between p-3 bg-white rounded-lg border border-creative-purple-100 hover:border-creative-purple-200 transition-colors duration-200">
+                  <a 
+                    href={file.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-creative-purple-600 hover:text-creative-purple-800 transition-colors duration-200 flex items-center"
+                  >
+                    📄 {file.name}
+                  </a>
+                  <div className="w-6 h-6 rounded-full bg-gray-200 animate-pulse"></div>
+                </li>
+              ))}
+            </ul>
+          )}
           </div>
 
           {/* Notes Section */}
@@ -380,35 +375,43 @@ export default function ProjectDetail() {
               </div>
             </form>
 
-            {loadingNotes && (
-              <div className="flex items-center justify-center py-8">
-                <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-creative-purple-500"></div>
-              </div>
-            )}
-            
-            {!loadingNotes && notes.length === 0 ? (
-              <p className="text-creative-purple-400 text-center py-8">No notes yet</p>
-            ) : (
-              <ul className="space-y-3">
-                {notes.map(note => (
-                  <li key={note.id} className="flex justify-between items-start bg-white p-4 rounded-lg border border-creative-purple-100 hover:border-creative-purple-200 transition-colors duration-200">
-                    <div>
-                      <p className="mb-2 text-gray-700 leading-relaxed">{note.content}</p>
-                      <span className="text-sm text-creative-purple-400">
-                        {note.createdAt?.toDate().toLocaleString()}
-                      </span>
-                    </div>
-                    <button
-                      onClick={() => handleDeleteNote(note.id)}
-                      className="text-red-400 hover:text-red-600 transition-colors duration-200 ml-4"
-                      disabled={loadingNotes}
-                    >
-                      Delete
-                    </button>
-                  </li>
-                ))}
-              </ul>
-            )}
+          {loadingNotes && (
+            <div className="space-y-3">
+              {Array.from({ length: 3 }).map((_, index) => (
+                <div key={index} className="flex justify-between items-start bg-white p-4 rounded-lg border border-creative-purple-100 animate-pulse">
+                  <div className="flex-1 space-y-2">
+                    <div className="h-4 bg-gray-300 rounded w-3/4"></div>
+                    <div className="h-3 bg-gray-300 rounded w-1/2"></div>
+                  </div>
+                  <div className="w-10 h-6 rounded bg-gray-300"></div>
+                </div>
+              ))}
+            </div>
+          )}
+          
+          {!loadingNotes && notes.length === 0 ? (
+            <p className="text-creative-purple-400 text-center py-8">No notes yet</p>
+          ) : (
+            <ul className="space-y-3">
+              {notes.map(note => (
+                <li key={note.id} className="flex justify-between items-start bg-white p-4 rounded-lg border border-creative-purple-100 hover:border-creative-purple-200 transition-colors duration-200">
+                  <div>
+                    <p className="mb-2 text-gray-700 leading-relaxed">{note.content}</p>
+                    <span className="text-sm text-creative-purple-400">
+                      {note.createdAt?.toDate().toLocaleString()}
+                    </span>
+                  </div>
+                  <button
+                    onClick={() => handleDeleteNote(note.id)}
+                    className="text-red-400 hover:text-red-600 transition-colors duration-200 ml-4"
+                    disabled={loadingNotes}
+                  >
+                    Delete
+                  </button>
+                </li>
+              ))}
+            </ul>
+          )}
           </div>
         </div>
       </div>

@@ -89,9 +89,10 @@
 ### UI/UX Phase 3
 - [x] Implemented skeleton loader for Project Detail title/description area
 - [x] Project card dropdown menu for actions, click-to-open, and delete confirmation
+- [x] Implemented skeleton loader for Project Detail Files section
 - [ ] Loading/skeleton states
 - [ ] Drag-and-drop implementation
-- [ ] Rich text editing
+- [x] Rich text editing
 - [ ] Advanced file previews
 
 ## 🔄 Recent Updates

@@ -32,6 +32,9 @@ UI/UX Enhancement and Layout Restructuring
 
 1. **Project Card Actions Refactor**
    - ✅ Refactored project card actions: card click opens project, 3-dot menu contains delete with confirmation
+   - ✅ Implemented skeleton loader for Project Detail Files section
+   - ✅ Implemented skeleton loader for Project Detail Notes section
+   - ✅ Implemented sidebar section switching in Project Detail view
 
 1. **UI/UX Phase 1 Overhaul**
    - ✅ Replaced top navbar with sidebar navigation
