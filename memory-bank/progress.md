@@ -71,6 +71,7 @@
   - Download links
   - Enhanced UI with feedback
   - Modular Files section with left-aligned upload form, file grid, upload/delete with skeleton loaders and confirmation
+  - All Firestore/Storage operations wrapped in try/catch with user-friendly error messages in Files, Projects, and Settings.
 - [x] Notes management
   - Creation and storage in Firestore
   - Display with timestamps
@@ -106,7 +107,7 @@
 ## 🔄 Recent Updates
 4. Added skeleton loader for Project Detail title/description area to improve perceived loading performance.
 5. Refactored project card actions: card click opens project, 3-dot menu contains delete with confirmation.
-6. Modularized Project Detail sections, restored file upload/delete, fixed heading cutoffs, and improved Files section layout.
+6. Modularized Project Detail sections, restored file upload/delete, fixed heading cutoffs, improved Files section layout, and completed error handling for all Firestore/Storage operations.
 
 ### Dashboard Enhancement
 - [ ] Advanced filtering

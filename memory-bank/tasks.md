@@ -31,17 +31,17 @@ This document outlines the remaining tasks required to complete and polish the W
     - [x] Wrap all Firestore `getDocs`, `getDoc`, `addDoc`, `updateDoc`, `deleteDoc` calls in `try/catch` blocks.
     - [x] Wrap all Firebase Storage `uploadBytes`, `getDownloadURL`, `deleteObject` calls in `try/catch` blocks.
     - [x] Display user-friendly error messages (e.g., using toasts or inline messages) for failed operations.
-- [ ] **Project Detail:**
-    - [ ] Implement a "Project Not Found" state if the `projectId` in the URL is invalid or the document doesn't exist.
-- [ ] **File Management:**
-    - [ ] Add client-side validation for allowed file types before upload.
-    - [ ] Add client-side validation for file size limits.
-    - [ ] Handle potential duplicate file names gracefully (e.g., append timestamp or number).
-    - [ ] Handle Firebase Storage errors (quota exceeded, permissions).
-- [ ] **Settings Form:**
-    - [ ] Add input validation (e.g., required fields, format checks if applicable).
-    - [ ] Display validation errors clearly to the user.
-    - [ ] Disable "Save Preferences" button if the form is invalid.
+- [x] **Project Detail:**
+    - [x] Implement a "Project Not Found" state if the `projectId` in the URL is invalid or the document doesn't exist.
+- [x] **File Management:**
+    - [x] Add client-side validation for allowed file types before upload.
+    - [x] Add client-side validation for file size limits.
+    - [x] Handle potential duplicate file names gracefully (e.g., append timestamp or number).
+    - [x] Handle Firebase Storage errors (quota exceeded, permissions).
+- [x] **Settings Form:**
+    - [x] Add input validation (e.g., required fields, format checks if applicable).
+    - [x] Display validation errors clearly to the user.
+    - [x] Disable "Save Preferences" button if the form is invalid.
 
 ### 1.3. Home Page Implementation
 - [ ] **Define Purpose:** Decide on the content and function of the Home page (e.g., welcome message, quick stats, recent projects, getting started guide).

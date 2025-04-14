@@ -16,6 +16,7 @@ export default function Settings() {
     preferredTone: '',
     defaultGenre: ''
   });
+  const [errors, setErrors] = useState({});
   const [saveSuccess, setSaveSuccess] = useState(false);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
@@ -40,7 +41,14 @@ export default function Settings() {
 
   const handleSave = async (e) => {
     e.preventDefault();
-    if (!preferences.name.trim()) return;
+
+    // Validation
+    const newErrors = {};
+    if (!preferences.name.trim()) newErrors.name = "Name is required.";
+    if (preferences.name.length > 50) newErrors.name = "Name must be under 50 characters.";
+    if (preferences.defaultGenre.length > 50) newErrors.defaultGenre = "Genre must be under 50 characters.";
+    setErrors(newErrors);
+    if (Object.keys(newErrors).length > 0) return;
 
     setSaving(true);
     try {
@@ -100,9 +108,10 @@ export default function Settings() {
             type="text"
             value={preferences.name}
             onChange={(e) => setPreferences({ ...preferences, name: e.target.value })}
-            className="w-full p-2 border rounded"
+            className={`w-full p-2 border rounded ${errors.name ? "border-red-400" : ""}`}
             required
           />
+          {errors.name && <div className="text-red-500 text-xs mt-1">{errors.name}</div>}
         </div>
 
         <div>
@@ -147,15 +156,16 @@ export default function Settings() {
             type="text"
             value={preferences.defaultGenre}
             onChange={(e) => setPreferences({ ...preferences, defaultGenre: e.target.value })}
-            className="w-full p-2 border rounded"
+            className={`w-full p-2 border rounded ${errors.defaultGenre ? "border-red-400" : ""}`}
             placeholder="e.g., Science Fiction, Pop Music, Drama"
           />
+          {errors.defaultGenre && <div className="text-red-500 text-xs mt-1">{errors.defaultGenre}</div>}
         </div>
 
         <div className="pt-4 space-x-4">
           <button
             type="submit"
-            disabled={!preferences.name.trim() || saving}
+            disabled={!preferences.name.trim() || saving || Object.keys(errors).length > 0}
             className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 disabled:opacity-50 disabled:hover:bg-blue-500"
           >
             {saving ? (
