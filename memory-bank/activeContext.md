@@ -35,6 +35,9 @@ UI/UX Enhancement and Layout Restructuring
    - ✅ Implemented skeleton loader for Project Detail Files section
    - ✅ Implemented skeleton loader for Project Detail Notes section
    - ✅ Implemented sidebar section switching in Project Detail view
+   - ✅ Added loading indicators for file upload/delete actions in Project Detail
+   - ✅ Added loading indicators for note add/delete actions in Project Detail
+   - ✅ Added loading indicator for saving project detail edits
 
 1. **UI/UX Phase 1 Overhaul**
    - ✅ Replaced top navbar with sidebar navigation

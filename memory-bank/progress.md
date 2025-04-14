@@ -90,6 +90,9 @@
 - [x] Implemented skeleton loader for Project Detail title/description area
 - [x] Project card dropdown menu for actions, click-to-open, and delete confirmation
 - [x] Implemented skeleton loader for Project Detail Files section
+- [x] Add loading indicators for file upload/delete actions
+- [x] Add loading indicators for note add/delete actions
+- [x] Add loading indicator for saving project detail edits
 - [ ] Loading/skeleton states
 - [ ] Drag-and-drop implementation
 - [x] Rich text editing

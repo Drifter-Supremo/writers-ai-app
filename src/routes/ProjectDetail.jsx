@@ -9,11 +9,15 @@ export default function ProjectDetail() {
   const [project, setProject] = useState(null);
   const [files, setFiles] = useState([]);
   const [uploading, setUploading] = useState(false);
+  const [deletingFileId, setDeletingFileId] = useState(null);
   const [notes, setNotes] = useState([]);
   const [newNote, setNewNote] = useState('');
   const [loadingNotes, setLoadingNotes] = useState(false);
+  const [addingNote, setAddingNote] = useState(false);
+  const [deletingNoteId, setDeletingNoteId] = useState(null);
   const [editing, setEditing] = useState(false);
   const [saveSuccess, setSaveSuccess] = useState(false);
+  const [savingEdit, setSavingEdit] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
     description: '',
@@ -40,7 +44,7 @@ export default function ProjectDetail() {
     if (!newNote.trim()) return;
     
     try {
-      setLoadingNotes(true);
+      setAddingNote(true);
       await addDoc(collection(db, `projects/${id}/notes`), {
         content: newNote,
         createdAt: serverTimestamp()
@@ -50,19 +54,19 @@ export default function ProjectDetail() {
     } catch (error) {
       console.error('Failed to add note:', error);
     } finally {
-      setLoadingNotes(false);
+      setAddingNote(false);
     }
   };
 
   const handleDeleteNote = async (noteId) => {
+    setDeletingNoteId(noteId);
     try {
-      setLoadingNotes(true);
       await deleteDoc(doc(db, `projects/${id}/notes`, noteId));
       fetchNotes();
     } catch (error) {
       console.error('Failed to delete note:', error);
     } finally {
-      setLoadingNotes(false);
+      setDeletingNoteId(null);
     }
   };
 
@@ -75,6 +79,7 @@ export default function ProjectDetail() {
   };
 
   const handleDelete = async (file) => {
+    setDeletingFileId(file.id);
     try {
       // 1. Delete from storage
       const fileRef = storageRef(storage, `projects/${id}/files/${file.name}`);
@@ -88,6 +93,8 @@ export default function ProjectDetail() {
       fetchFiles();
     } catch (error) {
       console.error("Failed to delete file:", error);
+    } finally {
+      setDeletingFileId(null);
     }
   };
 
@@ -150,6 +157,7 @@ export default function ProjectDetail() {
     e.preventDefault();
     if (!formData.name.trim() || !formData.description.trim()) return;
 
+    setSavingEdit(true);
     try {
       const docRef = doc(db, "projects", id);
       await updateDoc(docRef, {
@@ -169,6 +177,8 @@ export default function ProjectDetail() {
       }
     } catch (error) {
       console.error('Failed to update project:', error);
+    } finally {
+      setSavingEdit(false);
     }
   };
 
@@ -260,8 +270,28 @@ export default function ProjectDetail() {
                   <button
                     type="submit"
                     className="btn-creative"
+                    disabled={savingEdit}
                   >
-                    Save Changes
+                    {savingEdit ? (
+                      <svg className="animate-spin h-5 w-5 inline-block mr-2" viewBox="0 0 24 24">
+                        <circle
+                          className="opacity-25"
+                          cx="12"
+                          cy="12"
+                          r="10"
+                          stroke="currentColor"
+                          strokeWidth="4"
+                          fill="none"
+                        />
+                        <path
+                          className="opacity-75"
+                          fill="currentColor"
+                          d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
+                        />
+                      </svg>
+                    ) : (
+                      "Save Changes"
+                    )}
                   </button>
                   <button
                     type="button"
@@ -345,7 +375,32 @@ export default function ProjectDetail() {
                   >
                     📄 {file.name}
                   </a>
-                  <div className="w-6 h-6 rounded-full bg-gray-200 animate-pulse"></div>
+                  <button
+                    onClick={() => handleDelete(file)}
+                    className="text-red-400 hover:text-red-600 transition-colors duration-200 flex items-center"
+                    disabled={deletingFileId === file.id}
+                  >
+                    {deletingFileId === file.id ? (
+                      <svg className="animate-spin h-5 w-5" viewBox="0 0 24 24">
+                        <circle
+                          className="opacity-25"
+                          cx="12"
+                          cy="12"
+                          r="10"
+                          stroke="currentColor"
+                          strokeWidth="4"
+                          fill="none"
+                        />
+                        <path
+                          className="opacity-75"
+                          fill="currentColor"
+                          d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
+                        />
+                      </svg>
+                    ) : (
+                      <>🗑️ Delete</>
+                    )}
+                  </button>
                 </li>
               ))}
             </ul>
@@ -367,10 +422,29 @@ export default function ProjectDetail() {
                 />
                 <button
                   type="submit"
-                  disabled={!newNote.trim() || loadingNotes}
+                  disabled={!newNote.trim() || addingNote}
                   className="btn-creative"
                 >
-                  Add
+                  {addingNote ? (
+                    <svg className="animate-spin h-5 w-5 inline-block mr-2" viewBox="0 0 24 24">
+                      <circle
+                        className="opacity-25"
+                        cx="12"
+                        cy="12"
+                        r="10"
+                        stroke="currentColor"
+                        strokeWidth="4"
+                        fill="none"
+                      />
+                      <path
+                        className="opacity-75"
+                        fill="currentColor"
+                        d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
+                      />
+                    </svg>
+                  ) : (
+                    "Add"
+                  )}
                 </button>
               </div>
             </form>
@@ -404,9 +478,28 @@ export default function ProjectDetail() {
                   <button
                     onClick={() => handleDeleteNote(note.id)}
                     className="text-red-400 hover:text-red-600 transition-colors duration-200 ml-4"
-                    disabled={loadingNotes}
+                    disabled={deletingNoteId === note.id}
                   >
-                    Delete
+                    {deletingNoteId === note.id ? (
+                      <svg className="animate-spin h-5 w-5 inline-block mr-2" viewBox="0 0 24 24">
+                        <circle
+                          className="opacity-25"
+                          cx="12"
+                          cy="12"
+                          r="10"
+                          stroke="currentColor"
+                          strokeWidth="4"
+                          fill="none"
+                        />
+                        <path
+                          className="opacity-75"
+                          fill="currentColor"
+                          d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
+                        />
+                      </svg>
+                    ) : (
+                      "Delete"
+                    )}
                   </button>
                 </li>
               ))}
