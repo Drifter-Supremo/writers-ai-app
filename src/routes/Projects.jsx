@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { collection, getDocs, addDoc, serverTimestamp } from 'firebase/firestore';
+import { collection, getDocs, addDoc, serverTimestamp, deleteDoc, doc } from 'firebase/firestore';
 import { db } from '../services/firebase';
 import ProjectCard from '../components/ProjectCard';
 import SkeletonProjectCard from '../components/SkeletonProjectCard';
@@ -14,6 +14,8 @@ export default function Projects() {
     description: ''
   });
   const [isLoading, setIsLoading] = useState(true);
+  const [creatingProject, setCreatingProject] = useState(false);
+  const [deletingProjectId, setDeletingProjectId] = useState(null);
 
   // Debounce search query
   useEffect(() => {
@@ -46,6 +48,7 @@ export default function Projects() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setCreatingProject(true);
     try {
       await addDoc(collection(db, "projects"), {
         name: formData.name,
@@ -61,6 +64,22 @@ export default function Projects() {
       fetchProjects();
     } catch (error) {
       console.error("Error adding project:", error);
+    } finally {
+      setCreatingProject(false);
+    }
+  };
+
+  const handleDeleteProject = async (projectId) => {
+    setDeletingProjectId(projectId);
+    try {
+      // Delete project document
+      await deleteDoc(doc(db, "projects", projectId));
+      // Refresh projects list
+      fetchProjects();
+    } catch (error) {
+      console.error("Error deleting project:", error);
+    } finally {
+      setDeletingProjectId(null);
     }
   };
 
@@ -135,8 +154,9 @@ export default function Projects() {
             <button
               type="submit"
               className="btn-creative"
+              disabled={creatingProject}
             >
-              Create Project
+              {creatingProject ? 'Creating...' : 'Create Project'}
             </button>
             <button
               type="button"
@@ -166,6 +186,8 @@ export default function Projects() {
                 title={project.name}
                 description={project.description}
                 createdAt={project.createdAt}
+                onDelete={handleDeleteProject}
+                isDeleting={deletingProjectId === project.id}
               />
             ))
         )}

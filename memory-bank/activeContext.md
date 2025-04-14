@@ -27,6 +27,11 @@ UI/UX Enhancement and Layout Restructuring
      - Scale transforms
      - Rotating icons
      - Better feedback states
+1. **Project Detail Skeleton Loader**
+   - ✅ Implemented skeleton loader for Project Detail title/description area to improve perceived loading performance
+
+1. **Project Card Actions Refactor**
+   - ✅ Refactored project card actions: card click opens project, 3-dot menu contains delete with confirmation
 
 1. **UI/UX Phase 1 Overhaul**
    - ✅ Replaced top navbar with sidebar navigation

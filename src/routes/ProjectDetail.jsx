@@ -172,6 +172,16 @@ export default function ProjectDetail() {
     }
   };
 
+  if (!project) return (
+    <div className="p-6">
+      <div className="animate-pulse space-y-4">
+        <div className="h-10 bg-gray-300 rounded w-3/4"></div>
+        <div className="h-6 bg-gray-300 rounded w-1/2"></div>
+        <div className="h-6 bg-gray-300 rounded w-1/3"></div>
+      </div>
+    </div>
+  );
+
   return (
     <div className="grid grid-cols-[250px,1fr] min-h-full bg-gradient-to-br from-gray-50 to-creative-purple-50">
       {/* Left Panel - Navigation */}

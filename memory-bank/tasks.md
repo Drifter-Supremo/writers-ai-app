@@ -11,12 +11,12 @@ This document outlines the remaining tasks required to complete and polish the W
     - [x] Implement skeleton loader for project cards while fetching data.
     - [ ] Add loading indicator for project creation/deletion.
 - [ ] **Project Detail View:**
-    - [ ] Implement skeleton loader for project title/description area.
-    - [ ] Implement skeleton loader for the Files section.
-    - [ ] Implement skeleton loader for the Notes section.
-    - [ ] Add loading indicators for file upload/delete actions.
-    - [ ] Add loading indicators for note add/delete actions.
-    - [ ] Add loading indicator for saving project detail edits.
+- [x] Implement skeleton loader for project title/description area.
+- [ ] Implement skeleton loader for the Files section.
+- [ ] Implement skeleton loader for the Notes section.
+- [ ] Add loading indicators for file upload/delete actions.
+- [ ] Add loading indicators for note add/delete actions.
+- [ ] Add loading indicator for saving project detail edits.
 - [ ] **Settings Page:**
     - [ ] Add loading indicator while fetching/saving preferences.
     - [ ] Add loading indicator for clearing preferences.
