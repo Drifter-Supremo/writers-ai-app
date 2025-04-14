@@ -85,11 +85,22 @@ export default function Projects() {
 
   return (
     <div className="w-full px-4">
-      <div className="flex justify-between items-center mb-12 max-w-6xl mx-auto">
-        <h1 className="text-4xl font-bold text-gradient animate-float">Your Projects</h1>
+      <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-12 max-w-6xl mx-auto w-full">
+        <h1
+          className="text-4xl font-bold text-gradient animate-float break-words w-full sm:w-auto"
+          style={{
+            wordBreak: "break-word",
+            overflowWrap: "break-word",
+            whiteSpace: "normal",
+            maxWidth: "100%",
+            minWidth: 0,
+          }}
+        >
+          Your Projects
+        </h1>
         <button
           onClick={handleNewProject}
-          className="btn-creative flex items-center space-x-2 group"
+          className="btn-creative flex items-center space-x-2 group mt-6 sm:mt-0"
         >
           <span className="text-xl transition-transform duration-200 group-hover:rotate-90">+</span>
           <span>New Project</span>

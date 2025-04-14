@@ -35,6 +35,10 @@ UI/UX Enhancement and Layout Restructuring
    - ✅ Implemented skeleton loader for Project Detail Files section
    - ✅ Implemented skeleton loader for Project Detail Notes section
    - ✅ Implemented sidebar section switching in Project Detail view
+   - ✅ Modularized Overview, Files, Notes, Settings sections
+   - ✅ Files section: left-aligned upload form, file grid, upload/delete with skeleton loaders and confirmation, Firebase upload logic restored
+   - ✅ Overview: edit functionality restored, break-words for long titles
+   - ✅ Fixed heading cutoffs and improved Files section layout
    - ✅ Added loading indicators for file upload/delete actions in Project Detail
    - ✅ Added loading indicators for note add/delete actions in Project Detail
    - ✅ Added loading indicator for saving project detail edits

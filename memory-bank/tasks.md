@@ -18,7 +18,10 @@ This document outlines the remaining tasks required to complete and polish the W
 - [x] Add loading indicators for note add/delete actions.
 - [x] Add loading indicator for saving project detail edits.
 - [ ] **Project Detail Sidebar Navigation:**
-- [ ] Implement sidebar section switching (Overview, Files, Notes, Settings).
+- [x] Implement sidebar section switching (Overview, Files, Notes, Settings).
+  - Modular sections for Overview, Files, Notes, Settings
+  - Files section: left-aligned upload form, file grid, upload/delete with skeleton loaders and confirmation
+  - Overview: edit functionality restored
 - [ ] **Settings Page:**
     - [ ] Add loading indicator while fetching/saving preferences.
     - [ ] Add loading indicator for clearing preferences.

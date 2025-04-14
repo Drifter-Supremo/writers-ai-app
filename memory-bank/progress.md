@@ -70,6 +70,7 @@
   - File deletion
   - Download links
   - Enhanced UI with feedback
+  - Modular Files section with left-aligned upload form, file grid, upload/delete with skeleton loaders and confirmation
 - [x] Notes management
   - Creation and storage in Firestore
   - Display with timestamps
@@ -77,6 +78,9 @@
   - Loading states and validation
   - Error handling
   - Improved card layout
+- [x] Project detail modularization
+  - Sidebar section switching (Overview, Files, Notes, Settings)
+  - Overview: edit functionality restored, break-words for long titles
 
 ### Documentation
 - [x] Project brief documentation
@@ -93,6 +97,7 @@
 - [x] Add loading indicators for file upload/delete actions
 - [x] Add loading indicators for note add/delete actions
 - [x] Add loading indicator for saving project detail edits
+- [x] Implement sidebar section switching (Overview, Files, Notes, Settings)
 - [ ] Loading/skeleton states
 - [ ] Drag-and-drop implementation
 - [x] Rich text editing
@@ -101,6 +106,7 @@
 ## 🔄 Recent Updates
 4. Added skeleton loader for Project Detail title/description area to improve perceived loading performance.
 5. Refactored project card actions: card click opens project, 3-dot menu contains delete with confirmation.
+6. Modularized Project Detail sections, restored file upload/delete, fixed heading cutoffs, and improved Files section layout.
 
 ### Dashboard Enhancement
 - [ ] Advanced filtering
