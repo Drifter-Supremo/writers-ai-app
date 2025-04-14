@@ -44,11 +44,18 @@ This document outlines the remaining tasks required to complete and polish the W
     - [x] Disable "Save Preferences" button if the form is invalid.
 
 ### 1.3. Home Page Implementation
-- [ ] **Define Purpose:** Decide on the content and function of the Home page (e.g., welcome message, quick stats, recent projects, getting started guide).
-- [ ] **Implement Content:** Build the React component (`src/routes/Home.jsx`) with the chosen content.
-    - [ ] Add welcoming text and brief app description.
-    - [ ] Potentially display quick links or summary information (e.g., number of projects).
-    - [ ] Ensure styling aligns with the rest of the application.
+- [x] **Define Purpose:** Decide on the content and function of the Home page (e.g., welcome message, quick stats, recent projects, getting started guide).
+- [x] **Implement Content:** Build the React component (`src/routes/Home.jsx`) with the chosen content.
+    - [x] Add welcoming text and brief app description.
+    - [x] Potentially display quick links or summary information (e.g., number of projects).
+    - [x] Ensure styling aligns with the rest of the application.
+    - [x] Add Character Workflow dashboard with create, resume, view, and delete features.
+
+### 1.4. Character Workflow Integration
+- [ ] Add feature to link a character workflow to an existing project.
+    - [ ] Allow user to select a project when finishing a workflow.
+    - [ ] Save the workflow's ID or data to the selected project in Firestore.
+    - [ ] Show linked workflows in the project detail view.
 
 ---
 
