@@ -182,7 +182,7 @@
 3. Improved user interactions
    - Added hover states
    - Enhanced form feedback
-   - Improved loading states
+   - Improved loading states including skeleton loaders for project cards on the Projects Dashboard
 4. Upgraded styling system
    - Implemented consistent spacing
    - Enhanced color scheme

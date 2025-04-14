@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { collection, getDocs, addDoc, serverTimestamp } from 'firebase/firestore';
 import { db } from '../services/firebase';
 import ProjectCard from '../components/ProjectCard';
+import SkeletonProjectCard from '../components/SkeletonProjectCard';
 
 export default function Projects() {
   const [projects, setProjects] = useState([]);
@@ -12,6 +13,7 @@ export default function Projects() {
     name: '',
     description: ''
   });
+  const [isLoading, setIsLoading] = useState(true);
 
   // Debounce search query
   useEffect(() => {
@@ -23,6 +25,7 @@ export default function Projects() {
   }, [searchQuery]);
 
   const fetchProjects = async () => {
+    setIsLoading(true);
     const querySnapshot = await getDocs(collection(db, "projects"));
     const projectsData = querySnapshot.docs.map(doc => ({
       id: doc.id,
@@ -30,6 +33,7 @@ export default function Projects() {
     }));
     console.log('Fetched projects:', projectsData);
     setProjects(projectsData);
+    setIsLoading(false);
   };
 
   useEffect(() => {
@@ -64,7 +68,7 @@ export default function Projects() {
     <div className="w-full px-4">
       <div className="flex justify-between items-center mb-12 max-w-6xl mx-auto">
         <h1 className="text-4xl font-bold text-gradient animate-float">Your Projects</h1>
-        <button 
+        <button
           onClick={handleNewProject}
           className="btn-creative flex items-center space-x-2 group"
         >
@@ -128,13 +132,13 @@ export default function Projects() {
             />
           </div>
           <div className="flex space-x-4">
-            <button 
+            <button
               type="submit"
               className="btn-creative"
             >
               Create Project
             </button>
-            <button 
+            <button
               type="button"
               onClick={() => setShowForm(false)}
               className="btn-creative-secondary"
@@ -145,21 +149,27 @@ export default function Projects() {
         </form>
       )}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto animate-fade-in">
-        {projects
-          .filter(project => 
-            project.name.toLowerCase().includes(debouncedQuery.toLowerCase()) ||
-            project.description.toLowerCase().includes(debouncedQuery.toLowerCase())
-          )
-          .map(project => (
-            <ProjectCard 
-              key={project.id}
-              id={project.id}
-              title={project.name}
-              description={project.description}
-              createdAt={project.createdAt}
-            />
-          ))}
-        {debouncedQuery && projects.filter(project => 
+        {isLoading ? (
+          Array.from({ length: 6 }).map((_, index) => (
+            <SkeletonProjectCard key={index} />
+          ))
+        ) : (
+          projects
+            .filter(project =>
+              project.name.toLowerCase().includes(debouncedQuery.toLowerCase()) ||
+              project.description.toLowerCase().includes(debouncedQuery.toLowerCase())
+            )
+            .map(project => (
+              <ProjectCard
+                key={project.id}
+                id={project.id}
+                title={project.name}
+                description={project.description}
+                createdAt={project.createdAt}
+              />
+            ))
+        )}
+        {debouncedQuery && !isLoading && projects.filter(project =>
           project.name.toLowerCase().includes(debouncedQuery.toLowerCase()) ||
           project.description.toLowerCase().includes(debouncedQuery.toLowerCase())
         ).length === 0 && (

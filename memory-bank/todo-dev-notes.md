@@ -40,6 +40,7 @@ This file tracks areas that were simplified during MVP development and need poli
   - Project cards
   - File list
   - Notes section
+- [x] Added skeleton loaders for project cards on the Projects Dashboard to improve loading feedback
 - [ ] Implement drag-and-drop:
   - File uploads
   - Note reordering

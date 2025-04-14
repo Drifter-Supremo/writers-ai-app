@@ -7,8 +7,8 @@ This document outlines the remaining tasks required to complete and polish the W
 ## Phase 1: Core Functionality & UX Foundations (Addressing TODOs & Polish)
 
 ### 1.1. Loading & Skeleton States
-- [ ] **Projects Dashboard:**
-    - [ ] Implement skeleton loader for project cards while fetching data.
+- [x] **Projects Dashboard:**
+    - [x] Implement skeleton loader for project cards while fetching data.
     - [ ] Add loading indicator for project creation/deletion.
 - [ ] **Project Detail View:**
     - [ ] Implement skeleton loader for project title/description area.
