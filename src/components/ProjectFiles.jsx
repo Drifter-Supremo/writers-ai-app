@@ -13,27 +13,61 @@ export default function ProjectFiles({ files, onDeleteFile, deletingFileId, proj
 
   // Real upload logic
   const handleUploadFile = async (file) => {
+    // Client-side validation
+    const allowedTypes = [
+      "application/pdf",
+      "text/plain",
+      "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+      "image/png",
+      "image/jpeg",
+      "image/jpg"
+    ];
+    const maxSizeMB = 10;
+    if (!allowedTypes.includes(file.type)) {
+      alert("File type not allowed. Please upload PDF, TXT, DOCX, PNG, JPG, or JPEG files.");
+      return;
+    }
+    if (file.size > maxSizeMB * 1024 * 1024) {
+      alert(`File is too large. Maximum allowed size is ${maxSizeMB}MB.`);
+      return;
+    }
+
     setUploading(true);
     try {
-      // 1. Upload to Storage
-      const fileRef = storageRef(storage, `projects/${projectId}/files/${file.name}`);
+      // 1. Check for duplicate file name
+      const existing = files.find(f => f.name === file.name);
+      let fileName = file.name;
+      if (existing) {
+        const timestamp = Date.now();
+        const ext = file.name.includes(".") ? file.name.substring(file.name.lastIndexOf(".")) : "";
+        fileName = file.name.replace(ext, "") + `_${timestamp}` + ext;
+      }
+
+      // 2. Upload to Storage
+      const fileRef = storageRef(storage, `projects/${projectId}/files/${fileName}`);
       await uploadBytes(fileRef, file);
 
-      // 2. Get download URL
+      // 3. Get download URL
       const url = await getDownloadURL(fileRef);
 
-      // 3. Save to Firestore
+      // 4. Save to Firestore
       await addDoc(collection(db, `projects/${projectId}/files`), {
-        name: file.name,
+        name: fileName,
         url,
         type: file.type,
         createdAt: serverTimestamp(),
       });
 
-      // 4. Refresh files
+      // 5. Refresh files
       if (refreshFiles) refreshFiles();
     } catch (error) {
-      alert("Failed to upload file.");
+      if (error.code === "storage/quota-exceeded") {
+        alert("Upload failed: Firebase Storage quota exceeded.");
+      } else if (error.code === "storage/unauthorized") {
+        alert("Upload failed: You do not have permission to upload files.");
+      } else {
+        alert("Failed to upload file.");
+      }
     } finally {
       setUploading(false);
     }

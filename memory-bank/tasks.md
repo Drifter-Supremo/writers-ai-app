@@ -27,10 +27,10 @@ This document outlines the remaining tasks required to complete and polish the W
 - [x] Add loading indicator for clearing preferences.
 
 ### 1.2. Error Handling & Validation (Addressing TODOs)
-- [ ] **Firebase Operations:**
-    - [ ] Wrap all Firestore `getDocs`, `getDoc`, `addDoc`, `updateDoc`, `deleteDoc` calls in `try/catch` blocks.
-    - [ ] Wrap all Firebase Storage `uploadBytes`, `getDownloadURL`, `deleteObject` calls in `try/catch` blocks.
-    - [ ] Display user-friendly error messages (e.g., using toasts or inline messages) for failed operations.
+- [x] **Firebase Operations:**
+    - [x] Wrap all Firestore `getDocs`, `getDoc`, `addDoc`, `updateDoc`, `deleteDoc` calls in `try/catch` blocks.
+    - [x] Wrap all Firebase Storage `uploadBytes`, `getDownloadURL`, `deleteObject` calls in `try/catch` blocks.
+    - [x] Display user-friendly error messages (e.g., using toasts or inline messages) for failed operations.
 - [ ] **Project Detail:**
     - [ ] Implement a "Project Not Found" state if the `projectId` in the URL is invalid or the document doesn't exist.
 - [ ] **File Management:**

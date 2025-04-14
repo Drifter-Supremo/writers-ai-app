@@ -28,14 +28,18 @@ export default function Projects() {
 
   const fetchProjects = async () => {
     setIsLoading(true);
-    const querySnapshot = await getDocs(collection(db, "projects"));
-    const projectsData = querySnapshot.docs.map(doc => ({
-      id: doc.id,
-      ...doc.data()
-    }));
-    console.log('Fetched projects:', projectsData);
-    setProjects(projectsData);
-    setIsLoading(false);
+    try {
+      const querySnapshot = await getDocs(collection(db, "projects"));
+      const projectsData = querySnapshot.docs.map(doc => ({
+        id: doc.id,
+        ...doc.data()
+      }));
+      setProjects(projectsData);
+    } catch (error) {
+      alert("Failed to fetch projects.");
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   useEffect(() => {
@@ -55,15 +59,13 @@ export default function Projects() {
         description: formData.description,
         createdAt: serverTimestamp()
       });
-      
       // Reset form
       setFormData({ name: '', description: '' });
       setShowForm(false);
-      
       // Re-fetch projects
       fetchProjects();
     } catch (error) {
-      console.error("Error adding project:", error);
+      alert("Failed to create project.");
     } finally {
       setCreatingProject(false);
     }
@@ -77,7 +79,7 @@ export default function Projects() {
       // Refresh projects list
       fetchProjects();
     } catch (error) {
-      console.error("Error deleting project:", error);
+      alert("Failed to delete project.");
     } finally {
       setDeletingProjectId(null);
     }

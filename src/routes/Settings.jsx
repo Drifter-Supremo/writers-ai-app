@@ -30,7 +30,7 @@ export default function Settings() {
           setPreferences(docSnap.data());
         }
       } catch (error) {
-        console.error('Error fetching preferences:', error);
+        alert('Error fetching preferences.');
       } finally {
         setLoading(false);
       }
@@ -53,7 +53,7 @@ export default function Settings() {
       setSaveSuccess(true);
       setTimeout(() => setSaveSuccess(false), 3000);
     } catch (error) {
-      console.error('Error saving preferences:', error);
+      alert('Error saving preferences.');
     } finally {
       setSaving(false);
     }
@@ -201,7 +201,7 @@ export default function Settings() {
                 setSaveSuccess(true);
                 setTimeout(() => setSaveSuccess(false), 3000);
               } catch (error) {
-                console.error('Error clearing preferences:', error);
+                alert('Error clearing preferences.');
               } finally {
                 setClearing(false);
               }

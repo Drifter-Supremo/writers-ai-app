@@ -19,18 +19,28 @@ export default function ProjectDetail() {
 
   useEffect(() => {
     async function fetchProject() {
-      const docRef = doc(db, "projects", id);
-      const docSnap = await getDoc(docRef);
-      if (docSnap.exists()) {
-        setProject({ id: docSnap.id, ...docSnap.data() });
+      try {
+        const docRef = doc(db, "projects", id);
+        const docSnap = await getDoc(docRef);
+        if (docSnap.exists()) {
+          setProject({ id: docSnap.id, ...docSnap.data() });
+        } else {
+          setProject(null);
+        }
+      } catch (error) {
+        setProject("notfound");
       }
     }
     async function fetchFiles() {
-      const filesSnap = await getDocs(collection(db, `projects/${id}/files`));
-      setFiles(filesSnap.docs.map(doc => ({
-        id: doc.id,
-        ...doc.data()
-      })));
+      try {
+        const filesSnap = await getDocs(collection(db, `projects/${id}/files`));
+        setFiles(filesSnap.docs.map(doc => ({
+          id: doc.id,
+          ...doc.data()
+        })));
+      } catch (error) {
+        alert("Failed to fetch files.");
+      }
     }
     fetchProject();
     fetchFiles();
@@ -62,6 +72,14 @@ export default function ProjectDetail() {
     }
   };
 
+  if (project === "notfound") {
+    return (
+      <div className="p-6 text-center">
+        <div className="text-3xl font-bold text-red-500 mb-4">Project Not Found</div>
+        <div className="text-gray-600">The project you are looking for does not exist or has been deleted.</div>
+      </div>
+    );
+  }
   if (!project) return <div className="p-6">Loading...</div>;
 
   return (
