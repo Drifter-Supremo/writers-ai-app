@@ -22,9 +22,9 @@ This document outlines the remaining tasks required to complete and polish the W
   - Modular sections for Overview, Files, Notes, Settings
   - Files section: left-aligned upload form, file grid, upload/delete with skeleton loaders and confirmation
   - Overview: edit functionality restored
-- [ ] **Settings Page:**
-    - [ ] Add loading indicator while fetching/saving preferences.
-    - [ ] Add loading indicator for clearing preferences.
+- [x] **Settings Page:**
+- [x] Add loading indicator while fetching/saving preferences.
+- [x] Add loading indicator for clearing preferences.
 
 ### 1.2. Error Handling & Validation (Addressing TODOs)
 - [ ] **Firebase Operations:**
