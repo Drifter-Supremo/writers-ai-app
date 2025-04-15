@@ -89,6 +89,18 @@
 - [x] Technical context documentation
 - [x] Active context tracking
 
+### Character Workflow Restructuring & Linking
+- [x] Created dedicated `/workflows` route and `Workflows.jsx` component.
+- [x] Moved Character Workflow UI from `Home.jsx` to `Workflows.jsx`.
+- [x] Added "Workflows" link to sidebar navigation.
+- [x] Implemented "Link to Project" feature (menu option, modal, Firestore update).
+- [x] Implemented "Unlink Project" feature (menu option, Firestore update).
+- [x] Added skeleton loaders for workflow list and project list in modal.
+- [x] Replaced `alert()` with custom `Notification.jsx` component.
+- [x] Created `LinkedProjectDisplay.jsx` component.
+- [x] Fixed state issues in `CharacterWorkflowList.jsx`.
+- [x] Corrected modal to use `project.name`.
+
 ## 🚧 In Progress
 
 ### UI/UX Phase 3
@@ -99,7 +111,7 @@
 - [x] Add loading indicators for note add/delete actions
 - [x] Add loading indicator for saving project detail edits
 - [x] Implement sidebar section switching (Overview, Files, Notes, Settings)
-- [ ] Loading/skeleton states
+- [x] Loading/skeleton states (Workflow list, Link modal project list)
 - [ ] Drag-and-drop implementation
 - [x] Rich text editing
 - [ ] Advanced file previews
@@ -108,6 +120,7 @@
 4. Added skeleton loader for Project Detail title/description area to improve perceived loading performance.
 5. Refactored project card actions: card click opens project, 3-dot menu contains delete with confirmation.
 6. Modularized Project Detail sections, restored file upload/delete, fixed heading cutoffs, improved Files section layout, and completed error handling for all Firestore/Storage operations.
+7. Restructured Character Workflow UI into its own `/workflows` page, added project linking/unlinking functionality, implemented skeleton loaders, and replaced alerts with a custom notification component.
 
 ### Dashboard Enhancement
 - [ ] Advanced filtering
@@ -127,7 +140,7 @@
 - [x] Project detail view (enhanced)
 - [x] File upload system
 - [x] Notes management
-- [ ] Character management
+- [ ] Character management (linking implemented)
 - [ ] Advanced file organization
 
 ### Phase 3: AI Integration
@@ -143,9 +156,8 @@
 - [ ] Keyboard shortcuts
 
 ## 🐛 Known Issues
-1. Project detail view lacks error handling
-2. Loading states needed for Firestore operations
-3. Navigation feedback needs improvement
+1. Project detail view lacks comprehensive error handling for all scenarios.
+2. Navigation feedback needs improvement in some areas.
 
 ## 🎯 Milestones
 
@@ -158,7 +170,7 @@
 
 ### Milestone 2: Core Features 📅
 - [x] Basic project CRUD operations
-- [ ] Enhanced project operations
+- [x] Enhanced project operations (linking added)
 - [x] Basic data persistence
 - [ ] User authentication
 

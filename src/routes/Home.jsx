@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import CharacterWorkflowList from "../components/CharacterWorkflowList";
+// Removed: import CharacterWorkflowList from "../components/CharacterWorkflowList";
 
 export default function Home() {
   const navigate = useNavigate();
@@ -38,21 +38,9 @@ export default function Home() {
             Go to Settings
           </button>
         </div>
-        <div className="card-creative p-6 flex flex-col items-center">
-          <span className="text-5xl mb-4">🧑‍🎤</span>
-          <h2 className="text-xl font-semibold mb-2">Character Workflow</h2>
-          <p className="text-gray-600 mb-4 text-center">
-            Start a new character creation workflow to flesh out your ideas before adding them to a project.
-          </p>
-          <button
-            className="btn-creative w-full text-center"
-            onClick={() => navigate("/character-workflow")}
-          >
-            Start Character Workflow
-          </button>
-        </div>
+        {/* Removed Character Workflow Card */}
       </div>
-      <CharacterWorkflowList />
+      {/* Removed CharacterWorkflowList */}
     </div>
   );
 }

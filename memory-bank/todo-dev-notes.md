@@ -7,7 +7,7 @@ This file tracks areas that were simplified during MVP development and need poli
 ## 🚨 Error Handling Needed
 
 - [ ] Wrap Firestore reads (getDocs, getDoc) in try/catch blocks  
-- [ ] Show user-friendly error messages if Firebase fails  
+- [x] Show user-friendly error messages if Firebase fails (Implemented `Notification.jsx` for feedback, replacing native alerts)
 - [ ] Add 404 state to ProjectDetail page if project ID doesn't exist
 - [ ] Add error handling for file upload failures
 - [ ] Handle duplicate file names in Storage
@@ -40,6 +40,8 @@ This file tracks areas that were simplified during MVP development and need poli
   - Project cards
   - File list
   - Notes section
+  - [x] Character Workflow list (`Workflows.jsx`)
+  - [x] Project list in Link Workflow modal (`LinkWorkflowModal.jsx`)
 - [x] Added skeleton loaders for project cards on the Projects Dashboard to improve loading feedback
 - [ ] Implement drag-and-drop:
   - File uploads
@@ -51,7 +53,7 @@ This file tracks areas that were simplified during MVP development and need poli
   - Keyboard shortcuts
 - [ ] Enhance visual feedback:
   - Progress indicators
-  - Success/error states
+  - [x] Success/error states (Implemented `Notification.jsx` for link/unlink actions)
   - Tooltips
 - [ ] Improve accessibility:
   - ARIA labels

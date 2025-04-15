@@ -36,6 +36,7 @@ flowchart TD
   /projects         # Projects Dashboard
   /projects/:id     # Project Detail
   /settings         # User Settings
+  /workflows        # Character Workflows List
   ```
 
 ### 2. Component Hierarchy
@@ -46,16 +47,17 @@ flowchart TD
     - Dynamic routing with useParams
     - Firestore document fetching
     - Basic content layout
-- **Feature Components**: Business logic containers (ProjectCard)
+  - Workflows: Character workflow dashboard
+- **Feature Components**: Business logic containers (ProjectCard, CharacterWorkflowList, LinkWorkflowModal, LinkedProjectDisplay)
   - Self-contained UI components
   - Prop-based customization
   - Consistent styling patterns
-- **Navigation Components**: Top-level routing (Navbar)
+- **Navigation Components**: Top-level routing (Navbar, Sidebar)
   - React Router integration
   - Responsive layouts
   - Consistent link styling
-- **Base Components**: Reusable UI elements (Button, Input)
-- **Shared Components**: Cross-cutting concerns (ErrorBoundary)
+- **Base Components**: Reusable UI elements (Button, Input, SkeletonProjectCard)
+- **Shared Components**: Cross-cutting concerns (ErrorBoundary, Notification)
 
 ### 3. UI Component Patterns
 ```mermaid
@@ -97,6 +99,17 @@ flowchart TD
     Form --> Labels[text-sm font-bold]
     Form --> Inputs[input-creative]
     Form --> Focus[focus states]
+
+    Modal[Modal Dialogs] --> Overlay[bg-black/50]
+    Modal --> ContentBox[bg-white rounded-lg]
+    Modal --> Position[fixed inset-0 flex items-center justify-center]
+
+    Notification[Notification Component] --> Positioned[fixed bottom-4 right-4]
+    Notification --> Style[bg-green-500 or bg-red-500]
+    Notification --> Animation[fade-in/out]
+
+    Skeleton[Skeleton Loaders] --> Animation[animate-pulse]
+    Skeleton --> Style[bg-gray-300 rounded]
 ```
 
 ### 4. Styling Strategy
@@ -229,6 +242,14 @@ projects/
   │        ├─ url: string
   │        ├─ type: string
   │        └─ createdAt: timestamp
+
+characterWorkflows/
+  ├─ {workflowId}/
+  │  ├─ name: string
+  │  ├─ description: string
+  │  ├─ createdAt: timestamp
+  │  ├─ ... (other workflow fields)
+  │  └─ linkedProjectId?: string (Optional: ID of the linked project)
 ```
 
 ### 2. File Management Patterns
@@ -270,6 +291,31 @@ flowchart LR
     Firestore[Firestore] --> Projects[Projects.jsx]
     Projects --> ProjectCard[ProjectCard.jsx]
     ProjectCard --> UI[UI Render]
+
+### 5b. Workflow Linking Data Flow
+```mermaid
+flowchart TD
+    subgraph "Link Workflow"
+        A[User Clicks 'Link Project'] --> B{Open LinkWorkflowModal}
+        B --> C[Fetch Projects List]
+        C --> D[Firestore Query 'projects']
+        D --> E[Display Projects in Modal]
+        E --> F[User Selects Project]
+        F --> G[Update Workflow Document]
+        G --> H[setDoc/updateDoc 'characterWorkflows/{workflowId}']
+        H --> I[Add 'linkedProjectId' field]
+        I --> J[Show Success Notification]
+        J --> K[Close Modal & Update UI]
+    end
+
+    subgraph "Unlink Workflow"
+        L[User Clicks 'Unlink Project'] --> M[Confirm Action]
+        M --> N[Update Workflow Document]
+        N --> O[updateDoc 'characterWorkflows/{workflowId}']
+        O --> P[Remove 'linkedProjectId' field using deleteField()]
+        P --> Q[Show Success Notification]
+        Q --> R[Update UI]
+    end
 ```
 
 ### 6. Security Rules
@@ -300,7 +346,7 @@ flowchart TD
 - Global error boundary
 - Firebase operation retries
 - Graceful AI fallbacks
-- User feedback mechanisms
+- User feedback mechanisms (Custom `Notification.jsx` component)
 - Route-level error handling
 
 ## Performance Patterns
@@ -311,6 +357,7 @@ flowchart TD
 - AI response caching
 - Route prefetching
 - Component-level code splitting
+- Skeleton loaders for perceived performance during data fetching.
 
 ## Testing Strategy
 - Component unit tests

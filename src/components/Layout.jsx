@@ -40,6 +40,17 @@ export default function Layout({ children }) {
               <span>📚</span>
               <span>Projects</span>
             </a>
+            <a
+              href="/workflows"
+              className={`flex items-center space-x-3 p-3 rounded-lg transition-all duration-200 ${
+                location.pathname === '/workflows'
+                  ? 'bg-white/10 text-white border-l-4 border-creative-blue-400 shadow-lg shadow-black/20 font-medium'
+                  : 'text-white/70 hover:bg-white/5 hover:text-white hover:translate-x-1 hover:border-l-4 hover:border-creative-purple-400'
+              }`}
+            >
+              <span>⚡️</span>
+              <span>Workflows</span>
+            </a>
             <a 
               href="/settings"
               className={`flex items-center space-x-3 p-3 rounded-lg transition-all duration-200 ${

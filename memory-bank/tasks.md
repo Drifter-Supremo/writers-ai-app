@@ -17,6 +17,9 @@ This document outlines the remaining tasks required to complete and polish the W
 - [x] Add loading indicators for file upload/delete actions.
 - [x] Add loading indicators for note add/delete actions.
 - [x] Add loading indicator for saving project detail edits.
+- [x] **Character Workflows:**
+    - [x] Implement skeleton loader for workflow cards list (`Workflows.jsx`).
+    - [x] Implement skeleton loader for project list in Link Workflow modal.
 - [ ] **Project Detail Sidebar Navigation:**
 - [x] Implement sidebar section switching (Overview, Files, Notes, Settings).
   - Modular sections for Overview, Files, Notes, Settings
@@ -30,7 +33,7 @@ This document outlines the remaining tasks required to complete and polish the W
 - [x] **Firebase Operations:**
     - [x] Wrap all Firestore `getDocs`, `getDoc`, `addDoc`, `updateDoc`, `deleteDoc` calls in `try/catch` blocks.
     - [x] Wrap all Firebase Storage `uploadBytes`, `getDownloadURL`, `deleteObject` calls in `try/catch` blocks.
-    - [x] Display user-friendly error messages (e.g., using toasts or inline messages) for failed operations.
+    - [x] Display user-friendly error messages (e.g., using custom `Notification.jsx` component) for failed operations.
 - [x] **Project Detail:**
     - [x] Implement a "Project Not Found" state if the `projectId` in the URL is invalid or the document doesn't exist.
 - [x] **File Management:**
@@ -44,18 +47,29 @@ This document outlines the remaining tasks required to complete and polish the W
     - [x] Disable "Save Preferences" button if the form is invalid.
 
 ### 1.3. Home Page Implementation
-- [x] **Define Purpose:** Decide on the content and function of the Home page (e.g., welcome message, quick stats, recent projects, getting started guide).
+- [x] **Define Purpose:** Define the content and function of the Home page (e.g., welcome message, quick stats, recent projects, getting started guide). (Workflow UI moved to dedicated page).
 - [x] **Implement Content:** Build the React component (`src/routes/Home.jsx`) with the chosen content.
     - [x] Add welcoming text and brief app description.
     - [x] Potentially display quick links or summary information (e.g., number of projects).
     - [x] Ensure styling aligns with the rest of the application.
-    - [x] Add Character Workflow dashboard with create, resume, view, and delete features.
+    - [x] Remove Character Workflow dashboard UI (moved to `/workflows`).
 
-### 1.4. Character Workflow Integration
-- [ ] Add feature to link a character workflow to an existing project.
-    - [ ] Allow user to select a project when finishing a workflow.
-    - [ ] Save the workflow's ID or data to the selected project in Firestore.
-    - [ ] Show linked workflows in the project detail view.
+### 1.4. Character Workflow Restructuring & Linking
+- [x] **Create Dedicated Workflows Page:**
+    - [x] Create new route `/workflows`.
+    - [x] Create `src/routes/Workflows.jsx` component.
+    - [x] Move Character Workflow UI (start card, list) from `Home.jsx` to `Workflows.jsx`.
+    - [x] Add "Workflows" link to sidebar navigation (`Layout.jsx`).
+- [x] **Implement Project Linking/Unlinking:**
+    - [x] Add "Link to Project" option to workflow card menu (`CharacterWorkflowList.jsx`).
+    - [x] Create `LinkWorkflowModal.jsx` to fetch and display projects for selection.
+    - [x] Implement Firestore update to add `linkedProjectId` to `characterWorkflows` document on link.
+    - [x] Add "Unlink Project" option to menu (visible only when linked).
+    - [x] Implement Firestore update to remove `linkedProjectId` using `deleteField()` on unlink.
+    - [x] Create `LinkedProjectDisplay.jsx` to show linked project name on card.
+    - [x] Replace `alert()` with `Notification.jsx` for feedback on link/unlink actions.
+    - [x] Fix state declaration issues in `CharacterWorkflowList.jsx`.
+    - [x] Fix modal project selection to use `project.name`.
 
 ---
 

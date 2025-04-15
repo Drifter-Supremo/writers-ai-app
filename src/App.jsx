@@ -5,6 +5,7 @@ import Projects from './routes/Projects';
 import ProjectDetail from './routes/ProjectDetail';
 import Settings from './routes/Settings';
 import CharacterWorkflow from './routes/CharacterWorkflow';
+import Workflows from './routes/Workflows'; // Import the new component
 
 export default function App() {
   return (
@@ -15,6 +16,7 @@ export default function App() {
           <Route path="/projects" element={<Projects />} />
           <Route path="/projects/:id" element={<ProjectDetail />} />
           <Route path="/settings" element={<Settings />} />
+          <Route path="/workflows" element={<Workflows />} /> {/* Add the new route */}
           <Route path="/character-workflow" element={<CharacterWorkflow />} />
         </Routes>
       </Layout>

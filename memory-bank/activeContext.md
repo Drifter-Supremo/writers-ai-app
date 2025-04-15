@@ -43,6 +43,25 @@ UI/UX Enhancement and Layout Restructuring
    - ✅ Added loading indicators for note add/delete actions in Project Detail
    - ✅ Added loading indicator for saving project detail edits
 
+1. **Character Workflow Restructuring & Linking**
+  - ✅ Created dedicated `/workflows` route and `Workflows.jsx` component.
+  - ✅ Moved Character Workflow UI (start card, list) from `Home.jsx` to `Workflows.jsx`.
+  - ✅ Added "Workflows" link to sidebar navigation.
+  - ✅ Implemented "Link to Project" feature:
+    - Added option to 3-dot menu on workflow cards.
+    - Created `LinkWorkflowModal.jsx` for project selection.
+    - Updated Firestore `characterWorkflows` documents with `linkedProjectId`.
+  - ✅ Implemented "Unlink Project" feature:
+    - Added option to 3-dot menu (visible when linked).
+    - Removes `linkedProjectId` from Firestore using `deleteField()`.
+  - ✅ UI/UX Refinements:
+    - Added skeleton loaders for workflow list and project list in modal.
+    - Replaced `alert()` with custom `Notification.jsx` component for feedback.
+    - Created `LinkedProjectDisplay.jsx` to show linked project name.
+  - ✅ Fixes:
+    - Addressed missing state declarations in `CharacterWorkflowList.jsx`.
+    - Corrected modal to use `project.name`.
+
 1. **UI/UX Phase 1 Overhaul**
    - ✅ Replaced top navbar with sidebar navigation
      - Fixed-width sidebar (250px)
@@ -176,6 +195,8 @@ UI/UX Enhancement and Layout Restructuring
 - Implementing lazy loading for routes
 - Keeping components modular and reusable
 - Following route-based code organization
+- Introduced new route components: `Workflows.jsx`
+- Introduced new UI components: `LinkWorkflowModal.jsx`, `Notification.jsx`, `LinkedProjectDisplay.jsx`
 
 ### 2. Navigation Strategy
 - Top-level navigation bar
@@ -195,6 +216,9 @@ UI/UX Enhancement and Layout Restructuring
   - Flex-based layout
   - Hover interactions
   - Active state indicators
+  - Modal dialogs for actions (`LinkWorkflowModal.jsx`)
+  - Custom notification component (`Notification.jsx`) for user feedback instead of native alerts.
+  - Skeleton loaders for asynchronous content areas.
 
 ### 4. Styling Approach
 - Using Tailwind utility classes with custom extensions
@@ -221,6 +245,7 @@ UI/UX Enhancement and Layout Restructuring
 - Implementing Firestore data fetching
 - Planning real-time updates integration
 - Considering React Context for global state
+- Lifting state up to parent components when needed for shared components (e.g., `Notification.jsx` state managed in `CharacterWorkflowList.jsx`).
 
 ### 6. File Storage Strategy
 - Using Firebase Storage for file data
