@@ -171,6 +171,26 @@ This document outlines the remaining tasks required to complete and polish the W
     - [ ] Implement drag-and-drop reordering for project cards on the dashboard.
     - [ ] Update Firestore data to persist the order.
 
+### 3.4. Homepage Revamp Tasks
+- [ ] **Implement Welcome & Quickstart Section:**
+    - [ ] Add a welcome message and quick action buttons: Start New Workflow, Resume Saved Workflow, Go to Projects.
+- [ ] **Add User Progress Stats:**
+    - [ ] Display visual stat cards or icon pills showing creative activity metrics:
+        - Projects Created
+        - Characters Defined
+        - Notes Written
+        - Workflows Completed
+        - Files Uploaded
+- [ ] **Create Recent Activity Feed:**
+    - [ ] Show chronological logs of recent user events and actions.
+- [ ] **Add Featured Workflow Section:**
+    - [ ] Implement a rotating highlight section showcasing featured workflows.
+- [ ] **Plan AI Suggestions Panel:**
+    - [ ] Design a future panel offering bite-sized writing prompts or ideas powered by AI.
+- [ ] **Incorporate Workflow Strategy & Design Principles:**
+    - [ ] Implement structured form-based workflows.
+    - [ ] Add scoped AI brainstorm buttons for targeted creative assistance.
+
 ---
 
 ## Phase 4: AI Integration
