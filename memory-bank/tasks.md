@@ -54,7 +54,8 @@ This document outlines the remaining tasks required to complete and polish the W
     - [x] Ensure styling aligns with the rest of the application.
     - [x] Remove Character Workflow dashboard UI (moved to `/workflows`).
 
-### 1.4. Character Workflow Restructuring & Linking
+### 1.4. Character Workflow Restructuring & Linking (Partially Superseded)
+*Note: The core workflow execution UI described here was replaced by the Enhanced Workflow Engine (see 1.5), but the workflow listing, linking, and navigation aspects remain relevant.*
 - [x] **Create Dedicated Workflows Page:**
     - [x] Create new route `/workflows`.
     - [x] Create `src/routes/Workflows.jsx` component.
@@ -70,6 +71,18 @@ This document outlines the remaining tasks required to complete and polish the W
     - [x] Replace `alert()` with `Notification.jsx` for feedback on link/unlink actions.
     - [x] Fix state declaration issues in `CharacterWorkflowList.jsx`.
     - [x] Fix modal project selection to use `project.name`.
+
+### 1.5. Enhanced Character Workflow Implementation
+- [x] **New Structure:** Created `/src/workflows/`, `/src/workflows/components/`, `/src/workflows/configs/`.
+- [x] **Config-Driven:** Implemented `src/workflows/configs/characterWorkflowConfig.js` to define workflow structure.
+- [x] **Core Engine:** Developed `WorkflowEngine.jsx` for logic, state management, Firestore load/save (debounced autosave).
+- [x] **UI Components:** Created `WorkflowSection.jsx` and `QuestionCard.jsx` for rendering UI based on config.
+- [x] **Features:**
+    - [x] Added image display per question in `QuestionCard.jsx`.
+    - [x] Included placeholder `AIHelperModal.jsx` and AI button in `QuestionCard.jsx`.
+    - [x] Implemented debounced autosave for workflow answers.
+- [x] **Routing:** Created top-level `CharacterWorkflow.jsx` route component and updated `App.jsx` route `/character-workflow/:id`.
+- [x] **Data Storage:** Storing workflow answers in Firestore at `characterWorkflows/{workflowId}/answers/{questionId}`.
 
 ---
 
@@ -187,10 +200,14 @@ This document outlines the remaining tasks required to complete and polish the W
     - [ ] Decide if chat history needs to be persisted in Firestore.
     - [ ] If yes, implement logic to save and load chat messages for each project.
 
-### 4.3. AI-Powered Features (Beyond Chat)
-- [ ] **Contextual Suggestions:** Plan and implement specific AI features (e.g., "Suggest plot points," "Analyze character consistency," "Rewrite this paragraph").
-- [ ] **Trigger Points:** Determine how users will invoke these features (e.g., buttons within the notes editor, context menus).
-- [ ] **UI Integration:** Integrate these features into the relevant UI sections.
+### 4.3. AI-Powered Features (Workflow & Notes)
+- [ ] **Character Workflow AI Helper:**
+    - [ ] Implement actual AI API calls within `AIHelperModal.jsx`.
+    - [ ] Pass relevant question context (from `QuestionCard.jsx` via `WorkflowEngine.jsx`) to the AI.
+    - [ ] Provide UI for user to accept/modify AI suggestions and populate the `QuestionCard` input.
+- [ ] **Notes Contextual Suggestions:** Plan and implement specific AI features for the notes editor (e.g., "Suggest plot points," "Analyze character consistency," "Rewrite this paragraph").
+- [ ] **Trigger Points:** Determine how users will invoke these features (e.g., buttons within the notes editor, context menus, AI button in `QuestionCard`).
+- [ ] **UI Integration:** Integrate these features into the relevant UI sections (`ProjectDetail` notes editor, `QuestionCard`).
 
 ---
 
@@ -198,9 +215,9 @@ This document outlines the remaining tasks required to complete and polish the W
 
 ### 5.1. Unit Testing
 - [ ] **Setup:** Configure a testing framework (e.g., Vitest, React Testing Library).
-- [ ] **Component Tests:** Write unit tests for key components (e.g., `ProjectCard`, `FileUploader`, `NotesList`, `SettingsForm`, `Chatbox`).
-    - [ ] Test rendering based on props.
-    - [ ] Test event handlers and state changes.
+- [ ] **Component Tests:** Write unit tests for key components (e.g., `ProjectCard`, `FileUploader`, `NotesList`, `SettingsForm`, `Chatbox`, `WorkflowEngine`, `QuestionCard`).
+    - [ ] Test rendering based on props/config.
+    - [ ] Test event handlers, state changes, and autosave logic (`WorkflowEngine`, `QuestionCard`).
     - [ ] Mock Firebase/API calls where necessary.
 - [ ] **Utility/Hook Tests:** Write tests for any utility functions or custom hooks.
 
@@ -216,6 +233,7 @@ This document outlines the remaining tasks required to complete and polish the W
 - [ ] **Key User Flows:** Write E2E tests for critical user journeys:
     - [ ] Creating a new project.
     - [ ] Navigating to a project, adding a note, uploading a file, deleting them.
+    - [ ] Completing a character workflow using the `WorkflowEngine`.
     - [ ] Interacting with the AI chatbox.
     - [ ] Updating user settings.
     - [ ] Searching/filtering projects (if implemented).
@@ -240,6 +258,11 @@ This document outlines the remaining tasks required to complete and polish the W
     - [ ] Check color contrast ratios.
 - [ ] **Empty States:** Ensure all areas with dynamic content have well-designed empty states (e.g., no projects, no files, no notes).
 - [ ] **Feedback States:** Enhance visual feedback for user actions (e.g., clearer success messages, more distinct loading indicators).
+- [ ] **Workflow UI Enhancements:**
+   - [ ] Add fading animations/transitions between workflow questions in `WorkflowEngine`.
+   - [ ] Consider adding a progress indicator (e.g., step count, progress bar) to `WorkflowEngine`.
+   - [ ] Improve styling/layout of the "Build A New Character!" card on `/workflows` page.
+   - [ ] Standardize appearance (info displayed, button styles/placement) of Project cards (`ProjectCard.jsx`) and Workflow cards (`CharacterWorkflowList.jsx`).
 
 ### 6.2. Performance Optimization
 - [ ] **Bundle Analysis:** Analyze the production build bundle size and identify potential areas for optimization.
@@ -263,4 +286,8 @@ This document outlines the remaining tasks required to complete and polish the W
 - [ ] **Custom Domain (Optional):** Configure a custom domain on Railway if needed.
 - [ ] **CI/CD Pipeline (Optional):** Set up a CI/CD pipeline (e.g., using GitHub Actions) for automated testing and deployment triggers if Railway's default GitHub integration isn't sufficient.
 
+
 ---
+
+## Updates
+2025-04-15: Marked Character Workflow Restructuring/Linking tasks (1.4) as complete/superseded. Added new section (1.5) detailing the completion of the Enhanced Character Workflow implementation. Updated AI Integration (4.3), Testing (5.1, 5.3), and Polish (6.1) tasks to reflect the new workflow components and structure.

@@ -89,17 +89,35 @@
 - [x] Technical context documentation
 - [x] Active context tracking
 
-### Character Workflow Restructuring & Linking
-- [x] Created dedicated `/workflows` route and `Workflows.jsx` component.
-- [x] Moved Character Workflow UI from `Home.jsx` to `Workflows.jsx`.
+### Enhanced Character Workflow System (Major Refactor)
+- [x] **New Structure:** Created `/src/workflows/`, `/src/workflows/components/`, `/src/workflows/configs/`.
+- [x] **Config-Driven:** Implemented `src/workflows/configs/characterWorkflowConfig.js` defining workflow.
+- [x] **Core Engine (`WorkflowEngine.jsx`):**
+    - [x] Manages state (`answers`, `isLoading`, `currentStepIndex`, etc.).
+    - [x] Fetches existing answers from Firestore.
+    - [x] Implements step-by-step navigation logic (Next/Previous/Finish).
+    - [x] Handles autosave (debounced) to Firestore subcollection (`answers/{qid}`).
+    - [x] Updates parent workflow document `name` field.
+    - [x] Calculates starting step for new vs. resume.
+    - [x] Renders current step (intro or `QuestionCard`).
+    - [x] Renders navigation buttons (above card).
+    - [x] Implements View Mode layout (AI placeholder, collapsible Q&A list).
+- [x] **UI Components:**
+    - [x] `QuestionCard.jsx`: Displays image, prompt, textarea (consistent size), AI placeholder button. Integrates `AIHelperModal`. Handles local input state and triggers debounced save. Renders read-only view.
+    - [x] `AIHelperModal.jsx`: Placeholder modal created.
+    - [x] `CharacterWorkflow.jsx`: Top-level route component created.
+- [x] **Routing:** Updated `App.jsx` route `/character-workflow` to use `CharacterWorkflow.jsx`.
+- [x] **Data Storage:** Uses `characterWorkflows/{workflowId}/answers/{questionId}` structure.
+- [x] **Fixes:** Resolved `useNavigate` error, image loading paths, intro skip logic, button layout, input consistency.
+
+### Workflow Listing & Linking Features
+- [x] Created dedicated `/workflows` route and `Workflows.jsx` component (displays start card & list).
 - [x] Added "Workflows" link to sidebar navigation.
-- [x] Implemented "Link to Project" feature (menu option, modal, Firestore update).
-- [x] Implemented "Unlink Project" feature (menu option, Firestore update).
-- [x] Added skeleton loaders for workflow list and project list in modal.
-- [x] Replaced `alert()` with custom `Notification.jsx` component.
-- [x] Created `LinkedProjectDisplay.jsx` component.
-- [x] Fixed state issues in `CharacterWorkflowList.jsx`.
-- [x] Corrected modal to use `project.name`.
+- [x] Implemented "Link/Unlink Project" feature in `CharacterWorkflowList.jsx` menu.
+- [x] Created `LinkWorkflowModal.jsx` for project selection (using `project.name`).
+- [x] Created `LinkedProjectDisplay.jsx` to show linked project name on card.
+- [x] Added skeleton loaders for workflow list and link modal project list.
+- [x] Replaced `alert()` with custom `Notification.jsx` component for feedback.
 
 ## 🚧 In Progress
 
@@ -117,10 +135,20 @@
 - [ ] Advanced file previews
 
 ## 🔄 Recent Updates
-4. Added skeleton loader for Project Detail title/description area to improve perceived loading performance.
-5. Refactored project card actions: card click opens project, 3-dot menu contains delete with confirmation.
-6. Modularized Project Detail sections, restored file upload/delete, fixed heading cutoffs, improved Files section layout, and completed error handling for all Firestore/Storage operations.
-7. Restructured Character Workflow UI into its own `/workflows` page, added project linking/unlinking functionality, implemented skeleton loaders, and replaced alerts with a custom notification component.
+1. Completed UI/UX Phase 1 overhaul (Sidebar, Split View).
+2. Enhanced component architecture & user interactions.
+3. Upgraded styling system.
+4. Added skeleton loader for Project Detail title/description.
+5. Refactored project card actions (3-dot menu, delete confirmation).
+6. Modularized Project Detail sections, restored file upload/delete, improved layout & error handling.
+7. Implemented Enhanced Character Workflow System:
+    - Created config-driven engine (`WorkflowEngine.jsx`).
+    - Implemented step-by-step UI (`QuestionCard.jsx`) with image display.
+    - Added autosave, resume logic, view mode, placeholder AI modal.
+    - Created dedicated `/workflows` page & sidebar link.
+    - Implemented project linking/unlinking via modal.
+    - Added custom notifications & skeleton loaders.
+    - Fixed numerous bugs related to layout, state, and data handling.
 
 ### Dashboard Enhancement
 - [ ] Advanced filtering
@@ -140,7 +168,9 @@
 - [x] Project detail view (enhanced)
 - [x] File upload system
 - [x] Notes management
-- [ ] Character management (linking implemented)
+- [x] Character workflow engine implemented (config-driven, step-by-step, autosave, view mode)
+- [ ] Character workflow AI integration (implement actual AI calls in modal)
+- [ ] Character workflow UI enhancements (e.g., progress indicator, transition animations)
 - [ ] Advanced file organization
 
 ### Phase 3: AI Integration
@@ -171,6 +201,7 @@
 ### Milestone 2: Core Features 📅
 - [x] Basic project CRUD operations
 - [x] Enhanced project operations (linking added)
+- [x] Character Workflow engine implemented
 - [x] Basic data persistence
 - [ ] User authentication
 
@@ -223,3 +254,6 @@
 - Maintaining comprehensive documentation
 - Planning regular performance audits
 - Establishing consistent UI patterns
+
+## Updates
+2025-04-15: Consolidated and updated documentation for the enhanced Character Workflow system implementation, including config-driven engine, step-by-step UI, project linking/unlinking, view mode, autosave, resume logic fixes, layout adjustments, and associated new components. Marked previous workflow tasks as superseded or complete.

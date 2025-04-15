@@ -194,6 +194,73 @@ useEffect(() => {
   }
   fetchProjects();
 }, []);
+
+// Workflow Answer Saving (WorkflowEngine.jsx / QuestionCard.jsx)
+import { doc, setDoc, serverTimestamp } from "firebase/firestore";
+// ... inside component ...
+const saveAnswer = async (workflowId, questionId, answerValue) => {
+  const answerRef = doc(db, "characterWorkflows", workflowId, "answers", questionId);
+  try {
+    await setDoc(answerRef, {
+      value: answerValue, // Ensure field name is 'value'
+      lastUpdated: Timestamp.now() // Use Timestamp.now() for consistency
+    }, { merge: true });
+    console.log("Answer saved successfully for question:", questionId);
+  } catch (error) {
+    console.error("Error saving answer:", error);
+  }
+};
+
+// Workflow Answer Loading (WorkflowEngine.jsx)
+import { collection, getDocs } from "firebase/firestore";
+// ... inside component ...
+const loadAnswers = async (workflowId) => {
+  const answers = {};
+  const answersRef = collection(db, "characterWorkflows", workflowId, "answers");
+  try {
+    const querySnapshot = await getDocs(answersRef);
+    querySnapshot.forEach((doc) => {
+      answers[doc.id] = doc.data()?.value; // Ensure field name is 'value'
+    });
+    console.log("Answers loaded successfully");
+    return answers;
+  } catch (error) {
+    console.error("Error loading answers:", error);
+    return {}; // Return empty object on error
+  }
+};
+
+// Workflow Name Update (WorkflowEngine.jsx)
+import { doc, updateDoc } from "firebase/firestore";
+// ... inside saveAnswer function ...
+if (questionId === 'name') {
+  const workflowRef = doc(db, 'characterWorkflows', workflowId);
+  await updateDoc(workflowRef, { name: value || 'Untitled Character Workflow' });
+}
+```
+
+### 5. Workflow Configuration Pattern
+- The enhanced Character Workflow utilizes a JavaScript configuration file (`src/workflows/configs/characterWorkflowConfig.js`).
+- This config defines the structure, sections, questions, question types, and associated images for the workflow.
+- The `WorkflowEngine.jsx` component reads this configuration to dynamically render the workflow UI using `WorkflowSection.jsx` and `QuestionCard.jsx`.
+- This pattern allows for easier modification and creation of new workflows without changing the core engine components. Example structure:
+```javascript
+// src/workflows/configs/characterWorkflowConfig.js (Simplified Example)
+export const characterWorkflowConfig = {
+  id: 'character-creation-v1',
+  title: 'Character Creation Workflow',
+  sections: [
+    {
+      id: 'section-1',
+      title: 'Basic Concept',
+      questions: [
+        { id: 'q1', text: 'Character Name?', type: 'text', image: '/assets/workflows/name.png' },
+        { id: 'q2', text: 'Logline/Concept?', type: 'textarea', image: '/assets/workflows/concept.png' },
+      ]
+    },
+    // ... more sections
+  ]
+};
 ```
 
 ## Dependencies
@@ -204,9 +271,10 @@ useEffect(() => {
   "react": "^18.2.0",
   "react-dom": "^18.2.0",
   "react-router-dom": "^6.x",
-  "firebase": "^10.x",
-  "@google/generative-ai": "^0.1.x",
-  "tailwindcss": "^3.x"
+  "firebase": "^10.x", // Core Firebase SDK
+  "@google/generative-ai": "^0.1.x", // For Gemini AI
+  "tailwindcss": "^3.x", // Utility CSS framework
+  // Note: lodash.debounce was not used, debounce implemented with native JS
 }
 ```
 
@@ -289,3 +357,6 @@ npm run preview    # Preview production build
 - Error tracking
 - Performance monitoring
 - Usage analytics
+
+## Updates
+2025-04-15: Updated Firestore usage patterns for workflow answers (using `value` field, `Timestamp.now()`). Added example for updating parent workflow document name. Corrected dependencies (debounce implemented natively).

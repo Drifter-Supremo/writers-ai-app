@@ -21,9 +21,9 @@ This file tracks areas that were simplified during MVP development and need poli
 - [ ] Add form validation UI (error messages, disabled submit, etc.)  
 - [ ] Validate file types before upload
 - [ ] Add file size limits and validation
-- [ ] Add form auto-save functionality
-- [ ] Implement real-time validation
-- [ ] Add form state persistence
+- [x] Add form auto-save functionality (Implemented for Character Workflow via `WorkflowEngine` and debounced `QuestionCard` updates)
+- [ ] Implement real-time validation (Beyond basic required/format checks)
+- [ ] Add form state persistence (e.g., across page reloads for non-workflow forms)
 
 ---
 
@@ -42,6 +42,7 @@ This file tracks areas that were simplified during MVP development and need poli
   - Notes section
   - [x] Character Workflow list (`Workflows.jsx`)
   - [x] Project list in Link Workflow modal (`LinkWorkflowModal.jsx`)
+  - [x] Character Workflow Engine (`WorkflowEngine.jsx` while loading config/answers)
 - [x] Added skeleton loaders for project cards on the Projects Dashboard to improve loading feedback
 - [ ] Implement drag-and-drop:
   - File uploads
@@ -52,8 +53,8 @@ This file tracks areas that were simplified during MVP development and need poli
   - Right-click context menus
   - Keyboard shortcuts
 - [ ] Enhance visual feedback:
-  - Progress indicators
-  - [x] Success/error states (Implemented `Notification.jsx` for link/unlink actions)
+  - Progress indicators (e.g., for Character Workflow completion)
+  - [x] Success/error states (Implemented `Notification.jsx` for link/unlink actions, need general implementation)
   - Tooltips
 - [ ] Improve accessibility:
   - ARIA labels
@@ -129,6 +130,11 @@ This file tracks areas that were simplified during MVP development and need poli
   - Code splitting
   - Lazy loading
   - Caching strategies
+- [ ] Character Workflow Enhancements:
+  - [ ] Implement actual AI calls in `AIHelperModal.jsx` (currently placeholder).
+  - [ ] Add workflow progress indicator/steps UI.
+  - [ ] Consider adding different question input types (e.g., multiple choice, sliders) to config and `QuestionCard`.
+  - [ ] Add validation rules to workflow config and enforce in `QuestionCard`/`WorkflowEngine`.
 
 ---
 
@@ -154,3 +160,6 @@ This file tracks areas that were simplified during MVP development and need poli
 - Add screen reader support
 - Maintain proper color contrast
 - Add proper ARIA labels
+
+## Updates
+2025-04-15: Updated TODOs to reflect the completion of the enhanced Character Workflow. Marked workflow autosave as implemented. Added new TODOs for implementing the AI Helper modal functionality, adding workflow progress indicators, and potential future workflow enhancements (input types, validation). Marked skeleton loader TODO for the workflow engine as complete.

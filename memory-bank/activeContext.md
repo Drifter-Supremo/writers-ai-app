@@ -43,24 +43,40 @@ UI/UX Enhancement and Layout Restructuring
    - ✅ Added loading indicators for note add/delete actions in Project Detail
    - ✅ Added loading indicator for saving project detail edits
 
-1. **Character Workflow Restructuring & Linking**
-  - ✅ Created dedicated `/workflows` route and `Workflows.jsx` component.
-  - ✅ Moved Character Workflow UI (start card, list) from `Home.jsx` to `Workflows.jsx`.
-  - ✅ Added "Workflows" link to sidebar navigation.
-  - ✅ Implemented "Link to Project" feature:
-    - Added option to 3-dot menu on workflow cards.
-    - Created `LinkWorkflowModal.jsx` for project selection.
-    - Updated Firestore `characterWorkflows` documents with `linkedProjectId`.
-  - ✅ Implemented "Unlink Project" feature:
-    - Added option to 3-dot menu (visible when linked).
-    - Removes `linkedProjectId` from Firestore using `deleteField()`.
-  - ✅ UI/UX Refinements:
-    - Added skeleton loaders for workflow list and project list in modal.
-    - Replaced `alert()` with custom `Notification.jsx` component for feedback.
-    - Created `LinkedProjectDisplay.jsx` to show linked project name.
-  - ✅ Fixes:
-    - Addressed missing state declarations in `CharacterWorkflowList.jsx`.
-    - Corrected modal to use `project.name`.
+1. **Enhanced Character Workflow System (Major Refactor)**
+   - ✅ **UI Restructuring:**
+     - Created dedicated `/workflows` route and `Workflows.jsx` component.
+     - Moved old workflow UI from `Home.jsx` to `Workflows.jsx`.
+     - Added "Workflows" link to sidebar navigation.
+     - Updated "Start Workflow" card styling (image, text).
+   - ✅ **Config-Driven Engine:**
+     - Implemented new directory structure (`/src/workflows/...`).
+     - Created `characterWorkflowConfig.js` defining steps, questions, images, prompts.
+     - Developed `WorkflowEngine.jsx` managing state, step logic, Firestore load/save.
+     - Created `QuestionCard.jsx` displaying image, prompt, textarea (consistent size), AI placeholder button.
+     - Implemented step-by-step navigation (Previous/Next/Finish buttons) within `WorkflowEngine.jsx` (positioned above card).
+     - Implemented debounced autosave for answers in `WorkflowEngine` triggered by `QuestionCard`.
+     - Created placeholder `AIHelperModal.jsx` triggered by AI button.
+     - Created `CharacterWorkflow.jsx` route component using the engine.
+     - Updated `/character-workflow` route in `App.jsx`.
+   - ✅ **Project Linking:**
+     - Implemented "Link/Unlink Project" options in `CharacterWorkflowList.jsx` menu.
+     - Created `LinkWorkflowModal.jsx` for project selection (using `project.name`).
+     - Created `LinkedProjectDisplay.jsx` to show linked project name on card.
+     - Updated Firestore `characterWorkflows` documents with `linkedProjectId`.
+   - ✅ **View Mode:**
+     - Implemented read-only view mode (`?view=1` parameter).
+     - `WorkflowEngine` renders AI profile placeholder and collapsible Q&A list.
+     - `QuestionCard` displays answers as text, hides input/AI button.
+   - ✅ **Fixes & Refinements:**
+     - Fixed workflow resume logic to start at the first unanswered question.
+     - Fixed new workflow logic to start at the introduction step.
+     - Fixed autosave error (`updateDoc` import).
+     - Fixed workflow naming (updates parent doc `name` field on save).
+     - Fixed image loading paths and added missing images.
+     - Replaced `alert()` with custom `Notification.jsx` for feedback.
+     - Added skeleton loader for workflow loading state.
+     - Adjusted padding/layout to improve vertical positioning.
 
 1. **UI/UX Phase 1 Overhaul**
    - ✅ Replaced top navbar with sidebar navigation
@@ -197,6 +213,9 @@ UI/UX Enhancement and Layout Restructuring
 - Following route-based code organization
 - Introduced new route components: `Workflows.jsx`
 - Introduced new UI components: `LinkWorkflowModal.jsx`, `Notification.jsx`, `LinkedProjectDisplay.jsx`
+- Added dedicated workflow directory structure: `/src/workflows/`, `/src/workflows/components/`, `/src/workflows/configs/`.
+- Added new workflow components: `CharacterWorkflow.jsx` (route), `WorkflowEngine.jsx` (core logic), `QuestionCard.jsx` (UI), `AIHelperModal.jsx` (placeholder). (`WorkflowSection.jsx` was removed during refactor).
+- Added UI components: `LinkWorkflowModal.jsx`, `Notification.jsx`, `LinkedProjectDisplay.jsx`.
 
 ### 2. Navigation Strategy
 - Top-level navigation bar
@@ -219,6 +238,11 @@ UI/UX Enhancement and Layout Restructuring
   - Modal dialogs for actions (`LinkWorkflowModal.jsx`)
   - Custom notification component (`Notification.jsx`) for user feedback instead of native alerts.
   - Skeleton loaders for asynchronous content areas.
+  - Config-driven workflow layout:
+    - `WorkflowEngine` manages overall state, step logic, and data flow.
+    - `QuestionCard` displays individual questions step-by-step with associated images and input fields.
+  - Step-by-step workflow navigation pattern.
+  - Collapsible `<details>` element for View Mode Q&A list.
 
 ### 4. Styling Approach
 - Using Tailwind utility classes with custom extensions
@@ -246,6 +270,9 @@ UI/UX Enhancement and Layout Restructuring
 - Planning real-time updates integration
 - Considering React Context for global state
 - Lifting state up to parent components when needed for shared components (e.g., `Notification.jsx` state managed in `CharacterWorkflowList.jsx`).
+- Centralized state management for Character Workflow within `WorkflowEngine.jsx`.
+- Implemented debounced autosave for workflow answers triggered by `QuestionCard.jsx` input changes, saving to subcollection.
+- Logic added to `WorkflowEngine` to update parent workflow document `name` field.
 
 ### 6. File Storage Strategy
 - Using Firebase Storage for file data
@@ -253,6 +280,7 @@ UI/UX Enhancement and Layout Restructuring
 - Maintaining consistent file paths (`projects/${projectId}/files/${filename}`)
 - Implementing proper cleanup on deletion
 - Handling file upload and deletion states
+- Storing Character Workflow answers in Firestore subcollection: `characterWorkflows/{workflowId}/answers/{questionId}`.
 
 ### 7. Notes Management Strategy
 - Storing notes in Firestore subcollections (`projects/${projectId}/notes`)
@@ -348,3 +376,6 @@ UI/UX Enhancement and Layout Restructuring
 - Documenting component patterns
 - Planning code review process
 - Maintaining consistent code style
+
+## Updates
+2025-04-15: Consolidated and updated entries for the enhanced Character Workflow system, including config-driven engine, step-by-step UI, project linking/unlinking, view mode, autosave, resume logic fixes, layout adjustments, and associated new components. Removed `WorkflowSection.jsx` details as it was refactored out.

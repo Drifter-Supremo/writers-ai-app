@@ -17,6 +17,28 @@ flowchart TD
     Pages --> Shared[Shared Components]
     Features --> Shared
 
+    subgraph "Workflow Components (Enhanced)"
+        CWRoute[Route /character-workflow] --> CWPage[CharacterWorkflow.jsx]
+        CWPage --> WEngine[WorkflowEngine.jsx]
+        WEngine --> Config[characterWorkflowConfig.js]
+        WEngine --> QCard[QuestionCard.jsx]
+        QCard --> AIModal[AIHelperModal.jsx Placeholder]
+        WEngine --> FirestoreDB[(Firestore: Load/Save Answers)]
+    end
+
+    subgraph "Workflow Listing/Linking"
+        WLRoute[Route /workflows] --> WLPage[Workflows.jsx]
+        WLPage --> WLList[CharacterWorkflowList.jsx]
+        WLList --> LinkModal[LinkWorkflowModal.jsx]
+        WLList --> LinkDisplay[LinkedProjectDisplay.jsx]
+        WLList --> FirestoreDB2[(Firestore: Read Workflows)]
+        LinkModal --> FirestoreDB3[(Firestore: Read Projects)]
+        LinkModal --> FirestoreDB4[(Firestore: Update Workflow Link)]
+        WLList --> FirestoreDB5[(Firestore: Update Workflow Link)]
+        LinkDisplay --> FirestoreDB6[(Firestore: Read Project Name)]
+    end
+
+
     subgraph "Layout Structure"
         Layout
         Sidebar --> NavItems[Navigation Items]
@@ -36,7 +58,8 @@ flowchart TD
   /projects         # Projects Dashboard
   /projects/:id     # Project Detail
   /settings         # User Settings
-  /workflows        # Character Workflows List
+  /workflows        # Character Workflows List Page (`Workflows.jsx`)
+  /character-workflow # Enhanced Character Workflow Engine (`CharacterWorkflow.jsx`, uses `?id=...`)
   ```
 
 ### 2. Component Hierarchy
@@ -47,8 +70,16 @@ flowchart TD
     - Dynamic routing with useParams
     - Firestore document fetching
     - Basic content layout
-  - Workflows: Character workflow dashboard
-- **Feature Components**: Business logic containers (ProjectCard, CharacterWorkflowList, LinkWorkflowModal, LinkedProjectDisplay)
+  - Workflows: Character workflow dashboard (`Workflows.jsx` - displays start card & `CharacterWorkflowList.jsx`).
+  - CharacterWorkflow: Top-level route component for the enhanced workflow engine (`CharacterWorkflow.jsx`). Renders `WorkflowEngine.jsx`.
+- **Feature Components**: Business logic containers (ProjectCard, CharacterWorkflowList, LinkWorkflowModal, LinkedProjectDisplay).
+- **Workflow Engine Components**: Specific to the enhanced character workflow (`/src/workflows/components/`)
+  - `WorkflowEngine.jsx`: Core logic, state management (current step, answers), Firestore load/save (autosave), config processing, renders current step (intro or QuestionCard), renders navigation buttons.
+  - `QuestionCard.jsx`: Displays question, image, textarea (consistent size); handles local input state and triggers debounced autosave via `onAnswerChange` prop. Renders AI placeholder button & modal. Handles view mode display.
+  - `AIHelperModal.jsx`: Placeholder modal for AI assistance.
+- **Workflow Configuration**: (`/src/workflows/configs/`)
+  - `characterWorkflowConfig.js`: Defines workflow structure, questions, images, prompts, intro text.
+- **UI Components**:
   - Self-contained UI components
   - Prop-based customization
   - Consistent styling patterns
@@ -110,6 +141,17 @@ flowchart TD
 
     Skeleton[Skeleton Loaders] --> Animation[animate-pulse]
     Skeleton --> Style[bg-gray-300 rounded]
+
+    subgraph "Workflow UI (Step-by-Step)"
+        WEngine[WorkflowEngine] --> CurrentStep{Render Current Step}
+        CurrentStep -- intro --> IntroText[Intro Text + Start Button]
+        CurrentStep -- question --> QCard[QuestionCard]
+        WEngine --> NavButtons[Renders Nav Buttons (Prev/Next/Finish)]
+        QCard --> ImageDisplay[Image Display]
+        QCard --> InputArea[Textarea Input]
+        QCard --> AIButton[AI Helper Button]
+        AIButton --> AIModal[AIHelperModal]
+    end
 ```
 
 ### 4. Styling Strategy
@@ -220,6 +262,31 @@ flowchart LR
     Params --> DocFetch[Fetch Doc]
     DocFetch --> DetailState[Detail State]
     DetailState --> DetailUI[Detail UI]
+
+    subgraph "Character Workflow Engine Data Flow (Edit/Resume)"
+        direction LR
+        CW_Mount[WorkflowEngine Mount w/ ID] --> CW_LoadConfig[Load Config]
+        CW_Mount --> CW_LoadAnswers[Fetch Answers]
+        CW_LoadAnswers --> CW_Query[Firestore Query 'answers' subcollection]
+        CW_Query --> CW_SetAnswers[Set 'answers' State]
+        CW_SetAnswers --> CW_CalcStart[Calculate Start Step Index]
+        CW_CalcStart --> CW_SetStep[Set 'currentStepIndex' State]
+        CW_SetStep --> CW_RenderStep[Render Intro/QuestionCard]
+
+        CW_RenderStep -- Renders --> QC[QuestionCard]
+        QC --> UserInput[User Types]
+        UserInput --> QC_SetLocal[Set Local Input State]
+        QC_SetLocal --> QC_Debounce[Debounce Timer]
+        QC_Debounce --> QC_CallHandler[Call onAnswerChange(id, value)]
+        QC_CallHandler --> CW_HandleChange[WorkflowEngine handleAnswerChange]
+        CW_HandleChange --> CW_SetAnswers
+        CW_HandleChange --> CW_SaveAnswer[WorkflowEngine saveAnswer]
+        CW_SaveAnswer --> CW_SetDoc[Firestore setDoc 'answers/{qid}']
+        CW_SaveAnswer -- If id=='name' --> CW_UpdateName[Firestore updateDoc 'workflow/{id}']
+
+        UserNav[User Clicks Next/Prev] --> CW_NavHandler[WorkflowEngine handleNext/handlePrevious]
+        CW_NavHandler --> CW_SetStep
+    end
 ```
 
 ## Firebase Integration
@@ -244,12 +311,21 @@ projects/
   │        └─ createdAt: timestamp
 
 characterWorkflows/
-  ├─ {workflowId}/
-  │  ├─ name: string
-  │  ├─ description: string
+  ├─ {workflowId}/               <-- Document for overall workflow state
+  │  ├─ name: string             <-- Updated when 'name' question answered
   │  ├─ createdAt: timestamp
-  │  ├─ ... (other workflow fields)
-  │  └─ linkedProjectId?: string (Optional: ID of the linked project)
+  │  ├─ completed: boolean        <-- Set to true on Finish
+  │  ├─ completedAt?: timestamp   <-- Optional timestamp for completion
+  │  ├─ linkedProjectId?: string  <-- Optional: ID of the linked project
+  │  └─ answers/                  <-- Subcollection for individual answers
+  │     └─ {questionId}/          <-- Document ID = question ID from config
+  │        ├─ value: string        <-- The actual answer text
+  │        └─ lastUpdated: timestamp
+
+userPreferences/
+  ├─ {userId}/
+  │  ├─ theme: string
+  │  └─ ... (other preferences)
 ```
 
 ### 2. File Management Patterns
@@ -296,25 +372,25 @@ flowchart LR
 ```mermaid
 flowchart TD
     subgraph "Link Workflow"
-        A[User Clicks 'Link Project'] --> B{Open LinkWorkflowModal}
+        A[User Clicks 'Link Project' in List] --> B{Open LinkWorkflowModal}
         B --> C[Fetch Projects List]
         C --> D[Firestore Query 'projects']
         D --> E[Display Projects in Modal]
-        E --> F[User Selects Project]
-        F --> G[Update Workflow Document]
-        G --> H[setDoc/updateDoc 'characterWorkflows/{workflowId}']
-        H --> I[Add 'linkedProjectId' field]
-        I --> J[Show Success Notification]
-        J --> K[Close Modal & Update UI]
+        F[User Selects Project] --> G[Update Workflow Document]
+        G --> H[updateDoc 'characterWorkflows/{workflowId}']
+        H --> I[Set 'linkedProjectId' field]
+        I --> J[Show Success Notification via Callback]
+        J --> K[Close Modal & Update List UI]
+        E --> F
     end
 
     subgraph "Unlink Workflow"
-        L[User Clicks 'Unlink Project'] --> M[Confirm Action]
+        L[User Clicks 'Unlink Project' in List] --> M[Confirm Action]
         M --> N[Update Workflow Document]
         N --> O[updateDoc 'characterWorkflows/{workflowId}']
         O --> P[Remove 'linkedProjectId' field using deleteField()]
         P --> Q[Show Success Notification]
-        Q --> R[Update UI]
+        Q --> R[Update List UI]
     end
 ```
 
@@ -344,10 +420,10 @@ flowchart TD
 
 ## Error Handling
 - Global error boundary
-- Firebase operation retries
-- Graceful AI fallbacks
-- User feedback mechanisms (Custom `Notification.jsx` component)
-- Route-level error handling
+- Firebase operation retries (consider adding for saves)
+- Graceful AI fallbacks (when implemented)
+- User feedback mechanisms (Custom `Notification.jsx` component for link/unlink/save status)
+- Route-level error handling (e.g., missing workflow ID)
 
 ## Performance Patterns
 - Route-based code splitting
@@ -357,7 +433,7 @@ flowchart TD
 - AI response caching
 - Route prefetching
 - Component-level code splitting
-- Skeleton loaders for perceived performance during data fetching.
+- Skeleton loaders for perceived performance during data fetching (workflow list, link modal, workflow engine initial load).
 
 ## Testing Strategy
 - Component unit tests
@@ -367,3 +443,6 @@ flowchart TD
 - Route navigation tests
 - UI component testing
 - Responsive design testing
+
+## Updates
+2025-04-15: Updated component architecture, routes, component hierarchy, Firestore data structure, and data flow diagrams to reflect the enhanced, config-driven, step-by-step Character Workflow system (`WorkflowEngine`, `QuestionCard`, etc.) and the workflow linking features. Removed `WorkflowSection`. Added details on View Mode, autosave, resume logic, and placeholder AI modal.
