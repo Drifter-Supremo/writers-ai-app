@@ -38,7 +38,8 @@ export default function LinkedProjectDisplay({ projectId }) {
   if (!projectId) return null; // Don't render anything if there's no projectId
 
   return (
-    <div className="text-sm text-blue-600 font-medium mt-1 mb-2">
+    // Use new text color (e.g., secondary text color)
+    <div className="text-sm text-text-secondary font-medium mt-1 mb-2">
       {loading ? (
         <span>🔗 Loading project...</span>
       ) : (

@@ -88,6 +88,7 @@ export default function Projects() {
   return (
     <div className="w-full px-4">
       <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-12 max-w-6xl mx-auto w-full">
+        {/* Use text-text-primary (updated via index.css) */}
         <h1
           className="text-4xl font-bold text-gradient animate-float break-words w-full sm:w-auto"
           style={{
@@ -100,6 +101,7 @@ export default function Projects() {
         >
           Your Projects
         </h1>
+        {/* Use .btn-creative */}
         <button
           onClick={handleNewProject}
           className="btn-creative flex items-center space-x-2 group mt-6 sm:mt-0"
@@ -109,9 +111,9 @@ export default function Projects() {
         </button>
       </div>
       
-      {/* Search and Filter Area */}
-      <div className="card-creative p-6 mb-12 max-w-6xl mx-auto backdrop-blur-sm bg-white/70">
-        {/* Search input */}
+      {/* Search and Filter Area - Use .card-creative and new bg */}
+      <div className="card-creative p-6 mb-12 max-w-6xl mx-auto">
+        {/* Search input - Use .input-creative */}
         <div className="relative">
           <input
             type="text"
@@ -123,7 +125,8 @@ export default function Projects() {
           {searchQuery && (
             <button
               onClick={() => setSearchQuery('')}
-              className="absolute right-3 top-1/2 -translate-y-1/2 text-creative-purple-400 hover:text-creative-purple-600 transition-all duration-200 hover:scale-110"
+               // Use new accent color for clear button
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-accent-orange hover:text-accent-orange-hover transition-all duration-200 hover:scale-110"
             >
               <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                 <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
@@ -132,18 +135,23 @@ export default function Projects() {
           )}
         </div>
         
-        {/* Filter/Tag strip placeholder */}
+        {/* Filter/Tag strip placeholder - Use new colors */}
         <div className="mt-6 flex items-center space-x-3 text-sm">
-          <span className="text-creative-purple-700 font-medium">Filters:</span>
+          {/* Use new text color */}
+          <span className="text-text-primary font-medium">Filters:</span>
+          {/* Use .tag-creative */}
           <div className="tag-creative cursor-pointer hover:scale-105 transition-transform duration-200">All Projects</div>
           <div className="tag-creative cursor-pointer hover:scale-105 transition-transform duration-200">Recent</div>
-          <div className="bg-white/50 backdrop-blur-sm px-4 py-2 rounded-full text-creative-purple-500 font-medium border-2 border-dashed border-creative-purple-200 hover:border-creative-purple-300 hover:bg-white transition-all duration-200 cursor-pointer hover:scale-105">+ Add Filter</div>
+          {/* Use new colors for Add Filter button */}
+          <div className="bg-card-bg/80 px-4 py-2 rounded-full text-accent-orange font-medium border-2 border-dashed border-accent-cream/50 hover:border-accent-cream hover:bg-card-bg transition-all duration-200 cursor-pointer hover:scale-105">+ Add Filter</div>
         </div>
       </div>
 
       {showForm && (
+        // Use .card-creative
         <form onSubmit={handleSubmit} className="card-creative p-8 mb-12 max-w-6xl mx-auto">
           <div className="mb-6">
+            {/* Use .input-creative */}
             <input
               type="text"
               placeholder="Project Name"
@@ -154,6 +162,7 @@ export default function Projects() {
             />
           </div>
           <div className="mb-6">
+            {/* Use .input-creative */}
             <textarea
               placeholder="Project Description"
               value={formData.description}
@@ -164,6 +173,7 @@ export default function Projects() {
             />
           </div>
           <div className="flex space-x-4">
+            {/* Use .btn-creative */}
             <button
               type="submit"
               className="btn-creative"
@@ -171,6 +181,7 @@ export default function Projects() {
             >
               {creatingProject ? 'Creating...' : 'Create Project'}
             </button>
+            {/* Use .btn-creative-secondary */}
             <button
               type="button"
               onClick={() => setShowForm(false)}
@@ -184,7 +195,7 @@ export default function Projects() {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto animate-fade-in">
         {isLoading ? (
           Array.from({ length: 6 }).map((_, index) => (
-            <SkeletonProjectCard key={index} />
+            <SkeletonProjectCard key={index} /> // Assuming SkeletonProjectCard uses appropriate dark theme styles
           ))
         ) : (
           projects
@@ -193,7 +204,7 @@ export default function Projects() {
               project.description.toLowerCase().includes(debouncedQuery.toLowerCase())
             )
             .map(project => (
-              <ProjectCard
+              <ProjectCard // Uses updated ProjectCard styles
                 key={project.id}
                 id={project.id}
                 title={project.name}
@@ -208,7 +219,8 @@ export default function Projects() {
           project.name.toLowerCase().includes(debouncedQuery.toLowerCase()) ||
           project.description.toLowerCase().includes(debouncedQuery.toLowerCase())
         ).length === 0 && (
-          <div className="col-span-full flex flex-col items-center justify-center py-16 text-creative-purple-400">
+          // Use new text color for "No projects found"
+          <div className="col-span-full flex flex-col items-center justify-center py-16 text-text-secondary">
             <span className="text-6xl mb-6 animate-float">📝</span>
             <span className="text-lg font-medium animate-fade-in">No projects found matching your search</span>
           </div>

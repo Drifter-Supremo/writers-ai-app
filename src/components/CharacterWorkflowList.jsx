@@ -122,62 +122,72 @@ export default function CharacterWorkflowList() {
 
   return (
     <div className="mt-12">
-      <h2 className="text-2xl font-bold text-gradient mb-4">My Character Workflows</h2>
+      {/* Use new text color */}
+      <h2 className="text-2xl font-bold text-text-primary mb-4">My Character Workflows</h2>
       {loading ? (
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
           {[...Array(4)].map((_, index) => (
+            // Use card-creative and dark theme skeleton colors
             <div key={index} className="card-creative p-6 animate-pulse">
-              <div className="h-4 bg-gray-300 rounded w-3/4 mb-2"></div> {/* Title */}
-              <div className="h-3 bg-gray-200 rounded w-1/2 mb-2"></div> {/* Date */}
-              <div className="h-3 bg-gray-200 rounded w-1/4 mb-4"></div> {/* Status */}
+              <div className="h-4 bg-card-bg/70 rounded w-3/4 mb-2"></div> {/* Title */}
+              <div className="h-3 bg-card-bg/50 rounded w-1/2 mb-2"></div> {/* Date */}
+              <div className="h-3 bg-card-bg/50 rounded w-1/4 mb-4"></div> {/* Status */}
               <div className="flex gap-2">
-                <div className="h-10 bg-gray-300 rounded w-20"></div> {/* Button */}
-                <div className="h-10 bg-gray-300 rounded w-8"></div>  {/* Menu Button */}
+                <div className="h-10 bg-card-bg/70 rounded w-20"></div> {/* Button */}
+                <div className="h-10 bg-card-bg/70 rounded w-8"></div>  {/* Menu Button */}
               </div>
             </div>
           ))}
         </div>
       ) : workflows.length === 0 ? (
-        <div className="text-gray-400">No character workflows yet.</div>
+        // Use new text color
+        <div className="text-text-secondary">No character workflows yet.</div>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
           {workflows.map((wf) => (
             <div
               key={wf.id}
+              // Use .card-creative
               className={`card-creative p-6 flex flex-col items-start relative transition-opacity duration-500 ${
                 deletingId === wf.id ? "opacity-50 pointer-events-none" : ""
               }`}
             >
-              <div className="font-semibold text-creative-purple-700 mb-2 break-all">
+              {/* Use new text color */}
+              <div className="font-semibold text-text-primary mb-2 break-all">
                 {wf.name || "Untitled Character"}
               </div>
-              <div className="text-gray-500 text-sm mb-2">
+              {/* Use new text color */}
+              <div className="text-text-secondary text-sm mb-2">
                 Created:{" "}
                 {wf.createdAt?.toDate
                   ? wf.createdAt.toDate().toLocaleString()
                   : "Unknown"}
               </div>
               <div className="mb-4">
+                {/* Use new status colors */}
                 {wf.completed ? (
-                  <span className="text-green-600 font-medium">Complete</span>
+                  <span className="text-status-success font-medium">Complete</span>
                 ) : (
-                  <span className="text-yellow-600 font-medium">In Progress</span>
+                  <span className="text-status-warning font-medium">In Progress</span>
                 )}
               </div>
               {/* Linked Project Indicator */}
               {/* Use the new component to display the linked project name */}
               {wf.linkedProjectId && <LinkedProjectDisplay projectId={wf.linkedProjectId} />}
-              <div className="flex gap-2">
+              <div className="flex gap-2 items-center"> {/* Added items-center for vertical alignment */}
+                {/* Use .btn-creative */}
                 {wf.completed ? (
+                  // Add min-width to prevent resize
                   <button
-                    className="btn-creative"
+                    className="btn-creative min-w-[80px]" 
                     onClick={() => navigate(`/character-workflow?id=${wf.id}&view=1`)}
                   >
                     View
                   </button>
                 ) : (
+                  // Add min-width to prevent resize
                   <button
-                    className="btn-creative"
+                    className="btn-creative min-w-[80px]" 
                     onClick={() => navigate(`/character-workflow?id=${wf.id}`)}
                   >
                     Resume
@@ -187,40 +197,43 @@ export default function CharacterWorkflowList() {
                   className="relative"
                   ref={el => (menuRefs.current[wf.id] = el)}
                 >
+                  {/* Use .dropdown-menu-button */}
                   <button
-                    className="text-2xl font-bold text-creative-purple-600 hover:text-creative-purple-800 transition-colors duration-200 ml-2"
+                    className="text-2xl font-bold dropdown-menu-button ml-2 flex items-center justify-center h-full" // Added flex alignment for button content
                     onClick={() => setMenuOpenId(menuOpenId === wf.id ? null : wf.id)}
                   >
                     ⋮
                   </button>
                   {menuOpenId === wf.id && (
-                    <div className="absolute right-0 mt-2 w-32 bg-white rounded-md shadow-lg border border-gray-200 z-10">
-                      {/* Link to Project Button */}
+                    // Use .dropdown-menu
+                    <div className="dropdown-menu absolute right-0 mt-1 w-48"> {/* Position dropdown */}
+                      {/* Link to Project Button - Use .dropdown-menu-item */}
                        <button
                          onClick={() => handleOpenLinkModal(wf.id)}
                          disabled={!!wf.linkedProjectId} // Disable if linkedProjectId exists
-                         className={`block w-full text-left px-4 py-2 text-creative-purple-700 hover:bg-creative-purple-100 transition-colors duration-200 ${wf.linkedProjectId ? 'opacity-50 cursor-not-allowed' : ''}`} // Add disabled styles
+                         className={`dropdown-menu-item ${wf.linkedProjectId ? 'opacity-50 cursor-not-allowed' : ''}`} // Add disabled styles
                        >
                          {wf.linkedProjectId ? 'Already Linked' : 'Link to Project'}
                        </button>
-                       {/* Unlink Button - Appears only if linked */}
+                       {/* Unlink Button - Use .dropdown-menu-item-warning */}
                        {wf.linkedProjectId && (
                          <button
                            onClick={() => handleUnlink(wf.id)}
-                           className="block w-full text-left px-4 py-2 text-orange-600 hover:bg-orange-100 transition-colors duration-200"
+                           className="dropdown-menu-item-warning" // Use warning status color
                          >
                            Unlink Project
                          </button>
                        )}
-                      {/* Delete Button */}
+                      {/* Delete Button - Use .dropdown-menu-item-error */}
                       <button
                         onClick={() => handleDelete(wf.id)}
                         disabled={deletingId === wf.id}
-                        className="block w-full text-left px-4 py-2 text-red-600 hover:bg-red-100 transition-colors duration-200"
+                        className="dropdown-menu-item-error" // Use error status color
                       >
                         {deletingId === wf.id ? (
                           <span className="flex items-center gap-2">
-                            <svg className="animate-spin h-5 w-5" viewBox="0 0 24 24">
+                            {/* Use error status color for spinner */}
+                            <svg className="animate-spin h-5 w-5 text-status-error" viewBox="0 0 24 24"> 
                               <circle
                                 className="opacity-25"
                                 cx="12"

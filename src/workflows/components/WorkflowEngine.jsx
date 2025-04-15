@@ -17,6 +17,7 @@ const WorkflowEngine = ({ config, workflowId, projectId, isViewMode = false }) =
   useEffect(() => {
     if (!workflowId) {
       setIsLoading(false);
+      // Use new error color
       setError("Workflow ID is missing.");
       return;
     }
@@ -67,6 +68,7 @@ const WorkflowEngine = ({ config, workflowId, projectId, isViewMode = false }) =
 
       } catch (err) {
         console.error("Error fetching answers:", err);
+        // Use new error color
         setError("Failed to load workflow answers.");
       } finally {
         setIsLoading(false);
@@ -107,6 +109,7 @@ const WorkflowEngine = ({ config, workflowId, projectId, isViewMode = false }) =
       setTimeout(() => setSaveStatus('idle'), 1500);
     } catch (err) {
       console.error("Error saving answer or workflow name:", err);
+      // Use new error color
       setError(`Failed to save answer for ${questionId}`);
       setSaveStatus('error');
        // Optional: Reset status after a delay even on error
@@ -184,6 +187,7 @@ const WorkflowEngine = ({ config, workflowId, projectId, isViewMode = false }) =
         navigate('/workflows');
       } catch (err) {
         console.error("Error marking workflow as complete:", err);
+        // Use new error color
         setError("Failed to mark workflow as complete.");
         // Optionally show a notification
       }
@@ -200,27 +204,27 @@ const WorkflowEngine = ({ config, workflowId, projectId, isViewMode = false }) =
   // Render Logic
   // Wait for initial answer load AND step calculation before rendering main content
   if (isLoading || !initialLoadComplete) {
-    // Skeleton Loader for the workflow engine
+    // Skeleton Loader for the workflow engine - Use new dark theme colors
     return (
       <div className="workflow-engine-skeleton p-4 md:p-6 animate-pulse">
-        {/* Skeleton for Navigation (optional, could be simpler) */}
+        {/* Skeleton for Navigation */}
         <div className="navigation-controls mb-4 pt-2 flex justify-between items-center">
-           <div className="h-8 bg-gray-300 rounded w-20"></div>
-           <div className="h-4 bg-gray-300 rounded w-16"></div>
-           <div className="h-8 bg-gray-300 rounded w-20"></div>
+           <div className="h-8 bg-card-bg/70 rounded w-20"></div>
+           <div className="h-4 bg-card-bg/50 rounded w-16"></div>
+           <div className="h-8 bg-card-bg/70 rounded w-20"></div>
         </div>
          {/* Skeleton for Question Card */}
-         <div className="flex flex-col items-center p-4 border rounded-lg shadow-md"> {/* Mimic card */}
+         <div className="flex flex-col items-center p-4 border border-accent-cream/30 rounded-lg shadow-md bg-card-bg"> {/* Mimic card */}
             {/* Image Placeholder */}
-            <div className="flex justify-center h-60 md:h-80 mb-6 w-full bg-gray-300 rounded-md"></div>
+            <div className="flex justify-center h-60 md:h-80 mb-6 w-full bg-card-bg/70 rounded-md"></div>
             {/* Question Box Placeholder */}
             <div className="w-full max-w-lg text-center">
                 {/* Prompt Placeholder */}
-                <div className="h-6 bg-gray-300 rounded w-3/4 mx-auto mb-3"></div>
+                <div className="h-6 bg-card-bg/70 rounded w-3/4 mx-auto mb-3"></div>
                 {/* Input Placeholder */}
-                <div className="h-24 bg-gray-300 rounded w-full mb-4"></div>
+                <div className="h-24 bg-card-bg/70 rounded w-full mb-4"></div>
                 {/* AI Button Placeholder */}
-                <div className="h-8 bg-gray-300 rounded w-32"></div>
+                <div className="h-8 bg-card-bg/70 rounded w-32"></div>
             </div>
          </div>
       </div>
@@ -228,11 +232,13 @@ const WorkflowEngine = ({ config, workflowId, projectId, isViewMode = false }) =
   }
 
   if (error) {
-    return <div className="text-red-600">Error: {error}</div>;
+    // Use new error color
+    return <div className="text-status-error">Error: {error}</div>;
   }
 
    if (!config) {
-      return <div className="text-orange-600">Workflow configuration not loaded.</div>;
+       // Use new warning color
+      return <div className="text-status-warning">Workflow configuration not loaded.</div>;
   }
 
   // Get the current step based on the index
@@ -250,25 +256,27 @@ const WorkflowEngine = ({ config, workflowId, projectId, isViewMode = false }) =
 
     return (
       <div className="workflow-view p-4 md:p-6">
-        <h1 className="text-2xl md:text-3xl font-bold mb-4">{config.title}</h1> {/* Removed " - View" */}
+        {/* Use new text color */}
+        <h1 className="text-2xl md:text-3xl font-bold text-text-primary mb-4">{config.title}</h1>
 
-        {/* Placeholder for AI Generated Profile */}
-        <div className="mb-8 p-4 border border-dashed border-gray-400 rounded-md bg-gray-50">
-          <h2 className="text-xl font-semibold mb-2 text-gray-700">AI Generated Character Profile</h2>
-          <p className="text-gray-500 italic">(Placeholder: AI profile based on answers will appear here after completion.)</p>
+        {/* Placeholder for AI Generated Profile - Use new colors */}
+        <div className="mb-8 p-4 border border-dashed border-accent-cream/30 rounded-md bg-card-bg">
+          <h2 className="text-xl font-semibold mb-2 text-text-primary">AI Generated Character Profile</h2>
+          <p className="text-text-secondary italic">(Placeholder: AI profile based on answers will appear here after completion.)</p>
           {/* TODO: Add logic later to fetch/display actual AI profile if it exists */}
         </div>
 
-        {/* Collapsible Section for Answers */}
-        <details className="mb-4 bg-white rounded-lg shadow p-4">
-            <summary className="cursor-pointer font-semibold text-lg text-creative-purple-700 hover:underline list-none flex justify-between items-center">
+        {/* Collapsible Section for Answers - Use new colors */}
+        <details className="mb-4 bg-card-bg rounded-lg shadow p-4 border border-accent-cream/30">
+            {/* Use new accent color */}
+            <summary className="cursor-pointer font-semibold text-lg text-accent-orange hover:underline list-none flex justify-between items-center">
                 <span>View Your Answers ({questionSteps.length} questions)</span>
                 <span className="text-xl">▼</span> {/* Basic indicator */}
             </summary>
             {/* Make this div scrollable if it gets too long */}
-            <div className="mt-4 space-y-6 border-t pt-4 max-h-[60vh] overflow-y-auto">
+            <div className="mt-4 space-y-6 border-t border-accent-cream/30 pt-4 max-h-[60vh] overflow-y-auto">
                 {questionSteps.map(step => (
-                     <div key={step.questionConfig.id} className="qna-item mb-4 pb-4 border-b last:border-b-0">
+                     <div key={step.questionConfig.id} className="qna-item mb-4 pb-4 border-b border-accent-cream/20 last:border-b-0">
                         {/* Optional: Render Image */}
                         {step.questionConfig.image && (
                              <div className="flex justify-center max-h-60 mb-4 w-full">
@@ -279,16 +287,17 @@ const WorkflowEngine = ({ config, workflowId, projectId, isViewMode = false }) =
                                 />
                             </div>
                         )}
-                        {/* Question Prompt */}
-                        <p className="font-semibold text-gray-800 mb-2">{step.questionConfig.prompt}</p>
-                        {/* Answer */}
-                        <p className="text-gray-600 whitespace-pre-wrap bg-gray-50 p-2 rounded min-h-[3em]"> {/* Added min-height */}
-                            {answers[step.questionConfig.id] || <span className="text-gray-400 italic">No answer provided</span>}
+                        {/* Question Prompt - Use new text color */}
+                        <p className="font-semibold text-text-primary mb-2">{step.questionConfig.prompt}</p>
+                        {/* Answer - Use new colors */}
+                        <p className="text-text-secondary whitespace-pre-wrap bg-primary-bg p-2 rounded min-h-[3em]"> {/* Use primary bg for contrast */}
+                            {answers[step.questionConfig.id] || <span className="text-text-secondary/70 italic">No answer provided</span>}
                         </p>
                     </div>
                 ))}
                  {questionSteps.length === 0 && !isLoading && (
-                     <p className="text-gray-500 italic">No questions found in this workflow configuration.</p>
+                     // Use new text color
+                     <p className="text-text-secondary italic">No questions found in this workflow configuration.</p>
                  )}
             </div>
         </details>
@@ -300,28 +309,31 @@ const WorkflowEngine = ({ config, workflowId, projectId, isViewMode = false }) =
   return (
     // Reduce top padding (pt-4 md:pt-6 -> pt-2 md:pt-3), keep others
     <div className="workflow-engine px-4 md:px-6 pb-4 md:pb-6 pt-2 md:pt-3 flex flex-col">
-       {/* Save Status */}
-       <div className="save-status text-sm text-gray-500 mb-2 h-5 self-end">
+       {/* Save Status - Use new colors */}
+       <div className="save-status text-sm text-text-secondary mb-2 h-5 self-end">
          {saveStatus === 'saving' && 'Saving...'}
-         {saveStatus === 'saved' && 'Saved.'}
-         {saveStatus === 'error' && <span className="text-red-500">Save Error!</span>}
+         {saveStatus === 'saved' && <span className="text-status-success">Saved.</span>}
+         {saveStatus === 'error' && <span className="text-status-error">Save Error!</span>}
        </div>
 
        {/* Navigation Buttons - Placed ABOVE the main content area */}
        {totalSteps > 0 && !isViewMode && currentStep?.type !== 'intro' && ( // Show only on question steps
          <div className="navigation-controls mb-4 pt-2 flex justify-between items-center">
+           {/* Use .btn-creative-secondary */}
            <button
              onClick={handlePrevious}
              // Disable if it's the first question (index 0 or 1 depending on intro)
              disabled={currentStepIndex === (config?.introduction ? 1 : 0)}
-             className={`btn-secondary disabled:opacity-50`}
+             className={`btn-creative-secondary disabled:opacity-50`}
            >
              Previous
            </button>
-           <span className="text-sm text-gray-500">
+           {/* Use new text color */}
+           <span className="text-sm text-text-secondary">
               {/* Adjust step count display */}
               Step {currentStepIndex + (config.introduction ? 0 : 1)} of {totalSteps - (config.introduction ? 1 : 0)}
            </span>
+           {/* Use .btn-creative */}
            <button
              onClick={handleNext}
              className={`btn-creative disabled:opacity-50`}
@@ -335,10 +347,13 @@ const WorkflowEngine = ({ config, workflowId, projectId, isViewMode = false }) =
       <div className="workflow-content mb-4"> {/* Removed flex-grow and overflow */}
         {currentStep?.type === 'intro' && (
           <div className="mb-6">
-            <h1 className="text-2xl md:text-3xl font-bold mb-2">{config.title}</h1>
-            <p className="text-gray-700">{currentStep.content}</p>
+            {/* Use new text color */}
+            <h1 className="text-2xl md:text-3xl font-bold text-text-primary mb-2">{config.title}</h1>
+            {/* Use new text color */}
+            <p className="text-text-secondary">{currentStep.content}</p>
              {/* Add a 'Start' or 'Next' button specifically for the intro step */}
              <div className="mt-6 text-right">
+                 {/* Use .btn-creative */}
                  <button onClick={handleNext} className="btn-creative">
                      Start Workflow
                  </button>
@@ -347,7 +362,7 @@ const WorkflowEngine = ({ config, workflowId, projectId, isViewMode = false }) =
         )}
 
         {currentStep?.type === 'question' && (
-          <QuestionCard
+          <QuestionCard // Assuming QuestionCard uses new theme styles internally
             key={currentStep.questionConfig.id}
             questionConfig={currentStep.questionConfig}
             currentAnswer={answers[currentStep.questionConfig.id] || ''}
@@ -360,10 +375,12 @@ const WorkflowEngine = ({ config, workflowId, projectId, isViewMode = false }) =
           />
         )}
          {!currentStep && totalSteps > 0 && (
-             <div>Loading step...</div>
+             // Use new text color
+             <div className="text-text-secondary">Loading step...</div>
          )}
          {!currentStep && totalSteps === 0 && !isLoading && (
-             <div>No steps defined in this workflow.</div>
+             // Use new text color
+             <div className="text-text-secondary">No steps defined in this workflow.</div>
          )}
       </div>
 

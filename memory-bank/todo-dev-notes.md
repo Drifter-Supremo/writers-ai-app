@@ -60,10 +60,11 @@ This file tracks areas that were simplified during MVP development and need poli
   - ARIA labels
   - Focus management
   - Screen reader support
+  - Maintain proper color contrast (Needs review with new "Retro Space" theme palette)
 
-### Future Enhancements
-- [ ] Add dark mode support
-- [ ] Implement custom themes
+### Theme & Styling
+- [x] Add dark mode support (Implemented via "Retro Space" theme)
+- [ ] Implement custom themes (Future enhancement)
 - [ ] Add animation preferences
 - [ ] Create component presets
 
@@ -163,3 +164,4 @@ This file tracks areas that were simplified during MVP development and need poli
 
 ## Updates
 2025-04-15: Updated TODOs to reflect the completion of the enhanced Character Workflow. Marked workflow autosave as implemented. Added new TODOs for implementing the AI Helper modal functionality, adding workflow progress indicators, and potential future workflow enhancements (input types, validation). Marked skeleton loader TODO for the workflow engine as complete.
+2025-04-15: Marked "Add dark mode support" as complete due to the "Retro Space" theme implementation. Added note to check color contrast accessibility with the new theme palette.

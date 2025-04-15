@@ -24,12 +24,15 @@ export default function ProjectOverview({ project, onSave }) {
   return (
     <div>
       {editing ? (
+        // Use .card-creative and new text colors
         <form onSubmit={handleSave} className="card-creative p-8 max-w-2xl mx-auto mb-8 break-words">
           <div className="space-y-4">
             <div>
-              <label className="block text-creative-purple-900 text-sm font-bold mb-2">
+              {/* Use new text colors */}
+              <label className="block text-text-primary text-sm font-bold mb-2">
                 Project Name
               </label>
+              {/* Use .input-creative */}
               <input
                 type="text"
                 value={formData.name}
@@ -39,9 +42,11 @@ export default function ProjectOverview({ project, onSave }) {
               />
             </div>
             <div>
-              <label className="block text-creative-purple-900 text-sm font-bold mb-2">
+               {/* Use new text colors */}
+              <label className="block text-text-primary text-sm font-bold mb-2">
                 Description
               </label>
+               {/* Use .input-creative */}
               <textarea
                 value={formData.description}
                 onChange={(e) => setFormData({ ...formData, description: e.target.value })}
@@ -51,9 +56,11 @@ export default function ProjectOverview({ project, onSave }) {
               />
             </div>
             <div>
-              <label className="block text-creative-purple-900 text-sm font-bold mb-2">
+               {/* Use new text colors */}
+              <label className="block text-text-primary text-sm font-bold mb-2">
                 Tags (comma-separated)
               </label>
+               {/* Use .input-creative */}
               <input
                 type="text"
                 value={formData.tags}
@@ -63,6 +70,7 @@ export default function ProjectOverview({ project, onSave }) {
               />
             </div>
             <div className="flex gap-2">
+              {/* Use .btn-creative */}
               <button
                 type="submit"
                 className="btn-creative"
@@ -89,6 +97,7 @@ export default function ProjectOverview({ project, onSave }) {
                   "Save Changes"
                 )}
               </button>
+              {/* Use .btn-creative-secondary */}
               <button
                 type="button"
                 onClick={() => setEditing(false)}
@@ -100,20 +109,25 @@ export default function ProjectOverview({ project, onSave }) {
           </div>
         </form>
       ) : (
+        // Use .card-creative
         <div className="card-creative p-8 max-w-2xl mx-auto mb-8 break-words">
           <div className="flex justify-between items-start mb-6">
-            <h1 className="text-3xl font-bold text-gradient break-words max-w-full">{project.name}</h1>
+            {/* Use new text colors, remove text-gradient */}
+            <h1 className="text-3xl font-bold text-text-primary break-words max-w-full">{project.name}</h1>
+            {/* Use new text colors for edit button */}
             <button
               onClick={() => setEditing(true)}
-              className="text-creative-purple-500 hover:text-creative-purple-700 transition-colors duration-200"
+              className="text-accent-orange hover:text-accent-orange-hover transition-colors duration-200"
             >
               ✏️ Edit
             </button>
           </div>
-          <p className="text-gray-600 mb-6 leading-relaxed">{project.description}</p>
+          {/* Use new text colors */}
+          <p className="text-text-secondary mb-6 leading-relaxed">{project.description}</p>
           {project.tags?.length > 0 && (
             <div className="flex flex-wrap gap-2">
               {project.tags.map((tag, index) => (
+                // Use .tag-creative
                 <span
                   key={index}
                   className="tag-creative"
@@ -125,7 +139,8 @@ export default function ProjectOverview({ project, onSave }) {
           )}
         </div>
       )}
-      <div className="text-gray-400 text-sm text-center">
+      {/* Use new text colors */}
+      <div className="text-text-secondary text-sm text-center">
         (Edit and advanced overview features coming soon.)
       </div>
     </div>

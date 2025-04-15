@@ -8,7 +8,8 @@
   }
 
   body {
-    @apply bg-gradient-to-br from-gray-50 to-creative-purple-50 min-h-screen text-gray-900 m-0 p-0;
+    /* Use new primary background and text color */
+    @apply bg-primary-bg min-h-screen text-text-primary m-0 p-0; 
     font-family: system-ui, -apple-system, sans-serif;
   }
 
@@ -17,49 +18,90 @@
   }
 
   h1, h2, h3, h4, h5, h6 {
-    @apply font-semibold;
+    /* Use new primary text color */
+    @apply font-semibold text-text-primary; 
   }
 }
 
 @layer components {
+  .shadow-minimal { /* Keep if still needed, otherwise remove */
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Updated button styles */
   .btn-creative {
-    @apply bg-gradient-to-r from-creative-purple-500 to-creative-blue-500 
-           text-white px-6 py-3 rounded-lg shadow-md 
-           hover:from-creative-purple-600 hover:to-creative-blue-600 
+    @apply bg-accent-orange text-primary-bg /* Orange bg, dark text */
+           px-6 py-3 rounded-lg shadow-card
+           hover:bg-accent-orange-hover /* Use defined hover color */
            transform hover:-translate-y-0.5 transition-all duration-200
            font-medium disabled:opacity-50 disabled:cursor-not-allowed
            disabled:hover:transform-none;
   }
   
   .btn-creative-secondary {
-    @apply px-6 py-3 text-creative-purple-600 hover:bg-creative-purple-50 
-           rounded-lg transition-colors duration-200 font-medium;
+    @apply bg-accent-cream text-primary-bg /* Cream bg, dark text */
+           px-6 py-3 rounded-lg shadow-card
+           hover:bg-accent-cream/80 /* Slightly transparent cream hover */
+           transition-colors duration-200 font-medium
+           disabled:opacity-50 disabled:cursor-not-allowed;
   }
 
+  /* Updated dropdown styles */
+  .dropdown-menu {
+    @apply bg-card-bg rounded-md shadow-lg border border-accent-cream/30 z-10; /* Use card bg and cream border */
+  }
+
+  .dropdown-menu-button {
+     /* Use cream text, maybe orange on hover? */
+    @apply text-accent-cream hover:text-accent-orange transition-colors duration-200;
+  }
+
+  .dropdown-menu-item {
+     /* Cream text, orange hover background */
+    @apply block w-full text-left px-4 py-2 text-accent-cream hover:bg-accent-orange/20 transition-colors duration-200;
+  }
+  
+  /* Error/Success specific dropdown items */
+   .dropdown-menu-item-error {
+    @apply block w-full text-left px-4 py-2 text-status-error hover:bg-status-error/20 transition-colors duration-200;
+  }
+   .dropdown-menu-item-success {
+     @apply block w-full text-left px-4 py-2 text-status-success hover:bg-status-success/20 transition-colors duration-200;
+   }
+   .dropdown-menu-item-warning {
+     @apply block w-full text-left px-4 py-2 text-status-warning hover:bg-status-warning/20 transition-colors duration-200;
+   }
+
+
+  /* Updated card styles */
   .card-creative {
-    @apply bg-white/80 backdrop-blur-sm rounded-xl 
-           shadow-creative border border-creative-purple-100 
-           hover:shadow-creative-lg transition-all duration-300;
+    @apply bg-card-bg rounded-xl /* Use card background */
+           shadow-card border border-accent-cream/30 /* Use cream border */
+           hover:shadow-md transition-all duration-300;
   }
 
+  /* Updated input styles */
   .input-creative {
-    @apply w-full p-3 border-2 border-creative-purple-100 rounded-lg 
-           focus:outline-none focus:border-purple-300
-           focus:ring-2 focus:ring-purple-200 focus:ring-offset-2
-           transition-all duration-200 placeholder-creative-purple-300;
+    @apply w-full p-3 border-2 border-accent-cream/50 rounded-lg bg-card-bg /* Use card bg and cream border */
+           focus:outline-none focus:border-accent-orange /* Orange focus border */
+           focus:ring-1 focus:ring-accent-orange /* Orange focus ring */
+           transition-all duration-200 placeholder-text-secondary text-text-primary; /* Use new text colors */
   }
 
+  /* Updated tag styles */
   .tag-creative {
-    @apply bg-gradient-to-r from-creative-purple-100 to-creative-blue-50 
-           px-4 py-2 rounded-full text-creative-purple-700 font-medium 
-           shadow-sm hover:shadow transition-shadow duration-200;
+    @apply bg-accent-orange text-primary-bg /* Orange bg, dark text */
+           px-4 py-1 rounded-full font-medium text-sm
+           shadow-sm;
   }
 }
 
+/* Remove or update gradient classes */
 .border-gradient {
-  border-image: linear-gradient(to right, theme('colors.creative-purple.500'), theme('colors.creative-blue.500')) 1;
+  border-image: none;
 }
 
 .text-gradient {
-  @apply bg-gradient-to-r from-creative-purple-900 to-creative-blue-600 bg-clip-text text-transparent;
+  /* Default to primary text color */
+  @apply text-text-primary; 
 }

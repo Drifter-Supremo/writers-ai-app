@@ -62,47 +62,55 @@ export default function LinkWorkflowModal({ isOpen, onClose, workflowId, onLinkC
   }
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50 p-4">
-      <div className="bg-white rounded-lg shadow-xl p-6 w-full max-w-md relative">
+    <div className="fixed inset-0 bg-black bg-opacity-70 flex justify-center items-center z-50 p-4"> {/* Darker backdrop */}
+      {/* Use new card background */}
+      <div className="bg-card-bg rounded-lg shadow-xl p-6 w-full max-w-md relative border border-accent-cream/30">
         <button
           onClick={onClose}
-          className="absolute top-2 right-2 text-gray-500 hover:text-gray-800 text-2xl font-bold"
+           // Use new text colors
+          className="absolute top-2 right-2 text-text-secondary hover:text-text-primary text-2xl font-bold"
           aria-label="Close modal"
           disabled={isUpdating} // Disable close while updating
         >
           &times;
         </button>
 
-        <h2 className="text-xl font-semibold mb-4 text-creative-purple-700">Link Workflow to Project</h2>
+        {/* Use new text color */}
+        <h2 className="text-xl font-semibold mb-4 text-text-primary">Link Workflow to Project</h2>
 
         {isLoading && (
           <div className="space-y-2 p-2 mb-4"> {/* Added container and spacing */}
             {[...Array(3)].map((_, index) => (
-              <div key={index} className="h-8 bg-gray-300 rounded w-full animate-pulse"></div>
+              // Use new skeleton color
+              <div key={index} className="h-8 bg-card-bg/70 rounded w-full animate-pulse"></div>
             ))}
           </div>
         )}
 
-        {error && <div className="text-center text-red-600 bg-red-100 p-3 rounded mb-4">{error}</div>}
+        {/* Use new error status colors */}
+        {error && <div className="text-center text-status-error bg-status-error/20 p-3 rounded mb-4">{error}</div>}
 
         {!isLoading && !error && (
           <>
             {projects.length === 0 ? (
-              <div className="text-center text-gray-500 my-4">
+              // Use new text color
+              <div className="text-center text-text-secondary my-4">
                 No projects found. Create a project first.
               </div>
             ) : (
-              <div className="max-h-60 overflow-y-auto border rounded p-2 mb-4">
+              // Use new border color
+              <div className="max-h-60 overflow-y-auto border border-accent-cream/30 rounded p-2 mb-4">
                 <ul className="space-y-2">
                   {projects.map((project) => (
                     <li key={project.id}>
                       <button
                         onClick={() => handleLinkProject(project.id)}
                         disabled={isUpdating} // Disable buttons while updating
+                         // Use new theme colors for button states
                         className={`w-full text-left p-2 rounded transition-colors duration-200 ${
                           isUpdating
-                            ? 'bg-gray-200 text-gray-500 cursor-not-allowed'
-                            : 'hover:bg-creative-purple-100 text-creative-purple-800'
+                            ? 'bg-card-bg/50 text-text-secondary cursor-not-allowed' // Disabled state
+                            : 'text-text-primary hover:bg-accent-orange/20' // Normal and hover state
                         }`}
                       >
                         {project.name} {/* Display project name */}
@@ -116,10 +124,11 @@ export default function LinkWorkflowModal({ isOpen, onClose, workflowId, onLinkC
         )}
 
         <div className="flex justify-end mt-4">
+          {/* Use .btn-creative-secondary */}
           <button
             onClick={onClose}
             disabled={isUpdating} // Disable close while updating
-            className="btn-secondary"
+            className="btn-creative-secondary"
           >
             Cancel
           </button>

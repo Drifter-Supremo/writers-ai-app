@@ -2,40 +2,28 @@
 export default {
   content: [
     "./index.html",
-    "./src/**/*.{js,jsx,ts,tsx}",
+    "./src/**/*.{js,jsx,ts,tsx}", // Ensure this covers all component files
   ],
   
   theme: {
     extend: {
       colors: {
-        'creative-purple': {
-          50: '#f5f3ff',
-          100: '#ede9fe',
-          200: '#ddd6fe',
-          300: '#c4b5fd',
-          400: '#a78bfa',
-          500: '#8b5cf6',
-          600: '#7c3aed',
-          700: '#6d28d9',
-          800: '#5b21b6',
-          900: '#4c1d95'
-        },
-        'creative-blue': {
-          50: '#eff6ff',
-          100: '#dbeafe',
-          200: '#bfdbfe',
-          300: '#93c5fd',
-          400: '#60a5fa',
-          500: '#3b82f6',
-          600: '#2563eb',
-          700: '#1d4ed8',
-          800: '#1e40af',
-          900: '#1e3a8a'
-        }
+        // New Retro Space Palette
+        'primary-bg': '#0f303d', // Deep Teal/Green
+        'card-bg': '#1a4a58',    // Lighter Teal/Green for cards/panels
+        'accent-orange': '#f58a07', // Vibrant Orange
+        'accent-cream': '#f9f4d9', // Cream/Light Yellow
+        'text-primary': '#f9f4d9', // Alias for accent-cream
+        'text-secondary': '#d1ccb6', // Lighter Cream/Gray
+        'status-success': '#5a9a6a', // Muted Green
+        'status-error': '#b04a4a',   // Muted Red
+        'status-warning': '#d9a05b', // Muted Yellow/Orange
+
+        // Define hover/focus variations if needed, e.g.:
+        'accent-orange-hover': '#d97904', // Darker orange for hover
       },
-      backgroundImage: {
-        'gradient-creative': 'linear-gradient(to right, var(--tw-gradient-stops))',
-      },
+      // Remove old background gradients
+      backgroundImage: {}, 
       animation: {
         'float': 'float 3s ease-in-out infinite',
         'fade-in': 'fade-in 0.5s ease-out',
@@ -50,24 +38,15 @@ export default {
           '100%': { opacity: '1', transform: 'translateY(0)' },
         }
       },
+      // Update shadows if needed, or remove if using default Tailwind shadows
       boxShadow: {
-        'creative': '0 4px 20px -2px rgba(139, 92, 246, 0.1)',
-        'creative-lg': '0 10px 30px -3px rgba(139, 92, 246, 0.15)',
+        'card': '0 2px 5px rgba(0, 0, 0, 0.2)', // Example subtle shadow for dark theme
+        'minimal': '0 1px 3px rgba(0, 0, 0, 0.1)', // Keep if used
       },
-      ringColor: {
-        'creative-purple': {
-          200: '#ddd6fe',
-          300: '#c4b5fd'
-        }
-      },
-      ringOffsetColor: {
-        'creative-purple': {
-          100: '#f5f3ff'
-        }
-      },
-      ringWidth: {
-        '3': '3px'
-      }
+      // Remove old ring colors if not used with the new theme
+      ringColor: {},
+      ringOffsetColor: {},
+      ringWidth: {},
     },
   },
   plugins: [],

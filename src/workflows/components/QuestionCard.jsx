@@ -77,15 +77,17 @@ function QuestionCard({
 
       {/* Question/Input Area - Allow this to grow */}
       <div className="w-full max-w-lg text-center flex flex-col flex-grow mb-4">
-        <label htmlFor={`question-${id}`} className="block text-lg font-semibold mb-3 text-gray-700 flex-shrink-0"> {/* Prevent label shrink */}
+        {/* Use new text color */}
+        <label htmlFor={`question-${id}`} className="block text-lg font-semibold mb-3 text-text-primary flex-shrink-0">
           {prompt}
         </label>
 
         {/* Input Area - Allow textarea to grow */}
         <div className="input-area w-full flex-grow">
           {isViewMode ? (
-            <div className="text-left p-3 bg-gray-100 rounded-md w-full min-h-[6rem] whitespace-pre-wrap">
-              {currentAnswer || <span className="text-gray-400 italic">No answer provided</span>}
+            // Use new dark theme colors for view mode
+            <div className="text-left p-3 bg-primary-bg rounded-md w-full min-h-[6rem] whitespace-pre-wrap text-text-secondary">
+              {currentAnswer || <span className="text-text-secondary/70 italic">No answer provided</span>}
             </div>
           ) : (
             // ALWAYS render textarea for consistent behavior and wrapping
@@ -93,7 +95,7 @@ function QuestionCard({
               id={`question-${id}`}
               value={inputValue}
               onChange={handleInputChange}
-              // Consistent styling: padding, border, min-height. Remove h-full.
+              // Use .input-creative
               className="input-creative w-full p-3 border-2 rounded-lg min-h-[6rem]"
               // Rows attribute primarily suggests initial height but doesn't fix it like min-height
               rows={type === 'textarea' ? 4 : 2}
@@ -107,10 +109,11 @@ function QuestionCard({
         {!isViewMode && aiEnabled && (
           // Position AI button below input
           <div className="action-area mt-4 w-full max-w-lg flex justify-start">
+              {/* Use .btn-creative-secondary */}
               <button
                 type="button"
                 onClick={handleAiButtonClick}
-                className="btn-secondary text-sm"
+                className="btn-creative-secondary text-sm"
               >
                 ✨ Need AI Help?
               </button>

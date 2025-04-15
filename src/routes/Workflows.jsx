@@ -32,10 +32,12 @@ function Workflows() {
 
   return (
     <div className="p-8 max-w-4xl mx-auto">
+      {/* text-gradient updated via index.css */}
       <h1 className="text-4xl font-bold text-gradient mb-8">Workflows</h1>
 
       {/* Character Workflow Card */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 mb-8">
+        {/* Uses .card-creative */}
         <div className="card-creative p-6 flex flex-col items-center">
           {/* Specific image for Character Builder card */}
           <img
@@ -43,10 +45,13 @@ function Workflows() {
               alt="Character Builder"
               className="w-24 h-24 object-contain mb-4" // Adjust size as needed
           />
-          <h2 className="text-xl font-semibold mb-2">Character Builder</h2> {/* Updated Heading */}
-          <p className="text-gray-600 mb-4 text-center">
+          {/* Heading uses base style */}
+          <h2 className="text-xl font-semibold mb-2">Character Builder</h2>
+          {/* Use new text color */}
+          <p className="text-text-secondary mb-4 text-center">
             Start a new character creation workflow to flesh out your ideas before adding them to a project.
           </p>
+          {/* Uses .btn-creative */}
           <button
             className="btn-creative w-full text-center"
             onClick={handleStartNewWorkflow}

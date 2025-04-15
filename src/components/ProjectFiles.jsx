@@ -75,6 +75,7 @@ export default function ProjectFiles({ files, onDeleteFile, deletingFileId, proj
 
   return (
     <div>
+      {/* Use text-text-primary (updated via index.css) */}
       <h2 className="text-2xl font-bold text-gradient mb-6">Files</h2>
       <form
         onSubmit={e => {
@@ -87,6 +88,7 @@ export default function ProjectFiles({ files, onDeleteFile, deletingFileId, proj
         }}
         className="flex flex-col items-start gap-2 mb-8"
       >
+        {/* Use .btn-creative */}
         <label className="btn-creative cursor-pointer text-center w-auto min-w-[140px]">
           <input
             type="file"
@@ -98,9 +100,11 @@ export default function ProjectFiles({ files, onDeleteFile, deletingFileId, proj
           />
           Choose File
         </label>
-        <div className="text-gray-600 text-sm min-h-[1.5em] mb-1">
+        {/* Use new text color */}
+        <div className="text-text-secondary text-sm min-h-[1.5em] mb-1">
           {selectedFileName || "No file chosen"}
         </div>
+        {/* Use .btn-creative */}
         <button
           type="submit"
           className="btn-creative w-auto min-w-[140px]"
@@ -112,29 +116,35 @@ export default function ProjectFiles({ files, onDeleteFile, deletingFileId, proj
       {showSkeletons ? (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
           {Array.from({ length: 3 }).map((_, idx) => (
+            // Use .card-creative and dark theme skeleton colors
             <div
               key={idx}
-              className="bg-white rounded-xl shadow-creative border border-creative-purple-100 p-6 flex flex-col items-center animate-pulse"
+              className="card-creative p-6 flex flex-col items-center animate-pulse"
             >
-              <div className="h-10 w-10 bg-gray-200 rounded-full mb-2"></div>
-              <div className="h-4 w-2/3 bg-gray-200 rounded mb-2"></div>
-              <div className="h-3 w-1/2 bg-gray-200 rounded"></div>
+              <div className="h-10 w-10 bg-card-bg/70 rounded-full mb-2"></div>
+              <div className="h-4 w-2/3 bg-card-bg/70 rounded mb-2"></div>
+              <div className="h-3 w-1/2 bg-card-bg/70 rounded"></div>
             </div>
           ))}
         </div>
       ) : files.length === 0 ? (
-        <p className="text-creative-purple-400 text-center py-8">No files uploaded yet</p>
+        // Use new text color
+        <p className="text-text-secondary text-center py-8">No files uploaded yet</p>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
           {files.map((file) => (
+            // Use .card-creative
             <div
               key={file.id}
-              className="bg-white rounded-xl shadow-creative border border-creative-purple-100 hover:shadow-creative-lg transition-shadow duration-300 p-6 flex flex-col items-center relative"
+              className="card-creative p-6 flex flex-col items-center relative"
             >
-              <div className="text-4xl mb-2">📄</div>
-              <div className="font-semibold text-creative-purple-700 mb-2 text-center break-all">
+              {/* Use new text color for icon */}
+              <div className="text-4xl mb-2 text-text-primary">📄</div>
+              {/* Use new text color */}
+              <div className="font-semibold text-text-primary mb-2 text-center break-all">
                 {file.name}
               </div>
+              {/* Use .btn-creative */}
               <a
                 href={file.url}
                 target="_blank"
@@ -150,12 +160,14 @@ export default function ProjectFiles({ files, onDeleteFile, deletingFileId, proj
                       onDeleteFile(file);
                     }
                   }}
-                  className="absolute top-3 right-3 text-red-400 hover:text-red-600 transition-colors duration-200"
+                   // Use new error status colors
+                  className="absolute top-3 right-3 text-status-error hover:text-status-error/80 transition-colors duration-200"
                   title="Delete file"
                   disabled={deletingFileId === file.id}
                 >
                   {deletingFileId === file.id ? (
-                    <svg className="animate-spin h-5 w-5" viewBox="0 0 24 24">
+                    // Use error status color for spinner
+                    <svg className="animate-spin h-5 w-5 text-status-error" viewBox="0 0 24 24">
                       <circle
                         className="opacity-25"
                         cx="12"

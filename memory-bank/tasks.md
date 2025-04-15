@@ -84,6 +84,17 @@ This document outlines the remaining tasks required to complete and polish the W
 - [x] **Routing:** Created top-level `CharacterWorkflow.jsx` route component and updated `App.jsx` route `/character-workflow/:id`.
 - [x] **Data Storage:** Storing workflow answers in Firestore at `characterWorkflows/{workflowId}/answers/{questionId}`.
 
+
+### 1.6. Theme Implementation & UI Fixes
+- [x] **"Retro Space" Theme:** Implemented new dark theme (teal/orange/cream).
+- [x] **Component Styling:** Updated styles across all major components to use the new theme.
+- [x] **UI Fixes:**
+    - [x] Replaced sidebar header text with logo image (links home).
+    - [x] Removed emojis from sidebar navigation links.
+    - [x] Fixed workflow card button resizing issue.
+    - [x] Removed vertical right border from main sidebar.
+    - [x] Removed horizontal bottom border from sidebar logo container.
+
 ---
 
 ## Phase 2: Authentication & User Management
@@ -269,20 +280,20 @@ This document outlines the remaining tasks required to complete and polish the W
 ## Phase 6: Final Polish & Deployment Prep
 
 ### 6.1. UI/UX Refinements
-- [ ] **Consistency Check:** Review the entire application for UI consistency (spacing, typography, colors, component styles).
+- [x] **Consistency Check:** Review the entire application for UI consistency (spacing, typography, colors, component styles). *(Partially addressed by "Retro Space" theme implementation)*.
 - [ ] **Animation Polish:** Refine existing animations and add subtle transitions where appropriate (e.g., sidebar collapse if implemented, section transitions).
 - [ ] **Accessibility (A11y):**
     - [ ] Perform accessibility audit (using tools like Axe DevTools).
     - [ ] Ensure proper ARIA attributes are used.
     - [ ] Verify keyboard navigation is seamless.
-    - [ ] Check color contrast ratios.
+    - [ ] Check color contrast ratios (using new "Retro Space" theme palette).
 - [ ] **Empty States:** Ensure all areas with dynamic content have well-designed empty states (e.g., no projects, no files, no notes).
 - [ ] **Feedback States:** Enhance visual feedback for user actions (e.g., clearer success messages, more distinct loading indicators).
 - [ ] **Workflow UI Enhancements:**
    - [ ] Add fading animations/transitions between workflow questions in `WorkflowEngine`.
    - [ ] Consider adding a progress indicator (e.g., step count, progress bar) to `WorkflowEngine`.
    - [ ] Improve styling/layout of the "Build A New Character!" card on `/workflows` page.
-   - [ ] Standardize appearance (info displayed, button styles/placement) of Project cards (`ProjectCard.jsx`) and Workflow cards (`CharacterWorkflowList.jsx`).
+   - [x] Standardize appearance (info displayed, button styles/placement) of Project cards (`ProjectCard.jsx`) and Workflow cards (`CharacterWorkflowList.jsx`). *(Addressed by theme update)*.
 
 ### 6.2. Performance Optimization
 - [ ] **Bundle Analysis:** Analyze the production build bundle size and identify potential areas for optimization.
@@ -311,3 +322,4 @@ This document outlines the remaining tasks required to complete and polish the W
 
 ## Updates
 2025-04-15: Marked Character Workflow Restructuring/Linking tasks (1.4) as complete/superseded. Added new section (1.5) detailing the completion of the Enhanced Character Workflow implementation. Updated AI Integration (4.3), Testing (5.1, 5.3), and Polish (6.1) tasks to reflect the new workflow components and structure.
+2025-04-15: Added new section (1.6) marking the "Retro Space" theme implementation and associated UI fixes as complete. Updated related polish tasks (6.1) to reflect this completion.

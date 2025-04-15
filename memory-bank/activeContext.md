@@ -6,27 +6,26 @@
 UI/UX Enhancement and Layout Restructuring
 
 ### Recent Completions
-1. **UI/UX Phase 2 Overhaul**
-   - ✅ Enhanced color system
-     - Complete purple and blue palettes
-     - Gradient combinations
-     - Transparent overlays
-     - Consistent focus states
-   - ✅ Animation system
-     - Fade-in transitions
-     - Floating animations
-     - Hover transformations
-     - Smooth transitions
-   - ✅ Visual polish
-     - Backdrop blur effects
-     - Enhanced shadows
-     - Border gradients
-     - Improved spacing
-   - ✅ Interactive elements
-     - Enhanced hover states
-     - Scale transforms
-     - Rotating icons
-     - Better feedback states
+1. **"Retro Space" Theme & UI Overhaul**
+   - ✅ Implemented new "Retro Space" dark theme.
+     - **Color Palette:** Deep teal/green (`#0f303d`), vibrant orange (`#f58a07`), cream/yellow (`#f9f4d9`).
+     - **Backgrounds:** Solid deep teal/lighter teal for main, sidebar, cards, inputs. Removed gradients and white backgrounds.
+     - **Text:** Cream/yellow for primary, lighter cream/gray for secondary. Removed purple text.
+     - **Accents:** Vibrant orange for primary buttons/active states, cream/yellow for secondary buttons/borders.
+   - ✅ Updated styles across all major components (Layout, Home, Projects, Workflows, Settings, ProjectDetail, Cards, Modals, etc.).
+   - ✅ **UI Fixes:**
+     - Replaced sidebar header text with logo image (larger, links home).
+     - Removed emojis from sidebar navigation links.
+     - Fixed workflow card button resizing issue.
+     - Removed vertical right border from main sidebar.
+     - Removed horizontal bottom border from sidebar logo container.
+
+1. **(Superseded) UI/UX Phase 2 Overhaul**
+   - *Previous color system (purple/blue/gradients) replaced by "Retro Space" theme.*
+   - *Animation system remains.*
+   - *Visual polish elements (blur, shadows) may be adjusted by new theme.*
+   - *Interactive elements updated with new theme colors/styles.*
+
 1. **Project Detail Skeleton Loader**
    - ✅ Implemented skeleton loader for Project Detail title/description area to improve perceived loading performance
 
@@ -81,8 +80,11 @@ UI/UX Enhancement and Layout Restructuring
 1. **UI/UX Phase 1 Overhaul**
    - ✅ Replaced top navbar with sidebar navigation
      - Fixed-width sidebar (250px)
-     - Hover and active states
-     - Prepared for future collapsibility
+     - Logo image in header (links home), no text header.
+     - Navigation links without emojis.
+     - No vertical right border on sidebar.
+     - Hover and active states (using new theme colors).
+     - Prepared for future collapsibility.
    - ✅ Implemented split-view layout
      - Left panel navigation
      - Right panel content area
@@ -218,9 +220,9 @@ UI/UX Enhancement and Layout Restructuring
 - Added UI components: `LinkWorkflowModal.jsx`, `Notification.jsx`, `LinkedProjectDisplay.jsx`.
 
 ### 2. Navigation Strategy
-- Top-level navigation bar
-- React Router Link components
-- Consistent hover states
+- Sidebar navigation (replacing previous top navbar)
+- React Router Link components (without emojis)
+- Consistent hover/active states using "Retro Space" theme colors
 - Clear visual hierarchy
 - Semantic HTML structure
 
@@ -231,10 +233,10 @@ UI/UX Enhancement and Layout Restructuring
 - Clear visual hierarchy
 - Semantic HTML structure
 - Navigation patterns:
-  - Fixed top navigation
-  - Flex-based layout
-  - Hover interactions
-  - Active state indicators
+  - Fixed-left sidebar navigation
+  - Flex-based layout (Sidebar + Content Area)
+  - Hover interactions (using new theme colors)
+  - Active state indicators (using new theme colors, e.g., orange accent)
   - Modal dialogs for actions (`LinkWorkflowModal.jsx`)
   - Custom notification component (`Notification.jsx`) for user feedback instead of native alerts.
   - Skeleton loaders for asynchronous content areas.
@@ -245,24 +247,25 @@ UI/UX Enhancement and Layout Restructuring
   - Collapsible `<details>` element for View Mode Q&A list.
 
 ### 4. Styling Approach
-- Using Tailwind utility classes with custom extensions
-- Creative color system:
-  - creative-purple palette (50-900)
-  - creative-blue palette (50-900)
-  - Gradient combinations
-  - Transparent overlays
-- Animation system:
-  - fade-in transitions
-  - float animations
-  - hover transforms
-  - rotating elements
-- Component patterns:
-  - Layout: grid-cols-[250px,1fr] with backdrop-blur
-  - Cards: rounded-xl with gradient borders
-  - Buttons: gradient backgrounds with hover transforms
-  - Navigation: hover translations with border transitions
-  - Content: max-w-6xl with subtle gradients
-  - Forms: enhanced focus states and animations
+- Using Tailwind utility classes with custom theme extensions.
+- **"Retro Space" Theme:**
+  - **Primary Colors:** Deep Teal/Green (`#0f303d`), Vibrant Orange (`#f58a07`), Cream/Yellow (`#f9f4d9`).
+  - **Backgrounds:** Solid dark teal (`bg-teal-deep`) for primary surfaces (main content, sidebar), slightly lighter teal for cards/inputs. No gradients.
+  - **Text:** Cream/yellow (`text-cream-yellow`) for primary text, lighter cream/gray (`text-cream-gray`) for secondary. High contrast against dark backgrounds.
+  - **Accents:** Vibrant orange (`bg-orange-vibrant`, `border-orange-vibrant`) for primary actions, active states, focus rings. Cream/yellow (`border-cream-yellow`, `bg-cream-yellow`/`text-teal-deep`) for secondary buttons/borders.
+- **Removed Elements:** Previous purple/blue palettes, background gradients, border gradients, purple text.
+- **Animation System (Maintained):**
+  - Fade-in transitions
+  - Floating animations (subtle)
+  - Hover transforms (scale, brightness adjustments)
+  - Smooth transitions for color/layout changes.
+- **Component Styling Examples:**
+  - **Layout:** `grid-cols-[250px,1fr]` with `bg-teal-deep`. Sidebar has no right border. Logo container has no bottom border.
+  - **Cards:** `bg-teal-light`, `rounded-lg`, `border border-cream-yellow/20`.
+  - **Buttons (Primary):** `bg-orange-vibrant`, `text-white`, hover brightness increase.
+  - **Buttons (Secondary):** `border border-cream-yellow`, `text-cream-yellow`, hover `bg-cream-yellow/10`.
+  - **Navigation:** Active links use orange accent (e.g., left border or background). Hover states use subtle background change. No emojis.
+  - **Inputs:** `bg-teal-light`, `border border-cream-yellow/30`, `text-cream-yellow`, focus ring `focus:ring-orange-vibrant`.
 
 ### 5. State Management
 - Using local state for component data (useState)
@@ -379,3 +382,4 @@ UI/UX Enhancement and Layout Restructuring
 
 ## Updates
 2025-04-15: Consolidated and updated entries for the enhanced Character Workflow system, including config-driven engine, step-by-step UI, project linking/unlinking, view mode, autosave, resume logic fixes, layout adjustments, and associated new components. Removed `WorkflowSection.jsx` details as it was refactored out.
+2025-04-15: Updated documentation to reflect the new "Retro Space" theme overhaul. Replaced previous color system (purple/blue/gradients) with deep teal, vibrant orange, and cream/yellow palette. Updated background, text, and accent color usage across components. Documented UI fixes including sidebar logo header, removal of sidebar emojis and borders, and workflow card button fix. Marked previous UI/UX Phase 2 as superseded where applicable.

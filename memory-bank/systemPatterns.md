@@ -90,57 +90,68 @@ flowchart TD
 - **Base Components**: Reusable UI elements (Button, Input, SkeletonProjectCard)
 - **Shared Components**: Cross-cutting concerns (ErrorBoundary, Notification)
 
-### 3. UI Component Patterns
+### 3. UI Component Patterns ("Retro Space" Theme)
 ```mermaid
 flowchart TD
     Layout[Layout Component] --> Split[grid-cols-[250px,1fr]]
     Layout --> MinH[min-h-full]
-    Layout --> BgGradient[bg-gradient-to-br]
+    Layout --> BgColor[bg-teal-deep]
 
     Sidebar[Sidebar] --> Fixed[fixed h-full]
     Sidebar --> Width[w-64]
-    Sidebar --> Gradient[bg-gradient-to-b]
-    Sidebar --> Blur[backdrop-blur-sm]
+    Sidebar --> BgColor2[bg-teal-deep]
+    Sidebar --> NoBorder[No right border]
+    Sidebar --> LogoHeader[Logo Image Header (links home)]
+    Sidebar --> NavItems[Nav Items (no emojis, orange active state)]
 
     Content[Content Area] --> MaxW[max-w-6xl]
     Content --> Center[mx-auto]
     Content --> Spacing[space-y-8]
     Content --> Padding[p-8]
 
-    Card[Card Components] --> Shadow[shadow-creative]
-    Card --> Round[rounded-xl]
+    Card[Card Components] --> BgColor3[bg-teal-light]
+    Card --> Round[rounded-lg]
+    Card --> Border[border border-cream-yellow/20]
     Card --> Padding2[p-6]
-    Card --> BG[bg-white/80]
-    Card --> Blur2[backdrop-blur-sm]
 
-    Button[Buttons] --> Gradient2[bg-gradient-to-r]
-    Button --> Colors[from-creative-purple-500 to-creative-blue-500]
-    Button --> Text[text-white]
-    Button --> Size[px-6 py-3]
-    Button --> Round2[rounded-lg]
-    Button --> Hover[hover:scale-[1.02]]
-    Button --> Trans[transition-all]
+    ButtonPrimary[Primary Buttons] --> BgColor4[bg-orange-vibrant]
+    ButtonPrimary --> Text[text-white]
+    ButtonPrimary --> Size[px-4 py-2]
+    ButtonPrimary --> Round2[rounded-md]
+    ButtonPrimary --> Hover[hover:brightness-110]
+    ButtonPrimary --> Trans[transition-all]
+
+    ButtonSecondary[Secondary Buttons] --> Border2[border border-cream-yellow]
+    ButtonSecondary --> Text2[text-cream-yellow]
+    ButtonSecondary --> Hover2[hover:bg-cream-yellow/10]
+    ButtonSecondary --> Size
+    ButtonSecondary --> Round2
+    ButtonSecondary --> Trans
 
     Grid[Grid System] --> Mobile[grid-cols-1]
     Grid --> Tablet[sm:grid-cols-2]
     Grid --> Desktop[lg:grid-cols-3]
-    Grid --> Gap[gap-8]
+    Grid --> Gap[gap-6]
 
-    Form[Form Components] --> Space[space-y-6]
-    Form --> Labels[text-sm font-bold]
-    Form --> Inputs[input-creative]
-    Form --> Focus[focus states]
+    Form[Form Components] --> Space[space-y-4]
+    Form --> Labels[text-cream-gray text-sm]
+    Form --> Inputs[Input Fields]
+    Inputs --> BgColor5[bg-teal-light]
+    Inputs --> Border3[border border-cream-yellow/30]
+    Inputs --> Text3[text-cream-yellow]
+    Inputs --> Focus[focus:ring-orange-vibrant focus:border-orange-vibrant]
 
-    Modal[Modal Dialogs] --> Overlay[bg-black/50]
-    Modal --> ContentBox[bg-white rounded-lg]
+    Modal[Modal Dialogs] --> Overlay[bg-black/70]
+    Modal --> ContentBox[bg-teal-deep rounded-lg border border-cream-yellow/20]
     Modal --> Position[fixed inset-0 flex items-center justify-center]
 
     Notification[Notification Component] --> Positioned[fixed bottom-4 right-4]
-    Notification --> Style[bg-green-500 or bg-red-500]
+    Notification --> Style[bg-orange-vibrant or bg-red-600]
+    Notification --> Text4[text-white]
     Notification --> Animation[fade-in/out]
 
     Skeleton[Skeleton Loaders] --> Animation[animate-pulse]
-    Skeleton --> Style[bg-gray-300 rounded]
+    Skeleton --> Style[bg-teal-light/50 rounded]
 
     subgraph "Workflow UI (Step-by-Step)"
         WEngine[WorkflowEngine] --> CurrentStep{Render Current Step}
@@ -154,60 +165,50 @@ flowchart TD
     end
 ```
 
-### 4. Styling Strategy
-- Extended Tailwind system with custom utilities
-- Creative color system:
+### 4. Styling Strategy ("Retro Space" Theme)
+- Tailwind CSS with custom theme extensions defined in `tailwind.config.js`.
+- **Color Palette:**
   ```js
-  colors: {
-    'creative-purple': {
-      50: '#f5f3ff',  // Lightest purple
-      100: '#ede9fe',
-      200: '#ddd6fe',
-      300: '#c4b5fd',
-      400: '#a78bfa',
-      500: '#8b5cf6',
-      600: '#7c3aed',
-      700: '#6d28d9',
-      800: '#5b21b6',
-      900: '#4c1d95'  // Darkest purple
-    },
-    'creative-blue': {
-      50: '#eff6ff',  // Lightest blue
-      100: '#dbeafe',
-      200: '#bfdbfe',
-      300: '#93c5fd',
-      400: '#60a5fa',
-      500: '#3b82f6',
-      600: '#2563eb',
-      700: '#1d4ed8',
-      800: '#1e40af',
-      900: '#1e3a8a'  // Darkest blue
+  theme: {
+    extend: {
+      colors: {
+        'teal-deep': '#0f303d',      // Primary background (dark teal/green)
+        'teal-light': '#1a4c5d',     // Secondary background (cards, inputs)
+        'orange-vibrant': '#f58a07', // Accent color (buttons, active states)
+        'cream-yellow': '#f9f4d9',   // Primary text, secondary borders/buttons
+        'cream-gray': '#d1cbbd',     // Secondary text (lighter cream/gray)
+      },
+      // ... other extensions like fontFamily if applicable
     }
   }
   ```
-- Animation system:
+- **Key Principles:**
+  - Dark theme base using `teal-deep` and `teal-light`.
+  - High contrast text using `cream-yellow` and `cream-gray`.
+  - Vibrant `orange-vibrant` for calls to action and highlights.
+  - Solid colors preferred over gradients.
+  - Consistent focus states using `orange-vibrant` rings.
+- **Animation System (Maintained):**
   ```js
+  // (Animation definitions remain largely the same, potentially adjusted timing/easing)
   animation: {
-    'float': 'float 3s ease-in-out infinite',
-    'fade-in': 'fade-in 0.5s ease-out'
+    'float': 'float 3s ease-in-out infinite', // Subtle vertical movement
+    'fade-in': 'fade-in 0.3s ease-out'      // Faster fade-in
   },
   keyframes: {
-    float: {
-      '0%, 100%': { transform: 'translateY(0)' },
-      '50%': { transform: 'translateY(-10px)' }
-    },
-    'fade-in': {
-      '0%': { opacity: '0', transform: 'translateY(10px)' },
-      '100%': { opacity: '1', transform: 'translateY(0)' }
-    }
+    float: { /* ... */ },
+    'fade-in': { /* ... */ }
   }
   ```
-- Component patterns:
-  - Cards: `card-creative` with backdrop blur and gradient borders
-  - Buttons: `btn-creative` with gradient backgrounds and hover transforms
-  - Inputs: `input-creative` with enhanced focus states
-  - Tags: `tag-creative` with gradient backgrounds
-  - Text: `text-gradient` for gradient text effects
+- **Component Styling Examples:** (See Mermaid diagram above for class examples)
+  - **Layout:** `bg-teal-deep` overall.
+  - **Sidebar:** `bg-teal-deep`, no right border, logo header.
+  - **Cards:** `bg-teal-light`, `border border-cream-yellow/20`.
+  - **Buttons (Primary):** `bg-orange-vibrant`, `text-white`.
+  - **Buttons (Secondary):** `border border-cream-yellow`, `text-cream-yellow`.
+  - **Inputs:** `bg-teal-light`, `border border-cream-yellow/30`, `text-cream-yellow`, `focus:ring-orange-vibrant`.
+  - **Text:** Primary `text-cream-yellow`, Secondary `text-cream-gray`.
+  - **Navigation:** Active links use `orange-vibrant` accent. No emojis.
 
 ### 5. Navigation Patterns
 ```mermaid
@@ -223,9 +224,10 @@ flowchart TD
 
     subgraph "Sidebar Interaction"
         NavItem[Nav Item] --> Active[Active State]
-        Active --> Highlight[Gradient Background]
+        Active --> Highlight[Orange Accent (e.g., left border)]
         NavItem --> Hover[Hover State]
-        Hover --> Transform[Scale + Translate]
+        Hover --> BgChange[Subtle Background Change (e.g., bg-teal-light/50)]
+        NavItem --> NoEmoji[Text Only (No Emojis)]
     end
 
     subgraph "Content Transition"
@@ -235,11 +237,17 @@ flowchart TD
     end
 ```
 
-- Semantic HTML structure (nav element)
-- Gradient backgrounds with hover transforms
-- Smooth transitions and animations
-- Responsive layout adaptation
-- Clear visual hierarchy
+- Semantic HTML structure (`nav` element in Sidebar).
+- Sidebar Navigation:
+  - Fixed position on the left.
+  - Logo image header (links home).
+  - Text-only navigation links (no emojis).
+  - Active state indicated by `orange-vibrant` accent.
+  - Hover state uses subtle background color change.
+  - No vertical right border on the sidebar itself.
+- Smooth transitions for hover/active states.
+- Responsive layout adaptation handled by main layout grid.
+- Clear visual hierarchy.
 
 ### 6. State Management
 - React Context for global state
@@ -446,3 +454,4 @@ flowchart TD
 
 ## Updates
 2025-04-15: Updated component architecture, routes, component hierarchy, Firestore data structure, and data flow diagrams to reflect the enhanced, config-driven, step-by-step Character Workflow system (`WorkflowEngine`, `QuestionCard`, etc.) and the workflow linking features. Removed `WorkflowSection`. Added details on View Mode, autosave, resume logic, and placeholder AI modal.
+2025-04-15: Updated UI Component Patterns (Mermaid diagram), Styling Strategy, and Navigation Patterns sections to reflect the new "Retro Space" theme (deep teal, vibrant orange, cream/yellow). Replaced previous color system details and updated component styling examples. Documented sidebar changes (logo header, no emojis, no border).

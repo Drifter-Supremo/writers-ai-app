@@ -14,7 +14,8 @@ function CharacterWorkflow() {
   // const projectId = searchParams.get('projectId');
 
   if (!workflowId) {
-    return <div className="p-8 text-red-500">Error: Workflow ID is missing from URL.</div>;
+    // Use new error status color
+    return <div className="p-8 text-status-error">Error: Workflow ID is missing from URL.</div>;
   }
 
   // Optional: Wrap with Layout if needed

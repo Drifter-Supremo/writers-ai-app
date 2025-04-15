@@ -45,7 +45,7 @@ export default {
 }
 ```
 
-### 2. Tailwind Setup
+### 2. Tailwind Setup ("Retro Space" Theme)
 ```javascript
 // tailwind.config.js
 module.exports = {
@@ -56,62 +56,32 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        'creative-purple': {
-          50: '#f5f3ff',
-          100: '#ede9fe',
-          200: '#ddd6fe',
-          300: '#c4b5fd',
-          400: '#a78bfa',
-          500: '#8b5cf6',
-          600: '#7c3aed',
-          700: '#6d28d9',
-          800: '#5b21b6',
-          900: '#4c1d95'
-        },
-        'creative-blue': {
-          50: '#eff6ff',
-          100: '#dbeafe',
-          200: '#bfdbfe',
-          300: '#93c5fd',
-          400: '#60a5fa',
-          500: '#3b82f6',
-          600: '#2563eb',
-          700: '#1d4ed8',
-          800: '#1e40af',
-          900: '#1e3a8a'
-        }
+        'teal-deep': '#0f303d',      // Primary background (dark teal/green)
+        'teal-light': '#1a4c5d',     // Secondary background (cards, inputs)
+        'orange-vibrant': '#f58a07', // Accent color (buttons, active states, focus)
+        'cream-yellow': '#f9f4d9',   // Primary text, secondary borders/buttons
+        'cream-gray': '#d1cbbd',     // Secondary text (lighter cream/gray)
+        // Removed 'creative-purple' and 'creative-blue' palettes
       },
-      animation: {
+      animation: { // Animations likely kept, potentially adjusted
         'float': 'float 3s ease-in-out infinite',
-        'fade-in': 'fade-in 0.5s ease-out'
+        'fade-in': 'fade-in 0.3s ease-out' // Example: Faster fade-in
       },
       keyframes: {
         float: {
           '0%, 100%': { transform: 'translateY(0)' },
-          '50%': { transform: 'translateY(-10px)' }
+          '50%': { transform: 'translateY(-5px)' } // Example: More subtle float
         },
         'fade-in': {
-          '0%': { opacity: '0', transform: 'translateY(10px)' },
+          '0%': { opacity: '0', transform: 'translateY(5px)' },
           '100%': { opacity: '1', transform: 'translateY(0)' }
         }
       },
-      boxShadow: {
-        'creative': '0 4px 20px -2px rgba(139, 92, 246, 0.1)',
-        'creative-lg': '0 10px 30px -3px rgba(139, 92, 246, 0.15)'
-      },
-      ringColor: {
-        'creative-purple': {
-          200: '#ddd6fe',
-          300: '#c4b5fd'
-        }
-      },
-      ringOffsetColor: {
-        'creative-purple': {
-          100: '#f5f3ff'
-        }
-      },
-      ringWidth: {
-        '3': '3px'
+      // Removed theme-specific boxShadow, ringColor, ringOffsetColor, ringWidth
+      // Focus rings now likely use default outline or orange-vibrant:
+      // e.g., focus:ring-orange-vibrant
+      fontFamily: { // Example: If a custom font was added
+        // sans: ['"Your Retro Font"', 'sans-serif'],
       }
     }
   },
@@ -119,39 +89,42 @@ module.exports = {
 }
 ```
 
-### 3. Component Classes
-```css
-/* Base component classes */
-.btn-creative {
-  @apply bg-gradient-to-r from-creative-purple-500 to-creative-blue-500 
-         text-white px-6 py-3 rounded-lg shadow-md 
-         hover:from-creative-purple-600 hover:to-creative-blue-600 
-         transform hover:-translate-y-0.5 transition-all duration-200
-         font-medium disabled:opacity-50;
-}
 
-.card-creative {
-  @apply bg-white/80 backdrop-blur-sm rounded-xl 
-         shadow-creative border border-creative-purple-100 
-         hover:shadow-creative-lg transition-all duration-300;
-}
+### 3. Component Styling Approach ("Retro Space" Theme)
 
-.input-creative {
-  @apply w-full p-3 border-2 border-creative-purple-100 rounded-lg 
-         focus:ring-2 focus:ring-purple-200 focus:ring-offset-2
-         transition-all duration-200 placeholder-creative-purple-300;
-}
+**Note:** With the "Retro Space" theme, the previous `@apply` based custom classes (`.btn-creative`, `.card-creative`, etc.) may be superseded or significantly altered. Styling is now primarily achieved by directly applying Tailwind utility classes using the new theme colors (`teal-deep`, `teal-light`, `orange-vibrant`, `cream-yellow`, `cream-gray`).
 
-.tag-creative {
-  @apply bg-gradient-to-r from-creative-purple-100 to-creative-blue-50 
-         px-4 py-2 rounded-full text-creative-purple-700 font-medium 
-         shadow-sm hover:shadow transition-shadow duration-200;
-}
+Below are examples of how components might be styled using direct utility classes under the new theme:
 
-.text-gradient {
-  @apply bg-gradient-to-r from-creative-purple-900 to-creative-blue-600 
-         bg-clip-text text-transparent;
-}
+```jsx
+// Example Primary Button (using direct utilities)
+<button className="bg-orange-vibrant text-white px-4 py-2 rounded-md font-medium hover:brightness-110 transition duration-200 disabled:opacity-60">
+  Primary Action
+</button>
+
+// Example Secondary Button (using direct utilities)
+<button className="border border-cream-yellow text-cream-yellow px-4 py-2 rounded-md font-medium hover:bg-cream-yellow/10 transition duration-200 disabled:opacity-60">
+  Secondary Action
+</button>
+
+// Example Card (using direct utilities)
+<div className="bg-teal-light p-6 rounded-lg border border-cream-yellow/20 shadow-sm">
+  {/* Card Content */}
+</div>
+
+// Example Input Field (using direct utilities)
+<input
+  type="text"
+  className="w-full p-3 bg-teal-light border border-cream-yellow/30 rounded-md text-cream-yellow placeholder-cream-gray/70 focus:ring-2 focus:ring-orange-vibrant focus:border-orange-vibrant focus:outline-none transition duration-200"
+  placeholder="Enter text..."
+/>
+
+// Example Tag/Badge (using direct utilities)
+<span className="bg-orange-vibrant/20 text-orange-vibrant px-3 py-1 rounded-full text-sm font-medium">
+  Tag
+</span>
+
+// Note: Gradient text (.text-gradient) is likely removed as solid colors are preferred.
 ```
 
 ### 3. Firebase Configuration
@@ -360,3 +333,4 @@ npm run preview    # Preview production build
 
 ## Updates
 2025-04-15: Updated Firestore usage patterns for workflow answers (using `value` field, `Timestamp.now()`). Added example for updating parent workflow document name. Corrected dependencies (debounce implemented natively).
+2025-04-15: Updated Tailwind Setup section to reflect the new "Retro Space" theme colors (`teal-deep`, `teal-light`, `orange-vibrant`, `cream-yellow`, `cream-gray`) and removed the old purple/blue palettes and related theme extensions. Updated the Component Classes section to note the shift towards direct utility class application and provided examples using the new theme. Marked old `@apply` classes as likely superseded.

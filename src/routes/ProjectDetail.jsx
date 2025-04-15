@@ -75,23 +75,27 @@ export default function ProjectDetail() {
   if (project === "notfound") {
     return (
       <div className="p-6 text-center">
-        <div className="text-3xl font-bold text-red-500 mb-4">Project Not Found</div>
-        <div className="text-gray-600">The project you are looking for does not exist or has been deleted.</div>
+        {/* Use new status/text colors */}
+        <div className="text-3xl font-bold text-status-error mb-4">Project Not Found</div>
+        <div className="text-text-secondary">The project you are looking for does not exist or has been deleted.</div>
       </div>
     );
   }
-  if (!project) return <div className="p-6">Loading...</div>;
+  // Use new text color
+  if (!project) return <div className="p-6 text-text-secondary">Loading...</div>;
 
   return (
-    <div className="grid grid-cols-[250px,1fr] min-h-full bg-gradient-to-br from-gray-50 to-creative-purple-50">
-      {/* Sidebar Navigation */}
-      <div className="border-r border-creative-purple-100 bg-white/80 backdrop-blur-sm p-6">
+    // Use new primary background, remove gradient
+    <div className="grid grid-cols-[250px,1fr] min-h-full bg-primary-bg">
+      {/* Sidebar Navigation - Use new card background and border, add rounded corners */}
+      <div className="border-r border-accent-cream/30 bg-card-bg p-6 rounded-lg">
         <nav className="space-y-3">
+          {/* Update button styles */}
           <button
             className={`w-full text-left px-4 py-3 rounded-lg font-medium transition-colors duration-200 ${
               activeSection === 'overview'
-                ? 'btn-creative'
-                : 'text-creative-purple-700 hover:bg-creative-purple-50'
+                ? 'btn-creative' // Active state uses .btn-creative
+                : 'text-text-secondary hover:bg-accent-orange/20' // Inactive state uses text-secondary and orange hover
             }`}
             onClick={() => setActiveSection('overview')}
           >
@@ -101,7 +105,7 @@ export default function ProjectDetail() {
             className={`w-full text-left px-4 py-3 rounded-lg font-medium transition-colors duration-200 ${
               activeSection === 'files'
                 ? 'btn-creative'
-                : 'text-creative-purple-700 hover:bg-creative-purple-50'
+                : 'text-text-secondary hover:bg-accent-orange/20'
             }`}
             onClick={() => setActiveSection('files')}
           >
@@ -111,7 +115,7 @@ export default function ProjectDetail() {
             className={`w-full text-left px-4 py-3 rounded-lg font-medium transition-colors duration-200 ${
               activeSection === 'notes'
                 ? 'btn-creative'
-                : 'text-creative-purple-700 hover:bg-creative-purple-50'
+                : 'text-text-secondary hover:bg-accent-orange/20'
             }`}
             onClick={() => setActiveSection('notes')}
           >
@@ -121,7 +125,7 @@ export default function ProjectDetail() {
             className={`w-full text-left px-4 py-3 rounded-lg font-medium transition-colors duration-200 ${
               activeSection === 'settings'
                 ? 'btn-creative'
-                : 'text-creative-purple-700 hover:bg-creative-purple-50'
+                : 'text-text-secondary hover:bg-accent-orange/20'
             }`}
             onClick={() => setActiveSection('settings')}
           >
@@ -130,11 +134,11 @@ export default function ProjectDetail() {
         </nav>
       </div>
 
-      {/* Main Content */}
-      <div className="p-8">
+      {/* Main Content - Inherits primary-bg */}
+      <div className="p-8 overflow-auto"> {/* Added overflow-auto */}
         <div className="max-w-5xl mx-auto">
           {activeSection === 'overview' && (
-            <ProjectOverview
+            <ProjectOverview // Assumes ProjectOverview uses correct theme styles
               project={project}
               onSave={async (updated) => {
                 // Save to Firestore

@@ -70,58 +70,67 @@ export default function Settings() {
   if (loading) {
     return (
       <div className="p-6">
-        <div className="text-gray-600">Loading preferences...</div>
+        {/* Use new text color */}
+        <div className="text-text-secondary">Loading preferences...</div>
       </div>
     );
   }
 
   return (
     <div className="p-6 max-w-2xl mx-auto">
-      <h1 className="text-2xl font-bold mb-6">User Preferences</h1>
+      {/* Use new text color */}
+      <h1 className="text-2xl font-bold text-text-primary mb-6">User Preferences</h1>
 
-      <div className="bg-gray-50 p-4 rounded-lg mb-6">
-        <h2 className="text-lg font-semibold mb-2">Current Preferences</h2>
+      {/* Use new card background and text colors */}
+      <div className="bg-card-bg p-4 rounded-lg mb-6 border border-accent-cream/30">
+        <h2 className="text-lg font-semibold text-text-primary mb-2">Current Preferences</h2>
         {preferences.name || preferences.role || preferences.preferredTone || preferences.defaultGenre ? (
-          <div className="space-y-1 text-gray-600">
+          <div className="space-y-1 text-text-secondary">
             <p>Name: {preferences.name || 'Not set'}</p>
             <p>Role: {preferences.role || 'Not set'}</p>
             <p>AI Tone: {preferences.preferredTone || 'Not set'}</p>
             <p>Default Genre: {preferences.defaultGenre || 'Not set'}</p>
           </div>
         ) : (
-          <p className="text-gray-600">No preferences saved yet.</p>
+          <p className="text-text-secondary">No preferences saved yet.</p>
         )}
       </div>
 
       {saveSuccess && (
-        <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-2 rounded mb-4">
+        // Use new success status colors
+        <div className="bg-status-success/20 border border-status-success text-status-success px-4 py-2 rounded mb-4">
           Preferences saved successfully!
         </div>
       )}
 
       <form onSubmit={handleSave} className="space-y-4">
         <div>
-          <label className="block text-gray-700 text-sm font-bold mb-2">
+          {/* Use new text color */}
+          <label className="block text-text-primary text-sm font-bold mb-2">
             Name
           </label>
+          {/* Use .input-creative and new error border color */}
           <input
             type="text"
             value={preferences.name}
             onChange={(e) => setPreferences({ ...preferences, name: e.target.value })}
-            className={`w-full p-2 border rounded ${errors.name ? "border-red-400" : ""}`}
+            className={`input-creative ${errors.name ? "border-status-error" : "border-accent-cream/50"}`}
             required
           />
-          {errors.name && <div className="text-red-500 text-xs mt-1">{errors.name}</div>}
+          {/* Use new error text color */}
+          {errors.name && <div className="text-status-error text-xs mt-1">{errors.name}</div>}
         </div>
 
         <div>
-          <label className="block text-gray-700 text-sm font-bold mb-2">
+          {/* Use new text color */}
+          <label className="block text-text-primary text-sm font-bold mb-2">
             Creative Role
           </label>
+          {/* Use .input-creative */}
           <select
             value={preferences.role}
             onChange={(e) => setPreferences({ ...preferences, role: e.target.value })}
-            className="w-full p-2 border rounded"
+            className="input-creative"
           >
             <option value="">Select a role...</option>
             <option value="screenwriter">Screenwriter</option>
@@ -132,13 +141,15 @@ export default function Settings() {
         </div>
 
         <div>
-          <label className="block text-gray-700 text-sm font-bold mb-2">
+          {/* Use new text color */}
+          <label className="block text-text-primary text-sm font-bold mb-2">
             Preferred AI Tone
           </label>
+          {/* Use .input-creative */}
           <select
             value={preferences.preferredTone}
             onChange={(e) => setPreferences({ ...preferences, preferredTone: e.target.value })}
-            className="w-full p-2 border rounded"
+            className="input-creative"
           >
             <option value="">Select a tone...</option>
             <option value="professional">Professional</option>
@@ -149,24 +160,28 @@ export default function Settings() {
         </div>
 
         <div>
-          <label className="block text-gray-700 text-sm font-bold mb-2">
+          {/* Use new text color */}
+          <label className="block text-text-primary text-sm font-bold mb-2">
             Default Genre or Style
           </label>
+          {/* Use .input-creative and new error border color */}
           <input
             type="text"
             value={preferences.defaultGenre}
             onChange={(e) => setPreferences({ ...preferences, defaultGenre: e.target.value })}
-            className={`w-full p-2 border rounded ${errors.defaultGenre ? "border-red-400" : ""}`}
+            className={`input-creative ${errors.defaultGenre ? "border-status-error" : "border-accent-cream/50"}`}
             placeholder="e.g., Science Fiction, Pop Music, Drama"
           />
-          {errors.defaultGenre && <div className="text-red-500 text-xs mt-1">{errors.defaultGenre}</div>}
+          {/* Use new error text color */}
+          {errors.defaultGenre && <div className="text-status-error text-xs mt-1">{errors.defaultGenre}</div>}
         </div>
 
         <div className="pt-4 space-x-4">
+          {/* Use .btn-creative */}
           <button
             type="submit"
             disabled={!preferences.name.trim() || saving || Object.keys(errors).length > 0}
-            className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 disabled:opacity-50 disabled:hover:bg-blue-500"
+            className="btn-creative"
           >
             {saving ? (
               <svg className="animate-spin h-5 w-5 inline-block mr-2" viewBox="0 0 24 24">
@@ -189,6 +204,7 @@ export default function Settings() {
               "Save Preferences"
             )}
           </button>
+          {/* Use .btn-creative-secondary */}
           <button
             type="button"
             onClick={() => {
@@ -196,10 +212,11 @@ export default function Settings() {
               setSaveSuccess(true);
               setTimeout(() => setSaveSuccess(false), 3000);
             }}
-            className="bg-gray-200 text-gray-700 px-4 py-2 rounded hover:bg-gray-300"
+            className="btn-creative-secondary"
           >
             Reset Form
           </button>
+          {/* Use .btn-creative-secondary */}
           <button
             type="button"
             onClick={async () => {
@@ -216,7 +233,7 @@ export default function Settings() {
                 setClearing(false);
               }
             }}
-            className="bg-gray-200 text-gray-700 px-4 py-2 rounded hover:bg-gray-300"
+            className="btn-creative-secondary"
             disabled={clearing}
           >
             {clearing ? (

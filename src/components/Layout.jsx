@@ -1,4 +1,4 @@
-import { useLocation } from 'react-router-dom';
+import { useLocation, Link } from 'react-router-dom';
 
 export default function Layout({ children }) {
   const location = useLocation();
@@ -8,67 +8,83 @@ export default function Layout({ children }) {
       {/* Sidebar wrapper - prepared for future collapsible state */}
       <div className="w-64 transition-width duration-300">
         {/* Fixed sidebar */}
-        <div className="fixed h-full w-64 bg-gradient-to-b from-creative-purple-800 via-creative-purple-900 to-creative-blue-900 text-white shadow-creative-lg backdrop-blur-sm">
+        {/* Remove border-r */}
+        <div className="fixed h-full w-64 bg-primary-bg text-text-primary shadow-md">
           {/* Logo/title section */}
-          <div className="bg-white/5 p-8 border-b border-white/10">
-            <h1 className="text-2xl font-bold bg-gradient-to-r from-creative-blue-200 to-creative-purple-200 bg-clip-text text-transparent">
-              Writers AI Assistant
-            </h1>
+          {/* Remove border-b */}
+          <div className="p-6 flex justify-center">
+            <Link to="/" aria-label="Home">
+              <img
+                src="/assets/logo-no-background.png"
+                alt="Writers AI Assistant Logo"
+                // Increase logo size
+                className="h-16 w-auto cursor-pointer"
+              />
+            </Link>
           </div>
 
-          {/* Navigation items */}
+          {/* Navigation items - Use new colors */}
           <nav className="p-4 space-y-2">
-            <a 
-              href="/"
-              className={`flex items-center space-x-3 p-3 rounded-lg transition-all duration-200 ${
-                location.pathname === '/' 
-                  ? 'bg-white/10 text-white border-l-4 border-creative-blue-400 shadow-lg shadow-black/20 font-medium' 
-                  : 'text-white/70 hover:bg-white/5 hover:text-white hover:translate-x-1 hover:border-l-4 hover:border-creative-purple-400'
-              }`}
-            >
-              <span>🏠</span>
-              <span>Home</span>
-            </a>
-            <a 
-              href="/projects"
-              className={`flex items-center space-x-3 p-3 rounded-lg transition-all duration-200 ${
-                location.pathname === '/projects' 
-                  ? 'bg-white/10 text-white border-l-4 border-creative-blue-400 shadow-lg shadow-black/20 font-medium' 
-                  : 'text-white/70 hover:bg-white/5 hover:text-white hover:translate-x-1 hover:border-l-4 hover:border-creative-purple-400'
-              }`}
-            >
-              <span>📚</span>
-              <span>Projects</span>
-            </a>
             <a
-              href="/workflows"
-              className={`flex items-center space-x-3 p-3 rounded-lg transition-all duration-200 ${
-                location.pathname === '/workflows'
-                  ? 'bg-white/10 text-white border-l-4 border-creative-blue-400 shadow-lg shadow-black/20 font-medium'
-                  : 'text-white/70 hover:bg-white/5 hover:text-white hover:translate-x-1 hover:border-l-4 hover:border-creative-purple-400'
-              }`}
-            >
-              <span>⚡️</span>
-              <span>Workflows</span>
-            </a>
-            <a 
-              href="/settings"
-              className={`flex items-center space-x-3 p-3 rounded-lg transition-all duration-200 ${
-                location.pathname === '/settings' 
-                  ? 'bg-white/10 text-white border-l-4 border-creative-blue-400 shadow-lg shadow-black/20 font-medium' 
-                  : 'text-white/70 hover:bg-white/5 hover:text-white hover:translate-x-1 hover:border-l-4 hover:border-creative-purple-400'
-              }`}
-            >
-              <span>⚙️</span>
-              <span>Settings</span>
+              href="/"
+              // Remove emoji span, adjust spacing if needed (removed space-x-3)
+             // Remove border-l-4 from active and hover states
+             className={`flex items-center p-3 rounded-lg transition-all duration-200 ${
+               location.pathname === '/'
+                 ? 'bg-accent-orange text-primary-bg border-l-4 border-accent-orange shadow-lg shadow-black/20 font-medium' // Restore active border
+                 : 'text-text-secondary hover:bg-accent-orange/80 hover:text-primary-bg hover:translate-x-1' // Keep hover border removed
+             }`}
+           >
+             {/* <span>🏠</span> */}
+             <span>Home</span>
+           </a>
+           <a
+             href="/projects"
+              // Remove emoji span, adjust spacing if needed (removed space-x-3)
+              // Remove border-l-4 from active and hover states
+             className={`flex items-center p-3 rounded-lg transition-all duration-200 ${
+               location.pathname === '/projects'
+                 ? 'bg-accent-orange text-primary-bg border-l-4 border-accent-orange shadow-lg shadow-black/20 font-medium' // Restore active border
+                 : 'text-text-secondary hover:bg-accent-orange/80 hover:text-primary-bg hover:translate-x-1' // Keep hover border removed
+             }`}
+           >
+             {/* <span>📚</span> */}
+             <span>Projects</span>
+           </a>
+           <a
+             href="/workflows"
+              // Remove emoji span, adjust spacing if needed (removed space-x-3)
+              // Remove border-l-4 from active and hover states
+             className={`flex items-center p-3 rounded-lg transition-all duration-200 ${
+               location.pathname === '/workflows'
+                 ? 'bg-accent-orange text-primary-bg border-l-4 border-accent-orange shadow-lg shadow-black/20 font-medium' // Restore active border
+                 : 'text-text-secondary hover:bg-accent-orange/80 hover:text-primary-bg hover:translate-x-1' // Keep hover border removed
+             }`}
+           >
+             {/* <span>⚡️</span> */}
+             <span>Workflows</span>
+           </a>
+           <a
+             href="/settings"
+              // Remove emoji span, adjust spacing if needed (removed space-x-3)
+              // Remove border-l-4 from active and hover states
+             className={`flex items-center p-3 rounded-lg transition-all duration-200 ${
+               location.pathname === '/settings'
+                 ? 'bg-accent-orange text-primary-bg border-l-4 border-accent-orange shadow-lg shadow-black/20 font-medium' // Restore active border
+                 : 'text-text-secondary hover:bg-accent-orange/80 hover:text-primary-bg hover:translate-x-1' // Keep hover border removed
+             }`}
+           >
+             {/* <span>⚙️</span> */}
+             <span>Settings</span>
             </a>
           </nav>
         </div>
       </div>
 
       {/* Main content */}
-      <div className="flex-1 overflow-auto bg-gradient-to-br from-gray-50 via-creative-purple-50/30 to-creative-blue-50/30">
-        <main className="p-8 min-h-screen w-full backdrop-blur-[2px]">
+      {/* Main content - Use new primary-bg */}
+      <div className="flex-1 overflow-auto bg-primary-bg">
+        <main className="p-8 min-h-screen w-full">
           {children}
         </main>
       </div>
