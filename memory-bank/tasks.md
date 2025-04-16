@@ -127,27 +127,31 @@ All loading and skeleton state tasks for the Project Detail View and its sidebar
 - [ ] **(Optional) Password Reset:** Implement password reset functionality.
 
 ### 2.4. Multi-User Data Structure & Access Control
-- [ ] **Firestore Data Structure:**
-    - [ ] Add a `userId` field to the `projects` collection documents.
-    - [ ] Add a `userId` field to the `userPreferences` documents (if storing settings per user).
-    - [ ] Ensure subcollections (notes, files) are implicitly tied to the user via the parent project document.
-- [ ] **Firestore Queries:**
-    - [ ] Update `getDocs` calls (e.g., in `Projects.jsx`) to query only projects where `userId` matches the logged-in user's UID (`where("userId", "==", currentUser.uid)`).
-    - [ ] Update `getDoc` calls (e.g., in `ProjectDetail.jsx`) to verify the fetched project belongs to the current user.
-- [ ] **Firestore Writes:**
-    - [ ] Ensure `addDoc` for new projects includes the `userId` of the current user.
-    - [ ] Ensure `updateDoc`, `deleteDoc` operations are only allowed on documents belonging to the current user (primarily enforced by security rules, but client-side checks are good practice).
-- [ ] **Firebase Storage Structure:**
-    - [ ] Modify storage paths to include the `userId`, e.g., `users/{userId}/projects/{projectId}/files/{filename}`.
-    - [ ] Update file upload/delete logic in `ProjectDetail.jsx` to use these user-specific paths.
-- [ ] **Security Rules (CRITICAL):**
-    - [ ] **Firestore Rules:** Write and deploy rules (`firestore.rules`) to ensure:
+- [x] **Firestore Data Structure:**
+    - [x] Added a `userId` field to the `projects` collection documents.
+    - [x] Added a `userId` field to the `userPreferences` documents (if storing settings per user).
+    - [x] Ensured subcollections (notes, files) are implicitly tied to the user via the parent project document.
+    - [x] Added a `userId` field to `characterWorkflows` and all relevant subcollections.
+- [x] **Firestore Queries:**
+    - [x] Updated `getDocs` calls (e.g., in `Projects.jsx`, `CharacterWorkflowList.jsx`) to query only documents where `userId` matches the logged-in user's UID (`where("userId", "==", currentUser.uid)`).
+    - [x] Updated `getDoc` calls (e.g., in `ProjectDetail.jsx`) to verify the fetched document belongs to the current user.
+- [x] **Firestore Writes:**
+    - [x] Ensured `addDoc` for new projects, workflows, notes, files, and preferences includes the `userId` of the current user.
+    - [x] Ensured `updateDoc`, `deleteDoc` operations are only allowed on documents belonging to the current user (primarily enforced by security rules, but client-side checks are good practice).
+- [x] **Firebase Storage Structure:**
+    - [ ] (Planned) Modify storage paths to include the `userId`, e.g., `users/{userId}/projects/{projectId}/files/{filename}`.
+    - [ ] (Planned) Update file upload/delete logic in `ProjectDetail.jsx` to use these user-specific paths.
+- [x] **Security Rules (CRITICAL):**
+    - [x] **Firestore Rules:** Wrote and deployed rules (`firestore.rules`) to ensure:
         - Users must be authenticated to read/write any project-related data (`request.auth != null`).
-        - Users can only read/write documents (projects, notes, files metadata, settings) where the `userId` field matches their own `request.auth.uid`.
-        - Define rules for subcollections accordingly.
-    - [ ] **Storage Rules:** Write and deploy rules (`storage.rules`) to ensure:
+        - Users can only read/write documents (projects, notes, files metadata, settings, workflows) where the `userId` field matches their own `request.auth.uid`.
+        - Defined rules for subcollections accordingly.
+    - [ ] **Storage Rules:** (Planned) Write and deploy rules (`storage.rules`) to ensure:
         - Users must be authenticated (`request.auth != null`).
         - Users can only read/write files within their own user-specific path (`request.auth.uid == userIdInPath`).
+
+- [x] **Character Workflow Isolation:** Only the current user's workflows are visible and accessible after login.
+- [x] **Post-Login Redirect:** After login or signup, users are now redirected to the home page (`/`) instead of `/projects`.
 
 ---
 **Authentication system is now complete:**  

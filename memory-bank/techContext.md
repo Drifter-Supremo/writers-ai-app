@@ -274,7 +274,9 @@ export const characterWorkflowConfig = {
 - **ProtectedRoute**: Guards all private routes, redirecting unauthenticated users to `/login`.
 - **Sidebar Auth-Aware UI**: Sidebar navigation displays "Sign In" and "Sign Up" when logged out, and user info with "Logout" when logged in.
 - **Login/Signup Pages**: `/login` and `/signup` routes provide forms for Email/Password and Google authentication, with error handling and loading states.
-- **Multi-User Data Isolation (Planned)**: Next step is to add userId to all Firestore documents and update queries/security rules for per-user data access.
+- **Character Workflow User Isolation**: All workflow creation, queries, and security rules use userId for multi-user support. Only the current user's workflows are visible and accessible after login.
+- **Post-Login/Signup Redirect**: After login or signup, users are redirected to the home page (`/`) instead of `/projects`.
+- **Multi-User Data Isolation**: All Firestore documents (projects, files, notes, preferences, workflows) use userId for per-user access, enforced in both code and security rules.
 
 ### 2. Gemini Flash 2.0
 - API endpoint configuration

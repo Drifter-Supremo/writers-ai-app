@@ -87,6 +87,12 @@
 - [x] Technical context documentation
 - [x] Active context tracking
 
+### Character Workflow User Isolation & Post-Login Redirect
+- [x] Character workflows are now fully user-isolated: only the current user's workflows are visible and accessible after login.
+- [x] All workflow creation, queries, and security rules use userId for multi-user support.
+- [x] After login or signup, users are now redirected to the home page (`/`) instead of `/projects`.
+- [x] All changes tested and confirmed working for multiple accounts.
+
 ### Authentication System (Email/Password & Google, Protected Routes, Sidebar UI)
 - [x] Integrated Firebase Auth with Email/Password and Google sign-in.
 - [x] Created AuthContext for global user state and auth actions.
@@ -94,7 +100,7 @@
 - [x] Implemented ProtectedRoute to guard all private routes (`/projects`, `/settings`, `/workflows`, `/character-workflow`).
 - [x] Updated sidebar navigation to show login/signup when logged out, and user info/logout when logged in.
 - [x] Verified that authentication flow works for both providers and all protected navigation.
-- [ ] UserId-based data isolation and Firestore security rules in progress (currently, all users see all data).
+- [x] UserId-based data isolation and Firestore security rules for projects, files, notes, preferences, and workflows.
 
 ### Enhanced Character Workflow System (Major Refactor)
 - [x] **New Structure:** Created `/src/workflows/`, `/src/workflows/components/`, `/src/workflows/configs/`.

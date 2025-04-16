@@ -6,6 +6,12 @@
 Authentication System Integration & Multi-User Data Isolation
 
 ### Recent Completions
+1. **Character Workflow User Isolation & Post-Login Redirect**
+   - ✅ Character workflows are now fully user-isolated: only the current user's workflows are visible and accessible after login.
+   - ✅ All workflow creation, queries, and security rules use userId for multi-user support.
+   - ✅ After login or signup, users are now redirected to the home page (`/`) instead of `/projects`.
+   - ✅ All changes tested and confirmed working for multiple accounts.
+
 1. **Authentication System (Email/Password & Google, Protected Routes, Sidebar UI)**
    - ✅ Implemented Firebase Auth integration with Email/Password and Google sign-in.
    - ✅ Created AuthContext for global user state and auth actions.
@@ -309,11 +315,8 @@ Authentication System Integration & Multi-User Data Isolation
 ## Next Steps
 
 ### Immediate Tasks
-1. Implement userId-based data isolation for all Firestore documents (projects, notes, files, userPreferences).
-2. Update Firestore queries to only fetch data belonging to the current user.
-3. Update Firestore writes to include userId on all new documents.
-4. Write and deploy Firestore and Storage security rules to enforce per-user access.
-5. (Then) Implement drag-and-drop, rich text editing, and enhanced file previews.
+1. (Next) Address orphaned workflow links and preferences persistence issues.
+2. (Then) Implement drag-and-drop, rich text editing, and enhanced file previews.
 
 ### Upcoming Features
 1. UI/UX Phase 2
