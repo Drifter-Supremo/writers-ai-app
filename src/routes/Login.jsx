@@ -10,7 +10,7 @@ export default function Login() {
 
   // Redirect if already logged in
   React.useEffect(() => {
-    if (user) navigate("/projects");
+    if (user) navigate("/");
   }, [user, navigate]);
 
   const handleSubmit = async (e) => {
