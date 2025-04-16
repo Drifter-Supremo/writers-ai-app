@@ -452,6 +452,13 @@ flowchart TD
 - UI component testing
 - Responsive design testing
 
+### 8. Authentication Patterns
+- **AuthContext**: Provides global user state, loading, error, and authentication actions (login, signup, Google sign-in, logout) via React Context. Used throughout the app for authentication-aware logic.
+- **ProtectedRoute**: Higher-order component that checks authentication state and redirects unauthenticated users to `/login`. Wraps all private routes (projects, settings, workflows, etc.).
+- **Sidebar Auth-Aware UI**: Sidebar navigation displays "Sign In" and "Sign Up" when logged out, and user info with "Logout" when logged in. Uses AuthContext for state.
+- **Login/Signup Pages**: `/login` and `/signup` routes provide forms for Email/Password and Google authentication, with error handling and loading states.
+- **Multi-User Data Isolation (Planned)**: Next step is to add userId to all Firestore documents and update queries/security rules for per-user data access.
+
 ## Updates
 2025-04-15: Updated component architecture, routes, component hierarchy, Firestore data structure, and data flow diagrams to reflect the enhanced, config-driven, step-by-step Character Workflow system (`WorkflowEngine`, `QuestionCard`, etc.) and the workflow linking features. Removed `WorkflowSection`. Added details on View Mode, autosave, resume logic, and placeholder AI modal.
 2025-04-15: Updated UI Component Patterns (Mermaid diagram), Styling Strategy, and Navigation Patterns sections to reflect the new "Retro Space" theme (deep teal, vibrant orange, cream/yellow). Replaced previous color system details and updated component styling examples. Documented sidebar changes (logo header, no emojis, no border).

@@ -266,8 +266,15 @@ export const characterWorkflowConfig = {
 ### 1. Firebase Services
 - **Firestore**: Document database
 - **Storage**: File storage
-- **Authentication**: User management
+- **Authentication**: User management (Email/Password and Google sign-in via Firebase Auth, managed with AuthContext and protected routes)
 - **Security Rules**: Access control
+
+#### Authentication Integration
+- **AuthContext**: Provides global user state, loading, error, and authentication actions (login, signup, Google sign-in, logout) via React Context.
+- **ProtectedRoute**: Guards all private routes, redirecting unauthenticated users to `/login`.
+- **Sidebar Auth-Aware UI**: Sidebar navigation displays "Sign In" and "Sign Up" when logged out, and user info with "Logout" when logged in.
+- **Login/Signup Pages**: `/login` and `/signup` routes provide forms for Email/Password and Google authentication, with error handling and loading states.
+- **Multi-User Data Isolation (Planned)**: Next step is to add userId to all Firestore documents and update queries/security rules for per-user data access.
 
 ### 2. Gemini Flash 2.0
 - API endpoint configuration

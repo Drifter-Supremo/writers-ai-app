@@ -87,6 +87,15 @@
 - [x] Technical context documentation
 - [x] Active context tracking
 
+### Authentication System (Email/Password & Google, Protected Routes, Sidebar UI)
+- [x] Integrated Firebase Auth with Email/Password and Google sign-in.
+- [x] Created AuthContext for global user state and auth actions.
+- [x] Built Login and Signup pages with error handling, loading states, and Google sign-in.
+- [x] Implemented ProtectedRoute to guard all private routes (`/projects`, `/settings`, `/workflows`, `/character-workflow`).
+- [x] Updated sidebar navigation to show login/signup when logged out, and user info/logout when logged in.
+- [x] Verified that authentication flow works for both providers and all protected navigation.
+- [ ] UserId-based data isolation and Firestore security rules in progress (currently, all users see all data).
+
 ### Enhanced Character Workflow System (Major Refactor)
 - [x] **New Structure:** Created `/src/workflows/`, `/src/workflows/components/`, `/src/workflows/configs/`.
 - [x] **Config-Driven:** Implemented `src/workflows/configs/characterWorkflowConfig.js` defining workflow.
@@ -193,7 +202,7 @@
 - [x] Enhanced project operations (linking added)
 - [x] Character Workflow engine implemented
 - [x] Basic data persistence
-- [ ] User authentication
+- [x] User authentication
 
 ### Milestone 3: AI Integration 🤖
 - [ ] AI chat implementation

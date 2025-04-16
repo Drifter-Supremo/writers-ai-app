@@ -10,7 +10,9 @@ This document outlines the remaining tasks required to complete and polish the W
 - [x] **Projects Dashboard:**
     - [x] Implement skeleton loader for project cards while fetching data.
 - [x] Add loading indicator for project creation/deletion.
-- [ ] **Project Detail View:**
+- [x] **Project Detail View:**
+    - A visually consistent skeleton loader is now shown for the Project Overview section while project data is loading.
+    - The Files section now displays skeleton loaders whenever files are being fetched, uploaded, or deleted, ensuring a smooth user experience during all asynchronous operations.
 - [x] Implement skeleton loader for project title/description area.
 - [x] Implement skeleton loader for the Files section.
 - [x] Implement skeleton loader for the Notes section.
@@ -20,7 +22,8 @@ This document outlines the remaining tasks required to complete and polish the W
 - [x] **Character Workflows:**
     - [x] Implement skeleton loader for workflow cards list (`Workflows.jsx`).
     - [x] Implement skeleton loader for project list in Link Workflow modal.
-- [ ] **Project Detail Sidebar Navigation:**
+- [x] **Project Detail Sidebar Navigation:**
+    - The sidebar navigation is static and does not require a loading state.
 - [x] Implement sidebar section switching (Overview, Files, Notes, Settings).
   - Modular sections for Overview, Files, Notes, Settings
   - Files section: left-aligned upload form, file grid, upload/delete with skeleton loaders and confirmation
@@ -96,6 +99,8 @@ This document outlines the remaining tasks required to complete and polish the W
     - [x] Removed horizontal bottom border from sidebar logo container.
 
 ---
+**Phase 1 Summary:**  
+All loading and skeleton state tasks for the Project Detail View and its sidebar navigation are now complete and fully polished.
 
 ## Phase 2: Authentication & User Management
 
@@ -107,18 +112,18 @@ This document outlines the remaining tasks required to complete and polish the W
     - [ ] Use Firebase's `onAuthStateChanged` listener to update the auth state.
 
 ### 2.2. UI Components & Routing
-- [ ] **Create Auth Routes:** Add routes for `/login`, `/signup`.
-- [ ] **Create Login Component:** Build `src/routes/Login.jsx` with email/password fields and login button.
-- [ ] **Create Signup Component:** Build `src/routes/Signup.jsx` with email/password fields and signup button.
-- [ ] **Protected Routes:** Implement a mechanism (e.g., a wrapper component) to protect routes (like `/projects`, `/settings`) so they are only accessible to logged-in users, redirecting others to `/login`.
-- [ ] **Update Layout/Navbar:**
-    - [ ] Conditionally display Login/Signup links or User Info/Logout button based on auth state.
+- [x] **Create Auth Routes:** Added routes for `/login`, `/signup`.
+- [x] **Create Login Component:** Built `src/routes/Login.jsx` with email/password fields, Google sign-in, and login button.
+- [x] **Create Signup Component:** Built `src/routes/Signup.jsx` with email/password fields, Google sign-in, and signup button.
+- [x] **Protected Routes:** Implemented `ProtectedRoute` to protect routes (like `/projects`, `/settings`, `/workflows`, `/character-workflow`) so they are only accessible to logged-in users, redirecting others to `/login`.
+- [x] **Update Layout/Navbar:**
+    - [x] Sidebar now conditionally displays Login/Signup links or User Info/Logout button based on auth state.
 
 ### 2.3. Authentication Logic
-- [ ] **Signup Functionality:** Implement user registration using `createUserWithEmailAndPassword`.
-- [ ] **Login Functionality:** Implement user login using `signInWithEmailAndPassword`.
-- [ ] **Logout Functionality:** Implement user logout using `signOut`.
-- [ ] **Error Handling:** Add robust error handling for auth operations (e.g., invalid email, wrong password, user exists). Display clear feedback to the user.
+- [x] **Signup Functionality:** Implemented user registration using `createUserWithEmailAndPassword` and Google sign-in.
+- [x] **Login Functionality:** Implemented user login using `signInWithEmailAndPassword` and Google sign-in.
+- [x] **Logout Functionality:** Implemented user logout using `signOut`.
+- [x] **Error Handling:** Added robust error handling for auth operations (e.g., invalid email, wrong password, user exists). Displays clear feedback to the user.
 - [ ] **(Optional) Password Reset:** Implement password reset functionality.
 
 ### 2.4. Multi-User Data Structure & Access Control
@@ -145,6 +150,10 @@ This document outlines the remaining tasks required to complete and polish the W
         - Users can only read/write files within their own user-specific path (`request.auth.uid == userIdInPath`).
 
 ---
+**Authentication system is now complete:**  
+- Email/Password and Google sign-in supported
+- Protected routes and sidebar auth UI implemented
+- Users currently see all data; next step is to implement userId-based data isolation and security rules for true multi-user support
 
 ## Phase 3: Feature Enhancements
 
