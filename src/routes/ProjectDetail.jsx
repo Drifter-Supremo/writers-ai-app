@@ -1,18 +1,23 @@
 import { useEffect, useState } from 'react';
+import { useAuth } from '../context/AuthContext';
 import { useParams } from 'react-router-dom';
-import { doc, getDoc, collection, getDocs, deleteDoc } from 'firebase/firestore';
+import { doc, getDoc, collection, getDocs, deleteDoc, query, where } from 'firebase/firestore';
 import { db } from '../services/firebase';
 import ProjectFiles from '../components/ProjectFiles';
 import ProjectNotes from '../components/ProjectNotes';
+import { addDoc, serverTimestamp } from 'firebase/firestore';
 import ProjectSettings from '../components/ProjectSettings';
 import ProjectOverview from '../components/ProjectOverview';
 import ProjectOverviewSkeleton from '../components/ProjectOverviewSkeleton';
 
 export default function ProjectDetail() {
   const { id } = useParams();
+  const { user } = useAuth();
   const [project, setProject] = useState(null);
   const [files, setFiles] = useState(undefined);
   const [activeSection, setActiveSection] = useState('overview');
+  const [notes, setNotes] = useState([]);
+  const [loadingNotes, setLoadingNotes] = useState(false);
 
   // For file deletion/upload feedback
   const [deletingFileId, setDeletingFileId] = useState(null);
@@ -24,7 +29,12 @@ export default function ProjectDetail() {
         const docRef = doc(db, "projects", id);
         const docSnap = await getDoc(docRef);
         if (docSnap.exists()) {
-          setProject({ id: docSnap.id, ...docSnap.data() });
+          const data = { id: docSnap.id, ...docSnap.data() };
+          if (data.userId && user && data.userId !== user.uid) {
+            setProject("notfound");
+          } else {
+            setProject(data);
+          }
         } else {
           setProject(null);
         }
@@ -32,10 +42,16 @@ export default function ProjectDetail() {
         setProject("notfound");
       }
     }
+
     async function fetchFiles() {
       setFiles(undefined);
       try {
-        const filesSnap = await getDocs(collection(db, `projects/${id}/files`));
+        if (!user?.uid) {
+          setFiles([]);
+          return;
+        }
+        const q = query(collection(db, `projects/${id}/files`), where("userId", "==", user.uid));
+        const filesSnap = await getDocs(q);
         setFiles(filesSnap.docs.map(doc => ({
           id: doc.id,
           ...doc.data()
@@ -45,9 +61,34 @@ export default function ProjectDetail() {
         setFiles([]);
       }
     }
+
+    async function fetchNotes() {
+      setLoadingNotes(true);
+      try {
+        if (!user?.uid) {
+          setNotes([]);
+          setLoadingNotes(false);
+          return;
+        }
+        const q = query(collection(db, `projects/${id}/notes`), where("userId", "==", user.uid));
+        const notesSnap = await getDocs(q);
+        setNotes(
+          notesSnap.docs
+            .map(doc => ({ id: doc.id, ...doc.data() }))
+            .sort((a, b) => (b.createdAt?.seconds || 0) - (a.createdAt?.seconds || 0))
+        );
+      } catch (error) {
+        setNotes([]);
+      } finally {
+        setLoadingNotes(false);
+      }
+    }
+
     fetchProject();
     fetchFiles();
-  }, [id]);
+    fetchNotes();
+    // eslint-disable-next-line
+  }, [id, user]);
 
   // File delete handler
   const handleDeleteFile = async (file) => {
@@ -166,7 +207,12 @@ export default function ProjectDetail() {
               deletingFileId={deletingFileId}
               projectId={id}
               refreshFiles={async () => {
-                const filesSnap = await getDocs(collection(db, `projects/${id}/files`));
+                if (!user?.uid) {
+                  setFiles([]);
+                  return;
+                }
+                const q = query(collection(db, `projects/${id}/files`), where("userId", "==", user.uid));
+                const filesSnap = await getDocs(q);
                 setFiles(filesSnap.docs.map(doc => ({
                   id: doc.id,
                   ...doc.data()
@@ -175,7 +221,33 @@ export default function ProjectDetail() {
             />
           )}
           {activeSection === 'notes' && (
-            <ProjectNotes onAddNote={() => {}} />
+            <ProjectNotes
+              notes={notes}
+              loadingNotes={loadingNotes}
+              onAddNote={async (content) => {
+                if (!user?.uid) return;
+                setLoadingNotes(true);
+                try {
+                  await addDoc(collection(db, `projects/${id}/notes`), {
+                    content,
+                    createdAt: serverTimestamp(),
+                    userId: user.uid
+                  });
+                  // Refresh notes
+                  const q = query(collection(db, `projects/${id}/notes`), where("userId", "==", user.uid));
+                  const notesSnap = await getDocs(q);
+                  setNotes(
+                    notesSnap.docs
+                      .map(doc => ({ id: doc.id, ...doc.data() }))
+                      .sort((a, b) => (b.createdAt?.seconds || 0) - (a.createdAt?.seconds || 0))
+                  );
+                } catch (error) {
+                  // Optionally handle error
+                } finally {
+                  setLoadingNotes(false);
+                }
+              }}
+            />
           )}
           {activeSection === 'settings' && (
             <ProjectSettings />

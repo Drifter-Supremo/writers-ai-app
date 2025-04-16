@@ -1,11 +1,13 @@
 import { useEffect, useState } from 'react';
-import { collection, getDocs, addDoc, serverTimestamp, deleteDoc, doc } from 'firebase/firestore';
+import { collection, getDocs, addDoc, serverTimestamp, deleteDoc, doc, query, where } from 'firebase/firestore';
 import { db } from '../services/firebase';
 import ProjectCard from '../components/ProjectCard';
 import SkeletonProjectCard from '../components/SkeletonProjectCard';
+import { useAuth } from '../context/AuthContext';
 
 export default function Projects() {
   const [projects, setProjects] = useState([]);
+  const { user } = useAuth();
   const [showForm, setShowForm] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [debouncedQuery, setDebouncedQuery] = useState('');
@@ -29,7 +31,13 @@ export default function Projects() {
   const fetchProjects = async () => {
     setIsLoading(true);
     try {
-      const querySnapshot = await getDocs(collection(db, "projects"));
+      if (!user?.uid) {
+        setProjects([]);
+        setIsLoading(false);
+        return;
+      }
+      const q = query(collection(db, "projects"), where("userId", "==", user.uid));
+      const querySnapshot = await getDocs(q);
       const projectsData = querySnapshot.docs.map(doc => ({
         id: doc.id,
         ...doc.data()
@@ -44,7 +52,8 @@ export default function Projects() {
 
   useEffect(() => {
     fetchProjects();
-  }, []);
+    // eslint-disable-next-line
+  }, [user]);
 
   const handleNewProject = () => {
     setShowForm(true);
@@ -57,7 +66,8 @@ export default function Projects() {
       await addDoc(collection(db, "projects"), {
         name: formData.name,
         description: formData.description,
-        createdAt: serverTimestamp()
+        createdAt: serverTimestamp(),
+        userId: user?.uid || null
       });
       // Reset form
       setFormData({ name: '', description: '' });

@@ -1,6 +1,7 @@
 import { useEffect, useState, useRef } from "react";
-import { collection, getDocs, deleteDoc, doc, updateDoc, deleteField } from "firebase/firestore";
+import { collection, getDocs, deleteDoc, doc, updateDoc, deleteField, query, where } from "firebase/firestore";
 import { db } from "../services/firebase";
+import { useAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import LinkWorkflowModal from './LinkWorkflowModal'; // Added import
 import Notification from './Notification'; // Import the Notification component
@@ -8,6 +9,7 @@ import LinkedProjectDisplay from './LinkedProjectDisplay'; // Import the new com
 
 export default function CharacterWorkflowList() {
   const [workflows, setWorkflows] = useState([]);
+  const { user } = useAuth();
   const [loading, setLoading] = useState(true);
   const [deletingId, setDeletingId] = useState(null);
   const [menuOpenId, setMenuOpenId] = useState(null);
@@ -21,7 +23,13 @@ export default function CharacterWorkflowList() {
     async function fetchWorkflows() {
       setLoading(true);
       try {
-        const querySnapshot = await getDocs(collection(db, "characterWorkflows"));
+        if (!user?.uid) {
+          setWorkflows([]);
+          setLoading(false);
+          return;
+        }
+        const q = query(collection(db, "characterWorkflows"), where("userId", "==", user.uid));
+        const querySnapshot = await getDocs(q);
         setWorkflows(
           querySnapshot.docs.map((doc) => ({
             id: doc.id,
@@ -35,7 +43,7 @@ export default function CharacterWorkflowList() {
       }
     }
     fetchWorkflows();
-  }, [deletingId]);
+  }, [deletingId, user]);
 
   // Close menu on click outside
   useEffect(() => {

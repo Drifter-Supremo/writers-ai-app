@@ -4,10 +4,12 @@ import { collection, addDoc, Timestamp } from 'firebase/firestore'; // Added Fir
 import { db } from '../services/firebase'; // Added db import (adjust path if needed)
 import CharacterWorkflowList from "../components/CharacterWorkflowList";
 import { useState } from 'react'; // Import useState
+import { useAuth } from '../context/AuthContext';
 
 function Workflows() {
   const navigate = useNavigate();
   const [isCreating, setIsCreating] = useState(false); // Add loading state
+  const { user } = useAuth();
 
   // Handler function to create a new workflow
   const handleStartNewWorkflow = async () => {
@@ -17,8 +19,7 @@ function Workflows() {
         createdAt: Timestamp.now(),
         completed: false,
         name: 'Untitled Character Workflow',
-        // Add userId here later when auth is implemented
-        // userId: currentUser?.uid, // Example
+        userId: user?.uid || null
       });
       console.log("New workflow created with ID: ", newWorkflowRef.id);
       navigate(`/character-workflow?id=${newWorkflowRef.id}`);

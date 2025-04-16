@@ -1,4 +1,5 @@
 import React, { useRef, useState } from "react";
+import { useAuth } from "../context/AuthContext";
 import { ref as storageRef, uploadBytes, getDownloadURL } from "firebase/storage";
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import { db, storage } from "../services/firebase";
@@ -7,6 +8,7 @@ export default function ProjectFiles({ files, onDeleteFile, deletingFileId, proj
   const fileInputRef = useRef();
   const [selectedFileName, setSelectedFileName] = useState("");
   const [uploading, setUploading] = useState(false);
+  const { user } = useAuth();
 
   // Show skeletons when uploading, deleting, or files is undefined (loading)
   const showSkeletons = uploading || deletingFileId || files === undefined;
@@ -56,6 +58,7 @@ export default function ProjectFiles({ files, onDeleteFile, deletingFileId, proj
         url,
         type: file.type,
         createdAt: serverTimestamp(),
+        userId: user?.uid || null
       });
 
       // 5. Refresh files

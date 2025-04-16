@@ -1,8 +1,11 @@
 import { useEffect, useState } from 'react';
 import { doc, getDoc, setDoc, deleteDoc } from 'firebase/firestore';
 import { db } from '../services/firebase';
+import { useAuth } from '../context/AuthContext';
 
 export default function Settings() {
+  const { user } = useAuth();
+
   const defaultPreferences = {
     name: '',
     role: '',
@@ -25,7 +28,8 @@ export default function Settings() {
   useEffect(() => {
     async function fetchPreferences() {
       try {
-        const docRef = doc(db, 'users', 'defaultUser', 'preferences', 'profile');
+        if (!user?.uid) return;
+        const docRef = doc(db, 'users', user.uid, 'preferences', 'profile');
         const docSnap = await getDoc(docRef);
         if (docSnap.exists()) {
           setPreferences(docSnap.data());
@@ -52,7 +56,8 @@ export default function Settings() {
 
     setSaving(true);
     try {
-      await setDoc(doc(db, 'users', 'defaultUser', 'preferences', 'profile'), {
+      if (!user?.uid) return;
+      await setDoc(doc(db, 'users', user.uid, 'preferences', 'profile'), {
         name: preferences.name.trim(),
         role: preferences.role.trim(),
         preferredTone: preferences.preferredTone.trim(),
@@ -222,7 +227,8 @@ export default function Settings() {
             onClick={async () => {
               setClearing(true);
               try {
-                const docRef = doc(db, 'users', 'defaultUser', 'preferences', 'profile');
+                if (!user?.uid) return;
+                const docRef = doc(db, 'users', user.uid, 'preferences', 'profile');
                 await deleteDoc(docRef);
                 setPreferences(defaultPreferences);
                 setSaveSuccess(true);
