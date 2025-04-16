@@ -6,11 +6,12 @@ import ProjectFiles from '../components/ProjectFiles';
 import ProjectNotes from '../components/ProjectNotes';
 import ProjectSettings from '../components/ProjectSettings';
 import ProjectOverview from '../components/ProjectOverview';
+import ProjectOverviewSkeleton from '../components/ProjectOverviewSkeleton';
 
 export default function ProjectDetail() {
   const { id } = useParams();
   const [project, setProject] = useState(null);
-  const [files, setFiles] = useState([]);
+  const [files, setFiles] = useState(undefined);
   const [activeSection, setActiveSection] = useState('overview');
 
   // For file deletion/upload feedback
@@ -32,6 +33,7 @@ export default function ProjectDetail() {
       }
     }
     async function fetchFiles() {
+      setFiles(undefined);
       try {
         const filesSnap = await getDocs(collection(db, `projects/${id}/files`));
         setFiles(filesSnap.docs.map(doc => ({
@@ -40,6 +42,7 @@ export default function ProjectDetail() {
         })));
       } catch (error) {
         alert("Failed to fetch files.");
+        setFiles([]);
       }
     }
     fetchProject();
@@ -82,7 +85,7 @@ export default function ProjectDetail() {
     );
   }
   // Use new text color
-  if (!project) return <div className="p-6 text-text-secondary">Loading...</div>;
+  if (!project) return <ProjectOverviewSkeleton />;
 
   return (
     // Use new primary background, remove gradient

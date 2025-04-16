@@ -8,8 +8,8 @@ export default function ProjectFiles({ files, onDeleteFile, deletingFileId, proj
   const [selectedFileName, setSelectedFileName] = useState("");
   const [uploading, setUploading] = useState(false);
 
-  // Show skeletons when uploading or deleting
-  const showSkeletons = uploading || deletingFileId;
+  // Show skeletons when uploading, deleting, or files is undefined (loading)
+  const showSkeletons = uploading || deletingFileId || files === undefined;
 
   // Real upload logic
   const handleUploadFile = async (file) => {

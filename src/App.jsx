@@ -7,6 +7,9 @@ import ProjectDetail from './routes/ProjectDetail';
 import Settings from './routes/Settings';
 const CharacterWorkflow = React.lazy(() => import('./workflows/CharacterWorkflow')); // Update path and use lazy
 import Workflows from './routes/Workflows'; // Import the new component
+import Login from './routes/Login';
+import Signup from './routes/Signup';
+import ProtectedRoute from './components/ProtectedRoute';
 
 export default function App() {
   return (
@@ -14,16 +17,48 @@ export default function App() {
       <Layout>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/projects" element={<Projects />} />
-          <Route path="/projects/:id" element={<ProjectDetail />} />
-          <Route path="/settings" element={<Settings />} />
-          <Route path="/workflows" element={<Workflows />} /> {/* Add the new route */}
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
           <Route
-            path="/character-workflow" // Path remains the same
+            path="/projects"
             element={
-              <React.Suspense fallback={<div>Loading Workflow...</div>}>
-                <CharacterWorkflow /> {/* Point to the new component */}
-              </React.Suspense>
+              <ProtectedRoute>
+                <Projects />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/projects/:id"
+            element={
+              <ProtectedRoute>
+                <ProjectDetail />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/settings"
+            element={
+              <ProtectedRoute>
+                <Settings />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/workflows"
+            element={
+              <ProtectedRoute>
+                <Workflows />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/character-workflow"
+            element={
+              <ProtectedRoute>
+                <React.Suspense fallback={<div>Loading Workflow...</div>}>
+                  <CharacterWorkflow />
+                </React.Suspense>
+              </ProtectedRoute>
             }
           />
         </Routes>
