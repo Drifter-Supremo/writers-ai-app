@@ -70,6 +70,7 @@
   - Enhanced UI with feedback
   - Modular Files section with left-aligned upload form, file grid, upload/delete with skeleton loaders and confirmation
   - All Firestore/Storage operations wrapped in try/catch with user-friendly error messages in Files, Projects, and Settings.
+  - Scoped Firebase Storage paths to user-specific locations (`users/{userId}/projects/{projectId}/files/{filename}`).
 - [x] Notes management
   - Creation and storage in Firestore
   - Display with timestamps

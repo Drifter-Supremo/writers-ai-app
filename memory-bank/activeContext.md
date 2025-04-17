@@ -7,6 +7,7 @@ Landing Page Layout Refinement
 
 ### Recent Completions
 1. **Landing Page Implementation (Initial)**
+2. Scoped Firebase Storage to user-specific paths.
    - ✅ Created standalone landing page route (`/`).
    - ✅ Implemented full-screen background image.
    - ✅ Added sign-in/sign-up box with teal/cream theme.
