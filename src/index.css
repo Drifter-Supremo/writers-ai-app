@@ -95,6 +95,23 @@
            shadow-sm;
   }
 }
+  /* Landing page background */
+  .landing-background {
+    @apply overflow-hidden bg-primary-bg;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    background-image: url('./assets/new-landing-page.png');
+    background-size: contain;
+    background-position: center bottom;
+    background-color: theme('colors.primary-bg');
+  }
+
+  @media (min-resolution: 192dpi), (min-device-pixel-ratio: 2) {
+    .landing-background {
+      background-image: url('./assets/new-landing-page-big.png');
+    }
+  }
 
 /* Remove or update gradient classes */
 .border-gradient {

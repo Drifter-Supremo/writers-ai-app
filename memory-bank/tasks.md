@@ -157,9 +157,16 @@ All loading and skeleton state tasks for the Project Detail View and its sidebar
 **Authentication system is now complete:**  
 - Email/Password and Google sign-in supported
 - Protected routes and sidebar auth UI implemented
-- Users currently see all data; next step is to implement userId-based data isolation and security rules for true multi-user support
+- UserId-based data isolation and Firestore security rules implemented for projects, files, notes, preferences, and workflows.
 
 ## Phase 3: Feature Enhancements
+
+### 3.0. Landing Page Layout Refinement
+- [ ] **Fix Image Display:** Ensure the entire landing page image is visible without cropping top or bottom, using `background-size: contain` and `background-position: center`. Fill extra space with `bg-teal-deep`.
+- [ ] **Fix Sign-in Box Position:** Absolutely position the sign-in box clearly below the Medusa logo on the right, ensuring no overlap on any screen size. Adjust `top` offset and responsive styles as needed.
+- [ ] **Fix Google Button Style:** Ensure Google button uses `bg-teal-light` (or `bg-teal-deep`) background while keeping the logo and blue text.
+
+- [x] **Landing page full-viewport background & centered sign‑in:** Added `.landing-background` CSS class for responsive full-viewport backgrounds (default vs. high‑dpi PNG via media query); refactored `LandingPage.jsx` to use Flexbox centering and margin‑top utilities instead of absolute positioning; adjusted `background-position` and switched to `background-size: contain` to prevent the logo/tagline from cropping.
 
 ### 3.1. Rich Text Editor for Notes
 - [ ] **Choose Editor:** Select and install a rich text editor library (e.g., Tiptap or Quill).
