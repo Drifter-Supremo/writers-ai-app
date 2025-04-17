@@ -13,7 +13,8 @@ export default function LandingPage() {
   // If logged in, show "Continue" button
   if (user) {
     return (
-      <div className="landing-background flex items-center justify-center">
+      // Use the new background and center the button
+      <div className="min-h-screen flex flex-col items-center justify-center bg-[#032934] py-16">
         <button
           className="bg-cream-yellow text-teal-deep font-semibold px-6 py-3 rounded-lg shadow hover:bg-cream-yellow/90 transition"
           onClick={() => navigate("/projects")}
@@ -42,19 +43,23 @@ export default function LandingPage() {
     await loginWithGoogle();
   };
 
-  // Responsive: adjust top offset for sign-in box based on screen width
-  const getTopOffset = () => {
-    if (typeof window !== "undefined") {
-      if (window.innerWidth < 768) return "70vh";
-      if (window.innerWidth < 1024) return "54vh";
-    }
-    return "48vh";
-  };
-
   return (
-    <div className="landing-background flex items-center justify-center">
-      {/* Sign-in box absolutely positioned well below the logo */}
-      <div className="z-10 w-full max-w-md md:w-[380px] mt-64 bg-teal-deep/95 rounded-xl shadow-lg p-8 flex flex-col items-center">
+    // Apply new container styles, background color, and padding
+    <div className="min-h-screen flex flex-col items-center justify-start bg-[#032934] pt-12 pb-16">
+      {/* Add Logo */}
+      <img
+        src="/assets/logo-no-background.png"
+        alt="Writers AI Assistant Logo"
+        className="h-40 w-auto mb-4" // Adjust size and margin as needed
+      />
+
+      {/* Add Tagline */}
+      <p className="font-migra text-lg text-cream-yellow mb-8"> {/* Use Migra font, adjust size, color, margin */}
+        Draft. Organize. Evolve.
+      </p>
+
+      {/* Sign-in box - remove z-index */}
+      <div className="w-full max-w-md md:w-[380px] bg-teal-deep/95 rounded-xl shadow-lg p-8 flex flex-col items-center">
         <div className="flex mb-6 w-full">
           <button
             className={`flex-1 py-2 font-semibold rounded-l-lg ${
@@ -152,7 +157,8 @@ export default function LandingPage() {
         </div>
         {/* Google button with space green background */}
         <button
-          className="w-full flex items-center justify-center gap-3 py-3 rounded-lg bg-teal-light text-[#4285F4] font-semibold border border-cream-yellow/40 shadow hover:bg-teal-deep transition"
+          className="w-full flex items-center justify-center gap-3 py-3 rounded-lg font-semibold transition hover:brightness-95"
+          style={{ backgroundColor: '#f9f4d9', color: '#0f303d' }}
           onClick={handleGoogle}
           disabled={authLoading}
         >

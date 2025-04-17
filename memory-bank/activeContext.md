@@ -3,18 +3,20 @@
 ## Current Development Focus
 
 ### Active Phase
-Landing Page Layout Refinement
+Phase 2: Authentication & User Management - Password Reset
 
 ### Recent Completions
-1. **Landing Page Implementation (Initial)**
-2. Scoped Firebase Storage to user-specific paths.
-   - ✅ Created standalone landing page route (`/`).
-   - ✅ Implemented full-screen background image.
-   - ✅ Added sign-in/sign-up box with teal/cream theme.
-   - ✅ Styled Google button.
-   - ✅ Added logic to redirect logged-in users.
-   - ⚠️ **Issues:** Image cropping (top/bottom), sign-in box position incorrect (too high, overlapping logo).
-   - ✅ Fixed logout redirect to landing page and removed legacy login/signup routes.
+1. **Landing Page Redesign & Fixes**
+   - ✅ Replaced background image with solid color (`#032934`).
+   - ✅ Added logo as foreground `<img>` element (`h-40`).
+   - ✅ Added tagline "Draft. Organize. Evolve." (Migra Extralight font).
+   - ✅ Resolved scrolling issues via `overflow: hidden` on `body` in `src/index.css`.
+   - ✅ Restyled "Sign in with Google" button using inline styles (`backgroundColor: '#f9f4d9'`, `color: '#0f303d'`) due to Tailwind issues.
+   - ✅ Ensured layout stability on resize.
+   - ✅ *Supersedes previous "Landing Page Implementation (Initial)" and related layout fixes.*
+
+1. **(Superseded) Landing Page Implementation (Initial)**
+   - *Previous attempts at background image and layout were replaced by the redesign.*
 
 1. **Character Workflow User Isolation & Post-Login Redirect**
    - ✅ Character workflows are now fully user-isolated: only the current user's workflows are visible and accessible after login.
@@ -325,12 +327,13 @@ Landing Page Layout Refinement
 ## Next Steps
 
 ### Immediate Tasks
-1. **Fix Landing Page Layout:**
-   - Ensure full image visibility (no cropping) using `background-size: contain`.
-   - Correctly position sign-in box below logo using absolute positioning and adjusted `top` offset.
-   - Ensure Google button uses correct space green background.
-2. (Then) Address orphaned workflow links and preferences persistence issues.
-3. (Then) Implement drag-and-drop, rich text editing, and enhanced file previews.
+1. **Implement Password Reset Functionality:** **(Next Priority)**
+   - Add "Forgot Password?" link to Login page.
+   - Implement Firebase password reset email flow.
+   - Create a UI for initiating the reset.
+   - Handle success and error states with notifications.
+2. Address orphaned workflow links and preferences persistence issues.
+3. Implement drag-and-drop, rich text editing, and enhanced file previews.
 
 ### Upcoming Features
 1. UI/UX Phase 2
@@ -387,7 +390,7 @@ Landing Page Layout Refinement
 - Route access control
 
 ## Known Issues & Challenges
-1. Landing page layout needs refinement (image cropping, sign-in box position).
+1. **(Resolved)** Landing page layout issues addressed by redesign.
 2. Need to determine optimal Firebase data structure
 3. Planning AI context retention strategy
 4. Considering file upload size limits
@@ -411,3 +414,4 @@ Landing Page Layout Refinement
 ## Updates
 2025-04-15: Consolidated and updated entries for the enhanced Character Workflow system, including config-driven engine, step-by-step UI, project linking/unlinking, view mode, autosave, resume logic fixes, layout adjustments, and associated new components. Removed `WorkflowSection.jsx` details as it was refactored out.
 2025-04-15: Updated documentation to reflect the new "Retro Space" theme overhaul. Replaced previous color system (purple/blue/gradients) with deep teal, vibrant orange, and cream/yellow palette. Updated background, text, and accent color usage across components. Documented UI fixes including sidebar logo header, removal of sidebar emojis and borders, and workflow card button fix. Marked previous UI/UX Phase 2 as superseded where applicable.
+2025-04-17: Documented completion of Landing Page Redesign & Fixes, including solid background color, logo placement, tagline, scroll fix, and Google button inline styling. Updated current focus and next steps to Password Reset. Marked previous landing page tasks as superseded/resolved.

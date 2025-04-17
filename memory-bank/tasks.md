@@ -124,7 +124,7 @@ All loading and skeleton state tasks for the Project Detail View and its sidebar
 - [x] **Login Functionality:** Implemented user login using `signInWithEmailAndPassword` and Google sign-in.
 - [x] **Logout Functionality:** Implemented user logout using `signOut`.
 - [x] **Error Handling:** Added robust error handling for auth operations (e.g., invalid email, wrong password, user exists). Displays clear feedback to the user.
-- [x] **(Optional) Password Reset:** Implement password reset functionality.
+- [ ] **(Optional) Password Reset:** Implement password reset functionality. **(Next Priority)**
 
 ### 2.4. Multi-User Data Structure & Access Control
 - [x] **Firestore Data Structure:**
@@ -161,14 +161,13 @@ All loading and skeleton state tasks for the Project Detail View and its sidebar
 
 ## Phase 3: Feature Enhancements
 
-### 3.0. Landing Page Layout Refinement
-- [x] **Fix Logout Redirect:** Ensure logout redirects to the landing page and remove obsolete login/signup routes.
-- [ ] **Fix Image Display:** Ensure the entire landing page image is visible without cropping top or bottom, using `background-size: contain` and `background-position: center`. Fill extra space with `bg-teal-deep`.
-- [ ] **Fix Sign-in Box Position:** Absolutely position the sign-in box clearly below the Medusa logo on the right, ensuring no overlap on any screen size. Adjust `top` offset and responsive styles as needed.
-- [ ] **Fix Google Button Style:** Ensure Google button uses `bg-teal-light` (or `bg-teal-deep`) background while keeping the logo and blue text.
-
-- [x] **Landing page full-viewport background & centered sign‑in:** Added `.landing-background` CSS class for responsive full-viewport backgrounds (default vs. high‑dpi PNG via media query); refactored `LandingPage.jsx` to use Flexbox centering and margin‑top utilities instead of absolute positioning; adjusted `background-position` and switched to `background-size: contain` to prevent the logo/tagline from cropping.
-- [x] **Landing page background & centering updates:** Added `.landing-background` CSS class for a full‑viewport, responsive background with default and high‑DPI PNG via media query; refactored `LandingPage.jsx` to use Flexbox centering and `mt-64` instead of absolute positioning; switched background to `background-size: contain` with `background-position: center bottom` to prevent cropping the logo and tagline.
+### 3.0. Landing Page Redesign & Fixes (Completed)
+- [x] **Solid Background:** Replaced image with solid color (`#032934`).
+- [x] **Logo & Tagline:** Added foreground logo (`h-40`) and tagline ("Migra Extralight").
+- [x] **Scroll Fix:** Applied `overflow: hidden` to `body` in `src/index.css`.
+- [x] **Google Button:** Restyled using inline styles (`backgroundColor: '#f9f4d9'`, `color: '#0f303d'`).
+- [x] **Layout Stability:** Ensured stability on resize.
+- [x] *Supersedes previous layout refinement tasks.*
 
 ### 3.1. Rich Text Editor for Notes
 - [ ] **Choose Editor:** Select and install a rich text editor library (e.g., Tiptap or Quill).
@@ -345,3 +344,4 @@ All loading and skeleton state tasks for the Project Detail View and its sidebar
 ## Updates
 2025-04-15: Marked Character Workflow Restructuring/Linking tasks (1.4) as complete/superseded. Added new section (1.5) detailing the completion of the Enhanced Character Workflow implementation. Updated AI Integration (4.3), Testing (5.1, 5.3), and Polish (6.1) tasks to reflect the new workflow components and structure.
 2025-04-15: Added new section (1.6) marking the "Retro Space" theme implementation and associated UI fixes as complete. Updated related polish tasks (6.1) to reflect this completion.
+2025-04-17: Marked "(Optional) Password Reset" task (2.3) as incomplete and designated it as the **(Next Priority)**. Updated Landing Page section (3.0) to reflect completion of the redesign and fixes, superseding previous refinement tasks.

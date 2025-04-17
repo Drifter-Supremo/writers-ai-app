@@ -47,6 +47,10 @@ export default {
       ringColor: {},
       ringOffsetColor: {},
       ringWidth: {},
+      fontFamily: {
+        sans: ['system-ui', '-apple-system', 'sans-serif'], // Default system sans-serif
+        migra: ['"Migra"', 'serif'] // Add Migra font
+      },
     },
   },
   plugins: [],

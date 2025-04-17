@@ -2,6 +2,15 @@
 
 ## ✅ Completed Features
 
+### Landing Page Redesign & Fixes
+- [x] Replaced background image with solid color (`#032934`).
+- [x] Added logo as foreground `<img>` element (`h-40`).
+- [x] Added tagline "Draft. Organize. Evolve." (Migra Extralight font).
+- [x] Resolved scrolling issues via `overflow: hidden` on `body` in `src/index.css`.
+- [x] Restyled "Sign in with Google" button using inline styles (`backgroundColor: '#f9f4d9'`, `color: '#0f303d'`) due to Tailwind issues.
+- [x] Ensured layout stability on resize.
+- [x] *Supersedes previous "Landing Page Implementation (Initial)" and related layout fixes.*
+
 ### "Retro Space" Theme & UI Overhaul
 - [x] Implemented new "Retro Space" dark theme.
   - **Color Palette:** Deep teal/green (`#0f303d`), vibrant orange (`#f58a07`), cream/yellow (`#f9f4d9`).
@@ -135,10 +144,8 @@
 
 ## 🚧 In Progress
 
-### Landing Page Layout Refinement
-- [ ] Fix image display to show full image without cropping (`background-size: contain`).
-- [ ] Fix sign-in box position to be clearly below the logo on the right.
-- [ ] Fix Google button background color to use space green.
+### (Resolved) Landing Page Layout Refinement
+- [x] Issues addressed by the "Landing Page Redesign & Fixes" above.
 
 ### UI/UX Phase 3
 - [x] Implemented skeleton loader for Project Detail title/description area
@@ -160,6 +167,7 @@
 4. **Project Detail Enhancements:** Modularized sections (Overview, Files, Notes, Settings), restored file/note functionality, added skeleton loaders and loading indicators, improved layouts and error handling.
 5. **Project Card Actions:** Refactored actions into a 3-dot menu with delete confirmation; card click opens the project.
 6. **UI/UX Phase 1 Overhaul:** Replaced top navbar with sidebar navigation and implemented a split-view layout.
+7. **Landing Page Redesign & Fixes:** Replaced background image with solid color, added logo/tagline, fixed scrolling, restyled Google button.
 
 ### Dashboard Enhancement
 - [ ] Advanced filtering
@@ -253,3 +261,4 @@
 ## Updates
 2025-04-15: Consolidated and updated documentation for the enhanced Character Workflow system implementation, including config-driven engine, step-by-step UI, project linking/unlinking, view mode, autosave, resume logic fixes, layout adjustments, and associated new components. Marked previous workflow tasks as superseded or complete.
 2025-04-15: Documented the implementation of the "Retro Space" theme overhaul, including the new color palette (teal, orange, cream), updated component styling, and associated UI fixes (sidebar logo, removed emojis/borders). Marked previous UI/UX Phase 2 as superseded. Updated Recent Updates section.
+2025-04-17: Added entry for "Landing Page Redesign & Fixes" under Completed Features. Marked previous landing page layout task as resolved. Updated consolidated recent updates list.
