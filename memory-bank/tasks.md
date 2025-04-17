@@ -167,6 +167,7 @@ All loading and skeleton state tasks for the Project Detail View and its sidebar
 - [ ] **Fix Google Button Style:** Ensure Google button uses `bg-teal-light` (or `bg-teal-deep`) background while keeping the logo and blue text.
 
 - [x] **Landing page full-viewport background & centered sign‑in:** Added `.landing-background` CSS class for responsive full-viewport backgrounds (default vs. high‑dpi PNG via media query); refactored `LandingPage.jsx` to use Flexbox centering and margin‑top utilities instead of absolute positioning; adjusted `background-position` and switched to `background-size: contain` to prevent the logo/tagline from cropping.
+- [x] **Landing page background & centering updates:** Added `.landing-background` CSS class for a full‑viewport, responsive background with default and high‑DPI PNG via media query; refactored `LandingPage.jsx` to use Flexbox centering and `mt-64` instead of absolute positioning; switched background to `background-size: contain` with `background-position: center bottom` to prevent cropping the logo and tagline.
 
 ### 3.1. Rich Text Editor for Notes
 - [ ] **Choose Editor:** Select and install a rich text editor library (e.g., Tiptap or Quill).
