@@ -3,9 +3,17 @@
 ## Current Development Focus
 
 ### Active Phase
-Authentication System Integration & Multi-User Data Isolation
+Landing Page Layout Refinement
 
 ### Recent Completions
+1. **Landing Page Implementation (Initial)**
+   - ✅ Created standalone landing page route (`/`).
+   - ✅ Implemented full-screen background image.
+   - ✅ Added sign-in/sign-up box with teal/cream theme.
+   - ✅ Styled Google button.
+   - ✅ Added logic to redirect logged-in users.
+   - ⚠️ **Issues:** Image cropping (top/bottom), sign-in box position incorrect (too high, overlapping logo).
+
 1. **Character Workflow User Isolation & Post-Login Redirect**
    - ✅ Character workflows are now fully user-isolated: only the current user's workflows are visible and accessible after login.
    - ✅ All workflow creation, queries, and security rules use userId for multi-user support.
@@ -315,8 +323,12 @@ Authentication System Integration & Multi-User Data Isolation
 ## Next Steps
 
 ### Immediate Tasks
-1. (Next) Address orphaned workflow links and preferences persistence issues.
-2. (Then) Implement drag-and-drop, rich text editing, and enhanced file previews.
+1. **Fix Landing Page Layout:**
+   - Ensure full image visibility (no cropping) using `background-size: contain`.
+   - Correctly position sign-in box below logo using absolute positioning and adjusted `top` offset.
+   - Ensure Google button uses correct space green background.
+2. (Then) Address orphaned workflow links and preferences persistence issues.
+3. (Then) Implement drag-and-drop, rich text editing, and enhanced file previews.
 
 ### Upcoming Features
 1. UI/UX Phase 2
@@ -373,12 +385,13 @@ Authentication System Integration & Multi-User Data Isolation
 - Route access control
 
 ## Known Issues & Challenges
-1. Need to determine optimal Firebase data structure
-2. Planning AI context retention strategy
-3. Considering file upload size limits
-4. Deciding on real-time update approach
-5. Managing user preferences across sessions
-6. Integrating preferences with AI behavior
+1. Landing page layout needs refinement (image cropping, sign-in box position).
+2. Need to determine optimal Firebase data structure
+3. Planning AI context retention strategy
+4. Considering file upload size limits
+5. Deciding on real-time update approach
+6. Managing user preferences across sessions
+7. Integrating preferences with AI behavior
 
 ## Development Environment
 - Using Vite dev server

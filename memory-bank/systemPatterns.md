@@ -460,6 +460,7 @@ flowchart TD
 - **Character Workflow User Isolation**: All workflow creation, queries, and security rules use userId for multi-user support. Only the current user's workflows are visible and accessible after login.
 - **Post-Login/Signup Redirect**: After login or signup, users are redirected to the home page (`/`) instead of `/projects`.
 - **Multi-User Data Isolation**: All Firestore documents (projects, files, notes, preferences, workflows) use userId for per-user access, enforced in both code and security rules.
+- **Landing Page Pattern**: Standalone page (`/`) with full-screen background image (`background-size: contain`), no sidebar/nav. Sign-in box is absolutely positioned below the logo area in the image, using responsive offsets.
 
 ## Updates
 2025-04-15: Updated component architecture, routes, component hierarchy, Firestore data structure, and data flow diagrams to reflect the enhanced, config-driven, step-by-step Character Workflow system (`WorkflowEngine`, `QuestionCard`, etc.) and the workflow linking features. Removed `WorkflowSection`. Added details on View Mode, autosave, resume logic, and placeholder AI modal.

@@ -134,6 +134,11 @@
 
 ## 🚧 In Progress
 
+### Landing Page Layout Refinement
+- [ ] Fix image display to show full image without cropping (`background-size: contain`).
+- [ ] Fix sign-in box position to be clearly below the logo on the right.
+- [ ] Fix Google button background color to use space green.
+
 ### UI/UX Phase 3
 - [x] Implemented skeleton loader for Project Detail title/description area
 - [x] Project card dropdown menu for actions, click-to-open, and delete confirmation

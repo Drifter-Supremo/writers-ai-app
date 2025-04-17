@@ -277,6 +277,7 @@ export const characterWorkflowConfig = {
 - **Character Workflow User Isolation**: All workflow creation, queries, and security rules use userId for multi-user support. Only the current user's workflows are visible and accessible after login.
 - **Post-Login/Signup Redirect**: After login or signup, users are redirected to the home page (`/`) instead of `/projects`.
 - **Multi-User Data Isolation**: All Firestore documents (projects, files, notes, preferences, workflows) use userId for per-user access, enforced in both code and security rules.
+- **Landing Page**: Standalone page (`/`) with full-screen background image (`background-size: contain`), no sidebar/nav. Sign-in box is absolutely positioned below the logo area in the image, using responsive offsets.
 
 ### 2. Gemini Flash 2.0
 - API endpoint configuration
