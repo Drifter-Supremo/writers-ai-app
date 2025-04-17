@@ -124,7 +124,7 @@ All loading and skeleton state tasks for the Project Detail View and its sidebar
 - [x] **Login Functionality:** Implemented user login using `signInWithEmailAndPassword` and Google sign-in.
 - [x] **Logout Functionality:** Implemented user logout using `signOut`.
 - [x] **Error Handling:** Added robust error handling for auth operations (e.g., invalid email, wrong password, user exists). Displays clear feedback to the user.
-- [ ] **(Optional) Password Reset:** Implement password reset functionality.
+- [x] **(Optional) Password Reset:** Implement password reset functionality.
 
 ### 2.4. Multi-User Data Structure & Access Control
 - [x] **Firestore Data Structure:**
