@@ -2,6 +2,8 @@
 
 ## ✅ Completed Features
 
+- Password reset flow (email link via Firebase Auth)
+
 ### "Retro Space" Theme & UI Overhaul
 - [x] Implemented new "Retro Space" dark theme.
   - **Color Palette:** Deep teal/green (`#0f303d`), vibrant orange (`#f58a07`), cream/yellow (`#f9f4d9`).
