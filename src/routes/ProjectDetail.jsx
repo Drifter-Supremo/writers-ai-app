@@ -3,6 +3,8 @@ import { useAuth } from '../context/AuthContext';
 import { useParams } from 'react-router-dom';
 import { doc, getDoc, collection, getDocs, deleteDoc, query, where } from 'firebase/firestore';
 import { db } from '../services/firebase';
+import { ref as storageRef, deleteObject } from 'firebase/storage';
+import { storage } from '../services/firebase';
 import ProjectFiles from '../components/ProjectFiles';
 import ProjectNotes from '../components/ProjectNotes';
 import { addDoc, serverTimestamp } from 'firebase/firestore';
@@ -94,6 +96,10 @@ export default function ProjectDetail() {
   const handleDeleteFile = async (file) => {
     setDeletingFileId(file.id);
     try {
+      // Delete from Storage
+      const fileStorageRef = storageRef(storage, `users/${user.uid}/projects/${id}/files/${file.name}`);
+      await deleteObject(fileStorageRef);
+      // Delete Firestore document
       await deleteDoc(doc(db, `projects/${id}/files`, file.id));
       setFiles((prev) => prev.filter((f) => f.id !== file.id));
     } catch (error) {

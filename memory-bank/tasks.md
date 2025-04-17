@@ -105,11 +105,11 @@ All loading and skeleton state tasks for the Project Detail View and its sidebar
 ## Phase 2: Authentication & User Management
 
 ### 2.1. Firebase Authentication Setup
-- [ ] **Enable Auth Provider:** Enable Email/Password authentication in the Firebase console (consider adding Google/other providers later).
-- [ ] **Install Firebase Auth SDK:** Ensure `@firebase/auth` is correctly configured in `src/services/firebase.js`.
-- [ ] **Auth State Management:**
-    - [ ] Implement a mechanism to track the current user's authentication state globally (e.g., using React Context or a state management library).
-    - [ ] Use Firebase's `onAuthStateChanged` listener to update the auth state.
+- [x] **Enable Auth Provider:** Enable Email/Password authentication in the Firebase console (consider adding Google/other providers later).
+- [x] **Install Firebase Auth SDK:** Ensure `@firebase/auth` is correctly configured in `src/services/firebase.js`.
+- [x] **Auth State Management:**
+    - [x] Implement a mechanism to track the current user's authentication state globally (e.g., using React Context or a state management library).
+    - [x] Use Firebase's `onAuthStateChanged` listener to update the auth state.
 
 ### 2.2. UI Components & Routing
 - [x] **Create Auth Routes:** Added routes for `/login`, `/signup`.
@@ -139,8 +139,8 @@ All loading and skeleton state tasks for the Project Detail View and its sidebar
     - [x] Ensured `addDoc` for new projects, workflows, notes, files, and preferences includes the `userId` of the current user.
     - [x] Ensured `updateDoc`, `deleteDoc` operations are only allowed on documents belonging to the current user (primarily enforced by security rules, but client-side checks are good practice).
 - [x] **Firebase Storage Structure:**
-    - [ ] (Planned) Modify storage paths to include the `userId`, e.g., `users/{userId}/projects/{projectId}/files/{filename}`.
-    - [ ] (Planned) Update file upload/delete logic in `ProjectDetail.jsx` to use these user-specific paths.
+    - [x] (Planned) Modify storage paths to include the `userId`, e.g., `users/{userId}/projects/{projectId}/files/{filename}`.
+    - [x] (Planned) Update file upload/delete logic in `ProjectDetail.jsx` to use these user-specific paths.
 - [x] **Security Rules (CRITICAL):**
     - [x] **Firestore Rules:** Wrote and deployed rules (`firestore.rules`) to ensure:
         - Users must be authenticated to read/write any project-related data (`request.auth != null`).

@@ -46,7 +46,7 @@ export default function ProjectFiles({ files, onDeleteFile, deletingFileId, proj
       }
 
       // 2. Upload to Storage
-      const fileRef = storageRef(storage, `projects/${projectId}/files/${fileName}`);
+      const fileRef = storageRef(storage, `users/${user.uid}/projects/${projectId}/files/${fileName}`);
       await uploadBytes(fileRef, file);
 
       // 3. Get download URL
