@@ -13,6 +13,7 @@ Landing Page Layout Refinement
    - ✅ Styled Google button.
    - ✅ Added logic to redirect logged-in users.
    - ⚠️ **Issues:** Image cropping (top/bottom), sign-in box position incorrect (too high, overlapping logo).
+   - ✅ Fixed logout redirect to landing page and removed legacy login/signup routes.
 
 1. **Character Workflow User Isolation & Post-Login Redirect**
    - ✅ Character workflows are now fully user-isolated: only the current user's workflows are visible and accessible after login.

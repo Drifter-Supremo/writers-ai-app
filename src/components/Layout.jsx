@@ -82,7 +82,7 @@ export default function Layout({ children }) {
                   className="btn-creative-secondary w-full"
                   onClick={async () => {
                     await logout();
-                    navigate('/login');
+navigate('/');
                   }}
                 >
                   Logout
@@ -92,13 +92,13 @@ export default function Layout({ children }) {
               <div className="flex flex-col gap-2">
                 <button
                   className="btn-creative w-full"
-                  onClick={() => navigate('/login')}
+onClick={() => navigate('/')}
                 >
                   Sign In
                 </button>
                 <button
                   className="btn-creative-secondary w-full"
-                  onClick={() => navigate('/signup')}
+onClick={() => navigate('/')}
                 >
                   Sign Up
                 </button>

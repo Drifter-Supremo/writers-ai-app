@@ -1,0 +1,63 @@
+# .clinerules
+
+## Theme & Styling
+- Tailwind CSS with direct utility classes; extended colors in `tailwind.config.js`:
+  - teal-deep: `#0f303d`
+  - teal-light: `#1a4c5d`
+  - orange-vibrant: `#f58a07`
+  - cream-yellow: `#f9f4d9`
+  - cream-gray: `#d1cbbd`
+- Solid colors only (no gradients); default focus ring uses `focus:ring-orange-vibrant`.
+
+## Layout & Navigation
+- `Layout.jsx` uses CSS grid (`grid-cols-[250px,1fr]`) for a fixed 250px sidebar and content area.
+- Sidebar: no vertical border, logo image header links home, text-only nav items (no emojis), active state accent with `orange-vibrant`.
+
+## Component Organization
+- Page components in `src/routes/`, one file per route.
+- Shared and feature components in `src/components/`.
+- Workflow configs in `src/workflows/configs/`.
+- Workflow UI/components in `src/workflows/components/`.
+
+## Workflow Engine Patterns
+- Config-driven engine: `characterWorkflowConfig.js` defines `id`, `sections`, `questions`, `images`.
+- `WorkflowEngine.jsx` responsibilities:
+  - Load answers from Firestore subcollection `characterWorkflows/{workflowId}/answers`.
+  - Debounced autosave using native `setTimeout`.
+  - Save answers with fields `{ value: string, lastUpdated: Timestamp }`.
+  - Update parent workflow document `name` on name question.
+  - Intro vs question rendering; view mode toggle shows read-only Q&A list.
+- `QuestionCard.jsx`:
+  - Props: `question`, `answer`, `onAnswerChange`.
+  - Displays image, prompt, textarea, and AI helper button opening `AIHelperModal.jsx`.
+
+## UI Patterns
+- Skeleton loaders with `animate-pulse` for all async content (cards, forms, sections).
+- `Notification.jsx` for user feedback instead of `alert()`.
+- Buttons:
+  - Primary: `bg-orange-vibrant text-white px-4 py-2 rounded-md`.
+  - Secondary: `border border-cream-yellow text-cream-yellow px-4 py-2 rounded-md`.
+
+## Firebase & Data Patterns
+- Firestore collections:
+  - `projects/{projectId}` with subcollections `notes/`, `files/`.
+  - `characterWorkflows/{workflowId}` with subcollection `answers/`.
+- All documents include `userId` field; queries use `where("userId","==",uid)`.
+- Storage paths: `projects/{projectId}/files/{filename}`.
+- Wrap all Firestore/Storage calls in `try/catch`; display errors via `Notification.jsx`.
+- Use `serverTimestamp()` for timestamps.
+
+## Code & State Management
+- Functional components with hooks; React Context for auth state.
+- Route-based code splitting with React Router; lazy loading per route.
+- Native debounce implementation for autosave (`setTimeout` + clear).
+
+## Development Setup
+- Vite + React (`npm run dev`); ESLint and Prettier enforced.
+- Tailwind utilities preferred; avoid custom `@apply` unless unavoidable.
+
+## Learned Conventions
+- Use direct utility-first classes aligned to theme.
+- Modular file structure: keep workflows decoupled via configs.
+- Always catch and notify on async errors.
+- Keep component props minimal and declarative for reusability.

@@ -162,6 +162,7 @@ All loading and skeleton state tasks for the Project Detail View and its sidebar
 ## Phase 3: Feature Enhancements
 
 ### 3.0. Landing Page Layout Refinement
+- [x] **Fix Logout Redirect:** Ensure logout redirects to the landing page and remove obsolete login/signup routes.
 - [ ] **Fix Image Display:** Ensure the entire landing page image is visible without cropping top or bottom, using `background-size: contain` and `background-position: center`. Fill extra space with `bg-teal-deep`.
 - [ ] **Fix Sign-in Box Position:** Absolutely position the sign-in box clearly below the Medusa logo on the right, ensuring no overlap on any screen size. Adjust `top` offset and responsive styles as needed.
 - [ ] **Fix Google Button Style:** Ensure Google button uses `bg-teal-light` (or `bg-teal-deep`) background while keeping the logo and blue text.

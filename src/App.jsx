@@ -8,8 +8,6 @@ import ProjectDetail from './routes/ProjectDetail';
 import Settings from './routes/Settings';
 const CharacterWorkflow = React.lazy(() => import('./workflows/CharacterWorkflow'));
 import Workflows from './routes/Workflows';
-import Login from './routes/Login';
-import Signup from './routes/Signup';
 import ProtectedRoute from './components/ProtectedRoute';
 import { useAuth } from './context/AuthContext';
 
@@ -17,7 +15,11 @@ export default function App() {
   const { user, authLoading } = useAuth();
 
   if (authLoading) {
-    return <div className="min-h-screen flex items-center justify-center bg-primary-bg text-cream-yellow text-xl">Loading...</div>;
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-primary-bg text-cream-yellow text-xl">
+        Loading...
+      </div>
+    );
   }
 
   return (
@@ -39,8 +41,6 @@ export default function App() {
             <Layout>
               <Routes>
                 <Route path="/home" element={<Home />} />
-                <Route path="/login" element={<Login />} />
-                <Route path="/signup" element={<Signup />} />
                 <Route
                   path="/projects"
                   element={
