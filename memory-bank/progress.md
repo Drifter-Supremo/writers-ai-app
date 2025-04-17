@@ -11,6 +11,9 @@
 - [x] Ensured layout stability on resize.
 - [x] *Supersedes previous "Landing Page Implementation (Initial)" and related layout fixes.*
 
+### Authentication System Additions
+- [x] Password reset flow (email link via Firebase Auth)
+
 ### "Retro Space" Theme & UI Overhaul
 - [x] Implemented new "Retro Space" dark theme.
   - **Color Palette:** Deep teal/green (`#0f303d`), vibrant orange (`#f58a07`), cream/yellow (`#f9f4d9`).
@@ -168,6 +171,7 @@
 5. **Project Card Actions:** Refactored actions into a 3-dot menu with delete confirmation; card click opens the project.
 6. **UI/UX Phase 1 Overhaul:** Replaced top navbar with sidebar navigation and implemented a split-view layout.
 7. **Landing Page Redesign & Fixes:** Replaced background image with solid color, added logo/tagline, fixed scrolling, restyled Google button.
+8. **Authentication:** Added password reset flow.
 
 ### Dashboard Enhancement
 - [ ] Advanced filtering
@@ -181,6 +185,9 @@
 - [ ] Real-time updates implementation
 
 ## 📋 Upcoming Work
+
+### Phase 2: Authentication & User Management
+- [ ] **(Next Priority)** (Optional) Password Reset (Implement UI link, email flow, success/error handling)
 
 ### Phase 3: Project Management
 - [x] Project creation flow
@@ -261,4 +268,4 @@
 ## Updates
 2025-04-15: Consolidated and updated documentation for the enhanced Character Workflow system implementation, including config-driven engine, step-by-step UI, project linking/unlinking, view mode, autosave, resume logic fixes, layout adjustments, and associated new components. Marked previous workflow tasks as superseded or complete.
 2025-04-15: Documented the implementation of the "Retro Space" theme overhaul, including the new color palette (teal, orange, cream), updated component styling, and associated UI fixes (sidebar logo, removed emojis/borders). Marked previous UI/UX Phase 2 as superseded. Updated Recent Updates section.
-2025-04-17: Added entry for "Landing Page Redesign & Fixes" under Completed Features. Marked previous landing page layout task as resolved. Updated consolidated recent updates list.
+2025-04-17: Added entry for "Landing Page Redesign & Fixes" under Completed Features. Marked previous landing page layout task as resolved. Added Password Reset flow to completed features. Updated consolidated recent updates list. Updated Upcoming Work section to reflect Password Reset as next priority.

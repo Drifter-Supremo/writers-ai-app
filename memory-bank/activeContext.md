@@ -15,16 +15,17 @@ Phase 2: Authentication & User Management - Password Reset
    - ✅ Ensured layout stability on resize.
    - ✅ *Supersedes previous "Landing Page Implementation (Initial)" and related layout fixes.*
 
-1. **(Superseded) Landing Page Implementation (Initial)**
-   - *Previous attempts at background image and layout were replaced by the redesign.*
+2. **Reset Password Flow**
+   - ✅ Added ResetPassword page with email link via Firebase Auth.
+   - ✅ Fixed input overlap below logo tagline.
 
-1. **Character Workflow User Isolation & Post-Login Redirect**
+3. **Character Workflow User Isolation & Post-Login Redirect**
    - ✅ Character workflows are now fully user-isolated: only the current user's workflows are visible and accessible after login.
    - ✅ All workflow creation, queries, and security rules use userId for multi-user support.
    - ✅ After login or signup, users are now redirected to the home page (`/`) instead of `/projects`.
    - ✅ All changes tested and confirmed working for multiple accounts.
 
-1. **Authentication System (Email/Password & Google, Protected Routes, Sidebar UI)**
+4. **Authentication System (Email/Password & Google, Protected Routes, Sidebar UI)**
    - ✅ Implemented Firebase Auth integration with Email/Password and Google sign-in.
    - ✅ Created AuthContext for global user state and auth actions.
    - ✅ Built Login and Signup pages with error handling, loading states, and Google sign-in.
@@ -33,7 +34,7 @@ Phase 2: Authentication & User Management - Password Reset
    - ✅ Verified that authentication flow works for both providers and all protected navigation.
    - ⚠️ All users currently see all projects, settings, and workflows; next step is to implement userId-based data isolation and Firestore security rules.
 
-1. **"Retro Space" Theme & UI Overhaul**
+5. **"Retro Space" Theme & UI Overhaul**
    - ✅ Implemented new "Retro Space" dark theme.
      - **Color Palette:** Deep teal/green (`#0f303d`), vibrant orange (`#f58a07`), cream/yellow (`#f9f4d9`).
      - **Backgrounds:** Solid deep teal/lighter teal for main, sidebar, cards, inputs. Removed gradients and white backgrounds.
@@ -47,16 +48,16 @@ Phase 2: Authentication & User Management - Password Reset
      - Removed vertical right border from main sidebar.
      - Removed horizontal bottom border from sidebar logo container.
 
-1. **(Superseded) UI/UX Phase 2 Overhaul**
+6. **(Superseded) UI/UX Phase 2 Overhaul**
    - *Previous color system (purple/blue/gradients) replaced by "Retro Space" theme.*
    - *Animation system remains.*
    - *Visual polish elements (blur, shadows) may be adjusted by new theme.*
    - *Interactive elements updated with new theme colors/styles.*
 
-1. **Project Detail Skeleton Loader**
+7. **Project Detail Skeleton Loader**
    - ✅ Implemented skeleton loader for Project Detail title/description area to improve perceived loading performance
 
-1. **Project Card Actions Refactor**
+8. **Project Card Actions Refactor**
    - ✅ Refactored project card actions: card click opens project, 3-dot menu contains delete with confirmation
    - ✅ Implemented skeleton loader for Project Detail Files section
    - ✅ Implemented skeleton loader for Project Detail Notes section
@@ -69,7 +70,7 @@ Phase 2: Authentication & User Management - Password Reset
    - ✅ Added loading indicators for note add/delete actions in Project Detail
    - ✅ Added loading indicator for saving project detail edits
 
-1. **Enhanced Character Workflow System (Major Refactor)**
+9. **Enhanced Character Workflow System (Major Refactor)**
    - ✅ **UI Restructuring:**
      - Created dedicated `/workflows` route and `Workflows.jsx` component.
      - Moved old workflow UI from `Home.jsx` to `Workflows.jsx`.
@@ -104,116 +105,116 @@ Phase 2: Authentication & User Management - Password Reset
      - Added skeleton loader for workflow loading state.
      - Adjusted padding/layout to improve vertical positioning.
 
-1. **UI/UX Phase 1 Overhaul**
-   - ✅ Replaced top navbar with sidebar navigation
-     - Fixed-width sidebar (250px)
-     - Logo image in header (links home), no text header.
-     - Navigation links without emojis.
-     - No vertical right border on sidebar.
-     - Hover and active states (using new theme colors).
-     - Prepared for future collapsibility.
-   - ✅ Implemented split-view layout
-     - Left panel navigation
-     - Right panel content area
-     - Responsive design
-   - ✅ Enhanced content organization
-     - Consistent card styling
-     - Improved visual hierarchy
-     - Better spacing patterns
-   - ✅ Maintained all functionality
-     - Project editing
-     - File management
-     - Notes system
+10. **UI/UX Phase 1 Overhaul**
+    - ✅ Replaced top navbar with sidebar navigation
+      - Fixed-width sidebar (250px)
+      - Logo image in header (links home), no text header.
+      - Navigation links without emojis.
+      - No vertical right border on sidebar.
+      - Hover and active states (using new theme colors).
+      - Prepared for future collapsibility.
+    - ✅ Implemented split-view layout
+      - Left panel navigation
+      - Right panel content area
+      - Responsive design
+    - ✅ Enhanced content organization
+      - Consistent card styling
+      - Improved visual hierarchy
+      - Better spacing patterns
+    - ✅ Maintained all functionality
+      - Project editing
+      - File management
+      - Notes system
 
-2. **Settings Enhancements**
-   - ✅ Added preferences summary display
-     - Shows current Firestore values
-     - Handles empty states gracefully
-     - Updates automatically
-   - ✅ Added Reset Form functionality
-     - Resets to default values
-     - Maintains Firestore data
-     - Success feedback
-   - ✅ Added Clear Preferences functionality
-     - Deletes Firestore document
-     - Resets local state
-     - Error handling
-   - ✅ Enhanced UI consistency
-     - Maintained Tailwind patterns
-     - Consistent button styling
-     - Proper spacing and layout
+11. **Settings Enhancements**
+    - ✅ Added preferences summary display
+      - Shows current Firestore values
+      - Handles empty states gracefully
+      - Updates automatically
+    - ✅ Added Reset Form functionality
+      - Resets to default values
+      - Maintains Firestore data
+      - Success feedback
+    - ✅ Added Clear Preferences functionality
+      - Deletes Firestore document
+      - Resets local state
+      - Error handling
+    - ✅ Enhanced UI consistency
+      - Maintained Tailwind patterns
+      - Consistent button styling
+      - Proper spacing and layout
 
-2. **Settings Implementation**
-   - ✅ User preferences panel with form fields
-   - ✅ Firestore integration with proper path structure
-   - ✅ Form validation and error handling
-   - ✅ Loading states and success feedback
-   - ✅ Consistent styling with app theme
+12. **Settings Implementation**
+    - ✅ User preferences panel with form fields
+    - ✅ Firestore integration with proper path structure
+    - ✅ Form validation and error handling
+    - ✅ Loading states and success feedback
+    - ✅ Consistent styling with app theme
 
-3. **Notes Implementation**
-   - ✅ Notes creation and storage in Firestore
-   - ✅ Notes display with timestamps
-   - ✅ Notes deletion with cleanup
-   - ✅ Loading states and validation
-   - ✅ Error handling
+13. **Notes Implementation**
+    - ✅ Notes creation and storage in Firestore
+    - ✅ Notes display with timestamps
+    - ✅ Notes deletion with cleanup
+    - ✅ Loading states and validation
+    - ✅ Error handling
 
-2. **File Management Implementation**
-   - ✅ File upload form with type restrictions
-   - ✅ Firebase Storage integration
-   - ✅ File metadata in Firestore
-   - ✅ File deletion functionality
-   - ✅ File list display with download links
+14. **File Management Implementation**
+    - ✅ File upload form with type restrictions
+    - ✅ Firebase Storage integration
+    - ✅ File metadata in Firestore
+    - ✅ File deletion functionality
+    - ✅ File list display with download links
 
-2. **Project Detail Implementation**
-   - ✅ Dynamic routing to project details
-   - ✅ Firestore document fetching
-   - ✅ Basic detail view layout
-   - ✅ Navigation from project cards
-   - ✅ Project metadata editing
-     - Name and description editing
-     - Tag management with visual pills
-     - Input validation and error handling
-     - Save/cancel with feedback
+15. **Project Detail Implementation**
+    - ✅ Dynamic routing to project details
+    - ✅ Firestore document fetching
+    - ✅ Basic detail view layout
+    - ✅ Navigation from project cards
+    - ✅ Project metadata editing
+      - Name and description editing
+      - Tag management with visual pills
+      - Input validation and error handling
+      - Save/cancel with feedback
 
-2. **Firebase Integration**
-   - ✅ Firebase package installed
-   - ✅ firebase.js service file created
-   - ✅ Basic Firestore integration
-   - ✅ Project data fetching implemented
+16. **Firebase Integration**
+    - ✅ Firebase package installed
+    - ✅ firebase.js service file created
+    - ✅ Basic Firestore integration
+    - ✅ Project data fetching implemented
 
-2. **Project Setup**
-   - ✅ Vite + React initialization
-   - ✅ Tailwind CSS configuration
-   - ✅ Basic folder structure established
+17. **Project Setup**
+    - ✅ Vite + React initialization
+    - ✅ Tailwind CSS configuration
+    - ✅ Basic folder structure established
 
-2. **Component Structure**
-   - ✅ Created modular component skeleton
-   - ✅ Set up routes directory
-   - ✅ Set up components directory
-   - ✅ Basic component placeholders
+18. **Component Structure**
+    - ✅ Created modular component skeleton
+    - ✅ Set up routes directory
+    - ✅ Set up components directory
+    - ✅ Basic component placeholders
 
-3. **Routing Implementation**
-   - ✅ React Router integration
-   - ✅ Basic route configuration
-   - ✅ Navigation structure
-   - ✅ Dynamic project routing
+19. **Routing Implementation**
+    - ✅ React Router integration
+    - ✅ Basic route configuration
+    - ✅ Navigation structure
+    - ✅ Dynamic project routing
 
-4. **Dashboard UI**
-   - ✅ Projects page layout
-   - ✅ ProjectCard component design
-   - ✅ Responsive grid system
-   - ✅ Basic UI elements
-   - ✅ Project search implementation
-     - Case-insensitive search on name/description
-     - Debounced input for performance
-     - Clear search button
-     - "No results" feedback
+20. **Dashboard UI**
+    - ✅ Projects page layout
+    - ✅ ProjectCard component design
+    - ✅ Responsive grid system
+    - ✅ Basic UI elements
+    - ✅ Project search implementation
+      - Case-insensitive search on name/description
+      - Debounced input for performance
+      - Clear search button
+      - "No results" feedback
 
-5. **Navigation**
-   - ✅ Navbar component implementation
-   - ✅ React Router Link integration
-   - ✅ Responsive layout
-   - ✅ Consistent styling patterns
+21. **Navigation**
+    - ✅ Navbar component implementation
+    - ✅ React Router Link integration
+    - ✅ Responsive layout
+    - ✅ Consistent styling patterns
 
 ### In Progress
 1. **Project Detail Enhancement**
@@ -228,7 +229,7 @@ Phase 2: Authentication & User Management - Password Reset
    - Adding loading states
    - Implementing error handling
 
-2. **Firebase Enhancement**
+3. **Firebase Enhancement**
    - Configuring security rules
    - Adding real-time updates
    - Implementing data validation
