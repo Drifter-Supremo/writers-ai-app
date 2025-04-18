@@ -10,6 +10,7 @@ const CharacterWorkflow = React.lazy(() => import('./workflows/CharacterWorkflow
 import Workflows from './routes/Workflows';
 import ProtectedRoute from './components/ProtectedRoute';
 import { useAuth } from './context/AuthContext';
+import ResetPassword from './routes/ResetPassword';
 
 export default function App() {
   const { user, authLoading } = useAuth();
@@ -35,6 +36,7 @@ export default function App() {
             )
           }
         />
+        <Route path="/reset-password" element={<ResetPassword />} />
         <Route
           path="*"
           element={

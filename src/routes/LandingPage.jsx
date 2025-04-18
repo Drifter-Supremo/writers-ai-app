@@ -45,7 +45,7 @@ export default function LandingPage() {
 
   return (
     // Apply new container styles, background color, and padding
-    <div className="min-h-screen flex flex-col items-center justify-start bg-[#032934] pt-12 pb-16">
+    <div className="min-h-screen flex flex-col items-center justify-start bg-[#032934] pt-4 pb-6">
       {/* Add Logo */}
       <img
         src="/assets/logo-no-background.png"
@@ -134,6 +134,20 @@ export default function LandingPage() {
                 }}
                 required
               />
+            </div>
+          )}
+
+          {/* Forgot password button (login mode only) */}
+          {mode === "login" && (
+            <div className="flex justify-end">
+              <button
+                type="button"
+                className="text-cream-yellow hover:underline text-sm mt-1"
+                onClick={() => navigate('/reset-password')}
+                tabIndex={0}
+              >
+                Forgot password?
+              </button>
             </div>
           )}
           <button

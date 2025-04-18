@@ -12,6 +12,7 @@
 - [x] *Supersedes previous "Landing Page Implementation (Initial)" and related layout fixes.*
 
 ### Authentication System Additions
+- [x] Password reset flow: Added "Forgot password?" button to login form, new `/reset-password` route, Firebase Auth integration, robust error handling, and user feedback. Adjusted landing page spacing to accommodate the new button.
 - [x] Password reset flow (email link via Firebase Auth)
 
 ### "Retro Space" Theme & UI Overhaul
