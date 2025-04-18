@@ -6,7 +6,6 @@ This document outlines the remaining tasks required to complete and polish the W
 
 ## Phase 1: Core Functionality & UX Foundations (Addressing TODOs & Polish)
 
-- [x] Password Reset: Implemented password reset functionality using Firebase Auth. Added a "Forgot password?" button to the login form, which navigates to a new `/reset-password` route. The reset page matches the "Retro Space" theme, includes robust error handling, and returns users to the landing page after submitting. Landing page spacing was adjusted to accommodate the new button.
 
 ### 1.1. Loading & Skeleton States
 - [x] **Projects Dashboard:**
@@ -126,7 +125,7 @@ All loading and skeleton state tasks for the Project Detail View and its sidebar
 - [x] **Login Functionality:** Implemented user login using `signInWithEmailAndPassword` and Google sign-in.
 - [x] **Logout Functionality:** Implemented user logout using `signOut`.
 - [x] **Error Handling:** Added robust error handling for auth operations (e.g., invalid email, wrong password, user exists). Displays clear feedback to the user.
-- [ ] **(Optional) Password Reset:** Implement password reset functionality. **(Next Priority)**
+- [x] **Password Reset:** Implemented password reset functionality with Firebase Auth, error handling, and a new `/reset-password` route accessible via "Forgot password?" on the login form.
 
 ### 2.4. Multi-User Data Structure & Access Control
 - [x] **Firestore Data Structure:**
