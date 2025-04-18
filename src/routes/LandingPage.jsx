@@ -60,47 +60,62 @@ export default function LandingPage() {
 
       {/* Sign-in box - remove z-index */}
       <div className="w-full max-w-md md:w-[380px] bg-teal-deep/95 rounded-xl shadow-lg p-8 flex flex-col items-center">
-        <div className="flex mb-6 w-full">
-          <button
-            className={`flex-1 py-2 font-semibold rounded-l-lg ${
-              mode === "login"
-                ? "bg-cream-yellow text-teal-deep"
-                : "bg-teal-light text-cream-yellow"
-            }`}
-            onClick={() => {
-              setMode("login");
-              setError(null);
-            }}
-            disabled={authLoading}
-          >
-            Sign In
-          </button>
-          <button
-            className={`flex-1 py-2 font-semibold rounded-r-lg ${
-              mode === "signup"
-                ? "bg-cream-yellow text-teal-deep"
-                : "bg-teal-light text-cream-yellow"
-            }`}
-            onClick={() => {
-              setMode("signup");
-              setError(null);
-            }}
-            disabled={authLoading}
-          >
-            Sign Up
-          </button>
-        </div>
-        {error && (
-          <div className="mb-4 text-status-error text-center">{error}</div>
-        )}
         <form onSubmit={handleSubmit} className="space-y-4 w-full">
+          <div className="flex mb-6 w-full">
+            {mode === "login" ? (
+              <>
+                <button
+                  type="submit"
+                  className="flex-1 py-2 font-semibold rounded-l-lg bg-cream-yellow text-teal-deep"
+                  disabled={authLoading}
+                >
+                  {authLoading ? "Signing in..." : "Sign In"}
+                </button>
+                <button
+                  type="button"
+                  className="flex-1 py-2 font-semibold rounded-r-lg bg-teal-light text-cream-yellow"
+                  onClick={() => {
+                    setMode("signup");
+                    setError(null);
+                  }}
+                  disabled={authLoading}
+                >
+                  Sign Up
+                </button>
+              </>
+            ) : (
+              <>
+                <button
+                  type="button"
+                  className="flex-1 py-2 font-semibold rounded-l-lg bg-teal-light text-cream-yellow"
+                  onClick={() => {
+                    setMode("login");
+                    setError(null);
+                  }}
+                  disabled={authLoading}
+                >
+                  Sign In
+                </button>
+                <button
+                  type="submit"
+                  className="flex-1 py-2 font-semibold rounded-r-lg bg-cream-yellow text-teal-deep"
+                  disabled={authLoading}
+                >
+                  {authLoading ? "Signing up..." : "Sign Up"}
+                </button>
+              </>
+            )}
+          </div>
+          {error && (
+            <div className="mb-4 text-status-error text-center">{error}</div>
+          )}
           <div>
             <input
               type="email"
               className="input-creative w-full bg-teal-light text-cream-yellow border-cream-yellow/40 placeholder-cream-yellow/60"
               placeholder="Email"
               value={email}
-              onChange={e => {
+              onChange={(e) => {
                 setEmail(e.target.value);
                 setError(null);
               }}
@@ -114,7 +129,7 @@ export default function LandingPage() {
               className="input-creative w-full bg-teal-light text-cream-yellow border-cream-yellow/40 placeholder-cream-yellow/60"
               placeholder="Password"
               value={password}
-              onChange={e => {
+              onChange={(e) => {
                 setPassword(e.target.value);
                 setError(null);
               }}
@@ -128,7 +143,7 @@ export default function LandingPage() {
                 className="input-creative w-full bg-teal-light text-cream-yellow border-cream-yellow/40 placeholder-cream-yellow/60"
                 placeholder="Confirm Password"
                 value={confirm}
-                onChange={e => {
+                onChange={(e) => {
                   setConfirm(e.target.value);
                   setError(null);
                 }}
@@ -136,13 +151,11 @@ export default function LandingPage() {
               />
             </div>
           )}
-
-          {/* Forgot password button (login mode only) */}
           {mode === "login" && (
-            <div className="flex justify-end">
+            <div className="flex justify-end mt-1 mb-2">
               <button
                 type="button"
-                className="text-cream-yellow hover:underline text-sm mt-1"
+                className="text-cream-yellow hover:underline text-sm"
                 onClick={() => navigate('/reset-password')}
                 tabIndex={0}
               >
@@ -150,26 +163,12 @@ export default function LandingPage() {
               </button>
             </div>
           )}
-          <button
-            type="submit"
-            className="w-full py-3 rounded-lg font-semibold bg-cream-yellow text-teal-deep hover:bg-cream-yellow/90 transition"
-            disabled={authLoading}
-          >
-            {authLoading
-              ? mode === "login"
-                ? "Signing in..."
-                : "Signing up..."
-              : mode === "login"
-              ? "Sign In"
-              : "Sign Up"}
-          </button>
         </form>
         <div className="my-4 w-full flex items-center">
           <div className="flex-grow border-t border-cream-yellow/30"></div>
           <span className="mx-2 text-cream-yellow text-sm">or</span>
           <div className="flex-grow border-t border-cream-yellow/30"></div>
         </div>
-        {/* Google button with space green background */}
         <button
           className="w-full flex items-center justify-center gap-3 py-3 rounded-lg font-semibold transition hover:brightness-95"
           style={{ backgroundColor: '#f9f4d9', color: '#0f303d' }}

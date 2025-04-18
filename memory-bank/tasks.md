@@ -147,7 +147,7 @@ All loading and skeleton state tasks for the Project Detail View and its sidebar
         - Users must be authenticated to read/write any project-related data (`request.auth != null`).
         - Users can only read/write documents (projects, notes, files metadata, settings, workflows) where the `userId` field matches their own `request.auth.uid`.
         - Defined rules for subcollections accordingly.
-    - [ ] **Storage Rules:** (Planned) Write and deploy rules (`storage.rules`) to ensure:
+    - [x] **Storage Rules:** Wrote and deployed rules (`storage.rules`) to ensure:
         - Users must be authenticated (`request.auth != null`).
         - Users can only read/write files within their own user-specific path (`request.auth.uid == userIdInPath`).
 
