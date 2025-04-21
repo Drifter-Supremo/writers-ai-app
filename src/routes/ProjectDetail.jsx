@@ -8,6 +8,7 @@ import { storage } from '../services/firebase';
 import ProjectFiles from '../components/ProjectFiles';
 import ProjectNotes from '../components/ProjectNotes';
 import { addDoc, serverTimestamp } from 'firebase/firestore';
+import Notification from '../components/Notification'; // Import Notification component
 import ProjectSettings from '../components/ProjectSettings';
 import ProjectOverview from '../components/ProjectOverview';
 import ProjectOverviewSkeleton from '../components/ProjectOverviewSkeleton';
@@ -26,7 +27,19 @@ export default function ProjectDetail() {
   const [uploading, setUploading] = useState(false);
 
   // Notification state for errors
-  const [notification, setNotification] = useState(null);
+  const [notification, setNotification] = useState(null); // { message: string, type: 'success' | 'error' } | null
+
+  // Auto-dismiss notification after a delay
+  useEffect(() => {
+    if (notification) {
+      const timer = setTimeout(() => {
+        setNotification(null);
+      }, 4000); // Dismiss after 4 seconds
+
+      // Cleanup timer if component unmounts or notification changes
+      return () => clearTimeout(timer);
+    }
+  }, [notification]); // Re-run effect when notification changes
 
   // On mount, set activeSection from hash if present
   useEffect(() => {
@@ -91,7 +104,12 @@ export default function ProjectDetail() {
             .sort((a, b) => (b.createdAt?.seconds || 0) - (a.createdAt?.seconds || 0))
         );
       } catch (error) {
-        setNotes([]);
+        console.error("Error fetching notes:", error); // Log the error
+        setNotification({
+          type: "error",
+          message: "Failed to load notes. Please try refreshing the page.",
+        });
+        setNotes([]); // Keep notes empty on error
       } finally {
         setLoadingNotes(false);
       }
@@ -257,20 +275,12 @@ export default function ProjectDetail() {
       {/* Main Content - Inherits primary-bg */}
       <div className="p-8 overflow-auto"> {/* Added overflow-auto */}
         <div className="max-w-5xl mx-auto">
-          {notification && (
-            <div
-              className={`mb-4 px-4 py-3 rounded-md font-medium ${
-                notification.type === "error"
-                  ? "bg-red-900 text-red-100 border border-red-400"
-                  : "bg-green-900 text-green-100 border border-green-400"
-              }`}
-              role="alert"
-              onClick={() => setNotification(null)}
-              style={{ cursor: "pointer" }}
-            >
-              {notification.message}
-            </div>
-          )}
+          {/* Use Notification component */}
+          <Notification
+            message={notification?.message}
+            type={notification?.type}
+            onClose={() => setNotification(null)} // Manual close still possible
+          />
           {activeSection === 'overview' && (
             <ProjectOverview // Assumes ProjectOverview uses correct theme styles
               project={project}
@@ -320,6 +330,7 @@ export default function ProjectDetail() {
               setLoadingNotes(true);
               try {
                 await deleteDoc(doc(db, `projects/${id}/notes`, noteId));
+                setNotification({ type: "success", message: "Note deleted successfully" });
                 // Refresh notes
                 const q = query(collection(db, `projects/${id}/notes`), where("userId", "==", user.uid));
                 const notesSnap = await getDocs(q);

@@ -46,6 +46,7 @@ export default function EditorToolbar({ editor }) {
         className={`${buttonBase} ${editor.isActive('bold') ? buttonActive : ""}`}
         onClick={() => editor.chain().focus().toggleBold().run()}
         aria-label="Bold"
+        aria-pressed={editor.isActive('bold')}
         tabIndex={0}
       >
         <FaBold className="text-lg" />
@@ -55,6 +56,7 @@ export default function EditorToolbar({ editor }) {
         className={`${buttonBase} ${editor.isActive('italic') ? buttonActive : ""}`}
         onClick={() => editor.chain().focus().toggleItalic().run()}
         aria-label="Italic"
+        aria-pressed={editor.isActive('italic')}
         tabIndex={0}
       >
         <FaItalic className="text-lg" />
@@ -64,6 +66,7 @@ export default function EditorToolbar({ editor }) {
         className={`${buttonBase} ${editor.isActive('underline') ? buttonActive : ""}`}
         onClick={() => editor.chain().focus().toggleUnderline().run()}
         aria-label="Underline"
+        aria-pressed={editor.isActive('underline')}
         tabIndex={0}
       >
         <FaUnderline className="text-lg" />
@@ -73,6 +76,7 @@ export default function EditorToolbar({ editor }) {
         className={`${buttonBase} ${editor.isActive('bulletList') ? buttonActive : ""}`}
         onClick={() => editor.chain().focus().toggleBulletList().run()}
         aria-label="Bullet List"
+        aria-pressed={editor.isActive('bulletList')}
         tabIndex={0}
       >
         <FaListUl className="text-lg" />
@@ -82,6 +86,7 @@ export default function EditorToolbar({ editor }) {
         className={`${buttonBase} ${(editor.isActive('orderedList') || editor.isActive('ordered_list')) ? buttonActive : ""}`}
         onClick={() => editor.chain().focus().toggleOrderedList().run()}
         aria-label="Numbered List"
+        aria-pressed={editor.isActive('orderedList') || editor.isActive('ordered_list')}
         tabIndex={0}
       >
         <FaListOl className="text-lg" />
