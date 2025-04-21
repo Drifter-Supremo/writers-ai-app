@@ -192,13 +192,13 @@ All loading and skeleton state tasks for the Project Detail View and its sidebar
 - [x] *Supersedes previous layout refinement tasks.*
 
 ### 3.1. Rich Text Editor for Notes
-- [ ] **Choose Editor:** Select and install a rich text editor library (e.g., Tiptap or Quill).
-- [ ] **Integrate Editor:** Replace the basic textarea in the Notes section (`ProjectDetail.jsx`) with the chosen editor component.
-- [ ] **Implement Toolbar:** Add a simple toolbar with basic formatting options (e.g., Bold, Italic, Underline, Lists).
-- [ ] **Data Handling:**
-    - [ ] Ensure editor content (HTML or JSON) is correctly saved to Firestore when adding/editing notes.
-    - [ ] Ensure existing notes are correctly loaded and displayed in the editor.
-    - [ ] Handle potential data format changes if migrating from plain text.
+- [x] **Choose Editor:** Select and install a rich text editor library (e.g., Tiptap or Quill).
+- [x] **Integrate Editor:** Replace the basic textarea in the Notes section (`ProjectDetail.jsx`) with the chosen editor component.
+- [x] **Implement Toolbar:** Add a simple toolbar with basic formatting options (e.g., Bold, Italic, Underline, Lists).
+- [x] **Data Handling:**
+    - [x] Ensure editor content (HTML or JSON) is correctly saved to Firestore when adding/editing notes.
+    - [x] Ensure existing notes are correctly loaded and displayed in the editor.
+    - [x] Handle potential data format changes if migrating from plain text.
 
 ### 3.2. Dynamic Document Viewer
 - [ ] **Choose Viewer Library:** Research and select a suitable library for rendering common document types (PDF, DOCX, TXT) in the browser (e.g., `react-pdf`, `mammoth.js` for DOCX).
