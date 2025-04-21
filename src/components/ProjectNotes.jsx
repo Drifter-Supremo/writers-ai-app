@@ -1,138 +1,65 @@
-import React, { useState, useCallback, useEffect, useRef } from "react"; // Added useCallback, useEffect, useRef
+import React, { useState, useEffect, useRef } from "react"; // Removed useCallback
 import RichTextEditor from "./RichTextEditor";
-// Consider using lodash/debounce if available, otherwise simple implementation below
-// import { debounce } from 'lodash';
 
 export default function ProjectNotes({
   notes = [],
   loadingNotes = false,
-  onAddNote,
-  onEditNote, // optional, for editing support
+  onSaveNote, // Renamed from onAddNote/onEditNote
   onDeleteNote, // required for delete button to work
 }) {
   const [noteContent, setNoteContent] = useState("");
   const [noteTitle, setNoteTitle] = useState("");
-  const [selectedNoteId, setSelectedNoteId] = useState(null);
+  const [editingNote, setEditingNote] = useState(null); // Holds the full note object being edited, or null
   const [deletingNoteId, setDeletingNoteId] = useState(null); // Track which note is being deleted
-  const debounceTimeoutRef = useRef(null); // Ref to hold timeout ID
   const deleteTimeoutRef = useRef(null); // Ref to hold delete animation timeout ID
 
-  // Refs to always have latest values for debounce
-  const noteTitleRef = useRef(noteTitle);
-  const noteContentRef = useRef(noteContent);
-
-  useEffect(() => {
-    noteTitleRef.current = noteTitle;
-  }, [noteTitle]);
-  useEffect(() => {
-    noteContentRef.current = noteContent;
-  }, [noteContent]);
-
-  // Function to actually perform the save
-  const performSave = useCallback((noteId, title, content) => {
-    if (onEditNote && noteId) {
-      console.log("Performing debounced save for note:", noteId); // Debug log
-      // Ensure content is always passed, even if empty string
-      onEditNote(noteId, { title: title ?? "", content: content ?? "" });
-    }
-  }, [onEditNote]);
-
-  // Debounced save function - using simple setTimeout/clearTimeout
-  // Always use latest title/content from refs to avoid stale closure
-  const debouncedSaveContent = useCallback((noteId) => {
-    if (debounceTimeoutRef.current) {
-      clearTimeout(debounceTimeoutRef.current);
-    }
-    debounceTimeoutRef.current = setTimeout(() => {
-      performSave(noteId, noteTitleRef.current, noteContentRef.current);
-    }, 1500); // 1.5 second debounce timer
-  }, [performSave]);
-
-  // Cleanup timeouts on unmount
+  // Cleanup delete timeout on unmount
   useEffect(() => {
     return () => {
-      if (debounceTimeoutRef.current) {
-        clearTimeout(debounceTimeoutRef.current);
-      }
       if (deleteTimeoutRef.current) {
         clearTimeout(deleteTimeoutRef.current);
       }
     };
   }, []);
 
-   // Cleanup timeout when selected note changes to prevent saving to wrong note
-   useEffect(() => {
-    if (debounceTimeoutRef.current) {
-      clearTimeout(debounceTimeoutRef.current);
-    }
-  }, [selectedNoteId]);
-
-
   // Handle clicking a note to edit
   function handleNoteClick(note) {
-    // Clear any pending save from previous note before loading new one
-    if (debounceTimeoutRef.current) {
-      clearTimeout(debounceTimeoutRef.current);
-    }
-    setSelectedNoteId(note.id);
+    setEditingNote(note); // Store the whole note object
     setNoteTitle(note.title || "");
     setNoteContent(note.content || "");
   }
 
-   // Handle content change from RichTextEditor
-   const handleContentChange = useCallback((newContent) => {
+  // Handle content change from RichTextEditor
+  const handleContentChange = (newContent) => {
     setNoteContent(newContent);
-    noteContentRef.current = newContent;
-    // Only trigger debounced save if editing an existing note
-    if (selectedNoteId) {
-      debouncedSaveContent(selectedNoteId);
-    }
-  }, [selectedNoteId, debouncedSaveContent]);
-
+    // No debounced save here anymore
+  };
 
   // Handle cancel edit
   function handleCancelEdit() {
-     // Clear any pending save
-    if (debounceTimeoutRef.current) {
-      clearTimeout(debounceTimeoutRef.current);
-    }
-    setSelectedNoteId(null);
+    setEditingNote(null); // Clear the editing state
     setNoteTitle("");
     setNoteContent("");
   }
 
-  // Handle save (add or explicit edit save)
+  // Handle save (unified for add and edit)
   function handleSaveNote(e) {
     e.preventDefault();
-    // Clear any pending debounced save since we're saving explicitly
-    if (debounceTimeoutRef.current) {
-      clearTimeout(debounceTimeoutRef.current);
-    }
 
     const noteData = {
       title: noteTitle ?? "",
       content: noteContent ?? "",
     };
 
-    if (selectedNoteId) {
-      // Explicitly save both title and content when editing via button
-      if (onEditNote) {
-        console.log("Performing explicit save for note:", selectedNoteId); // Debug log
-        onEditNote(selectedNoteId, noteData);
-      }
-      // Reset form after explicit save
-      setSelectedNoteId(null);
-      setNoteTitle("");
-      setNoteContent("");
-    } else {
-      // Add new note
-      onAddNote(noteData);
-      // Clear form after adding
-      setNoteTitle("");
-      setNoteContent("");
-    }
-  }
+    // Call the single save handler passed from parent
+    // Pass the ID if we are editing, otherwise pass null/undefined
+    onSaveNote(editingNote ? editingNote.id : null, noteData);
 
+    // Reset form and editing state after save
+    setEditingNote(null);
+    setNoteTitle("");
+    setNoteContent("");
+  }
 
   return (
     <div>
@@ -146,18 +73,11 @@ export default function ProjectNotes({
           style={{ backgroundColor: '#1a4c5d' }}
           placeholder="Note title"
           value={noteTitle}
-          onChange={(e) => {
-            setNoteTitle(e.target.value);
-            noteTitleRef.current = e.target.value;
-            // Only trigger debounced save if editing an existing note
-            if (selectedNoteId) {
-              debouncedSaveContent(selectedNoteId);
-            }
-          }}
+          onChange={(e) => setNoteTitle(e.target.value)} // Simplified onChange
         />
         <RichTextEditor
           content={noteContent}
-          onChange={handleContentChange} // Use the new handler with debouncing
+          onChange={handleContentChange} // Simplified onChange
           placeholder="Write a note..."
         />
         <div className="flex gap-2 mt-3">
@@ -166,9 +86,9 @@ export default function ProjectNotes({
             className="bg-orange-vibrant text-white px-4 py-2 rounded-md font-medium hover:brightness-110 transition duration-200 disabled:opacity-60"
             // No validation: always enabled
           >
-            {selectedNoteId ? "Save Changes" : "Add Note"}
+            {editingNote ? "Save Changes" : "Add Note"} {/* Updated button text */}
           </button>
-          {selectedNoteId && (
+          {editingNote && ( // Show cancel button only when editing
             <button
               type="button"
               className="border border-cream-yellow text-cream-yellow px-4 py-2 rounded-md font-medium hover:bg-teal-deep transition duration-200"
@@ -202,7 +122,7 @@ export default function ProjectNotes({
             >
               <button
                 className={`w-full text-left bg-teal-light p-4 rounded-md border border-cream-yellow/20 hover:bg-teal-deep transition-colors duration-150 focus:outline-none focus:ring-2 focus:ring-orange-vibrant ${
-                  selectedNoteId === note.id ? "ring-2 ring-orange-vibrant" : ""
+                  editingNote?.id === note.id ? "ring-2 ring-orange-vibrant" : "" // Highlight based on editingNote.id
                 }`}
                 onClick={() => handleNoteClick(note)}
                 type="button"
@@ -230,12 +150,12 @@ export default function ProjectNotes({
                     if (typeof onDeleteNote === "function") {
                       // Set the deleting note ID to trigger animation
                       setDeletingNoteId(note.id);
-                      
+
                       // Clear any existing delete timeout
                       if (deleteTimeoutRef.current) {
                         clearTimeout(deleteTimeoutRef.current);
                       }
-                      
+
                       // Delay actual deletion until animation completes
                       deleteTimeoutRef.current = setTimeout(async () => {
                         await onDeleteNote(note.id);

@@ -422,3 +422,9 @@ Phase 2: Authentication & Landing Page
 2025-04-15: Consolidated and updated entries for the enhanced Character Workflow system, including config-driven engine, step-by-step UI, project linking/unlinking, view mode, autosave, resume logic fixes, layout adjustments, and associated new components. Removed `WorkflowSection.jsx` details as it was refactored out.
 2025-04-15: Updated documentation to reflect the new "Retro Space" theme overhaul. Replaced previous color system (purple/blue/gradients) with deep teal, vibrant orange, and cream/yellow palette. Updated background, text, and accent color usage across components. Documented UI fixes including sidebar logo header, removal of sidebar emojis and borders, and workflow card button fix. Marked previous UI/UX Phase 2 as superseded where applicable.
 2025-04-17: Documented completion of Landing Page Redesign & Fixes, including solid background color, logo placement, tagline, scroll fix, and Google button inline styling. Updated current focus and next steps to Password Reset. Marked previous landing page tasks as superseded/resolved.
+
+1. **UI Polish & Note Editing Refactor**
+   - ✅ Added note deletion animation (`ProjectNotes.jsx`).
+   - ✅ Implemented editor toolbar active states (`EditorToolbar.jsx`).
+   - ✅ Fixed editor list buttons (CSS conflict resolved in `index.css`, `RichTextEditor.jsx`).
+   - ✅ Simplified note editing logic in `ProjectNotes.jsx` and `ProjectDetail.jsx` to match note creation.

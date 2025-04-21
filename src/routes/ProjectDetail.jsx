@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { useParams } from 'react-router-dom';
-import { doc, getDoc, collection, getDocs, deleteDoc, query, where } from 'firebase/firestore';
+import { doc, getDoc, collection, getDocs, deleteDoc, query, where, updateDoc } from 'firebase/firestore'; // Added updateDoc
 import { db } from '../services/firebase';
 import { ref as storageRef, deleteObject } from 'firebase/storage';
 import { storage } from '../services/firebase';
@@ -120,7 +120,54 @@ export default function ProjectDetail() {
     }
   };
 
-  // File upload handler
+  // Unified Note Save Handler (Add & Edit)
+  const handleSaveNote = async (noteId, noteData) => {
+    if (!user?.uid) return;
+    setLoadingNotes(true);
+    const { title, content } = noteData;
+
+    try {
+      if (noteId) {
+        // Update existing note
+        await updateDoc(doc(db, `projects/${id}/notes`, noteId), {
+          title: typeof title === "string" ? title : "",
+          content: typeof content === "string" ? content : "",
+          lastUpdated: serverTimestamp(),
+          userId: user.uid // Ensure userId is present on updates too
+        });
+        setNotification({ type: "success", message: "Note updated successfully" });
+      } else {
+        // Add new note
+        await addDoc(collection(db, `projects/${id}/notes`), {
+          title: typeof title === "string" ? title : "",
+          content: typeof content === "string" ? content : "",
+          createdAt: serverTimestamp(),
+          userId: user.uid
+        });
+        setNotification({ type: "success", message: "Note added successfully" });
+      }
+
+      // Refresh notes after add or update
+      const q = query(collection(db, `projects/${id}/notes`), where("userId", "==", user.uid));
+      const notesSnap = await getDocs(q);
+      setNotes(
+        notesSnap.docs
+          .map(doc => ({ id: doc.id, ...doc.data() }))
+          .sort((a, b) => (b.createdAt?.seconds || 0) - (a.createdAt?.seconds || 0))
+      );
+
+    } catch (error) {
+      console.error("Error saving note:", error); // Log the error
+      setNotification({
+        type: "error",
+        message: `Failed to ${noteId ? 'update' : 'add'} note. Please try again.`
+      });
+    } finally {
+      setLoadingNotes(false);
+    }
+  };
+
+  // File upload handler (remains the same)
   const handleUploadFile = async (file) => {
     setUploading(true);
     try {
@@ -267,31 +314,8 @@ export default function ProjectDetail() {
             <ProjectNotes
               notes={notes}
               loadingNotes={loadingNotes}
-              onAddNote={async ({ title, content }) => {
-                if (!user?.uid) return;
-                setLoadingNotes(true);
-                try {
-                  await addDoc(collection(db, `projects/${id}/notes`), {
-                    title: typeof title === "string" ? title : "",
-                    content: typeof content === "string" ? content : "",
-                    createdAt: serverTimestamp(),
-                    userId: user.uid
-                  });
-                  // Refresh notes
-                  const q = query(collection(db, `projects/${id}/notes`), where("userId", "==", user.uid));
-                  const notesSnap = await getDocs(q);
-                  setNotes(
-                    notesSnap.docs
-                      .map(doc => ({ id: doc.id, ...doc.data() }))
-                      .sort((a, b) => (b.createdAt?.seconds || 0) - (a.createdAt?.seconds || 0))
-                  );
-                } catch (error) {
-                  // Optionally handle error
-                } finally {
-                  setLoadingNotes(false);
-                }
-              }}
-            onDeleteNote={async (noteId) => {
+              onSaveNote={handleSaveNote} // Use the unified save handler
+              onDeleteNote={async (noteId) => {
               if (!user?.uid) return;
               setLoadingNotes(true);
               try {

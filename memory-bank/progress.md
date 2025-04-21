@@ -283,3 +283,9 @@
 2025-04-15: Consolidated and updated documentation for the enhanced Character Workflow system implementation, including config-driven engine, step-by-step UI, project linking/unlinking, view mode, autosave, resume logic fixes, layout adjustments, and associated new components. Marked previous workflow tasks as superseded or complete.
 2025-04-15: Documented the implementation of the "Retro Space" theme overhaul, including the new color palette (teal, orange, cream), updated component styling, and associated UI fixes (sidebar logo, removed emojis/borders). Marked previous UI/UX Phase 2 as superseded. Updated Recent Updates section.
 2025-04-17: Added entry for "Landing Page Redesign & Fixes" under Completed Features. Marked previous landing page layout task as resolved. Added Password Reset flow to completed features. Updated consolidated recent updates list. Updated Upcoming Work section to reflect Password Reset as next priority.
+
+### UI Polish & Note Editing Refactor
+- [x] Added note deletion animation (`ProjectNotes.jsx`).
+- [x] Implemented editor toolbar active states (`EditorToolbar.jsx`).
+- [x] Fixed editor list buttons (CSS conflict resolved in `index.css`, `RichTextEditor.jsx`).
+- [x] Simplified note editing logic in `ProjectNotes.jsx` and `ProjectDetail.jsx` to match note creation.

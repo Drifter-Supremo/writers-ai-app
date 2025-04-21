@@ -106,7 +106,7 @@ This file tracks areas that were simplified during MVP development and need poli
   - Version history
   - File categorization
 - [ ] Note improvements:
-  - Rich text editor
+  - [x] Rich text editor
   - Note templates
   - Note categories
 - [ ] Search enhancements:

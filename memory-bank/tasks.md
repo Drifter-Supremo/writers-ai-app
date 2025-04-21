@@ -90,9 +90,10 @@ This document outlines the remaining tasks required to complete and polish the W
 - General UI/UX improvements for the Notes section.
 
 **Remaining Issues & Next Steps:**
-- Toolbar buttons (bold, italic, underline, bullet/number list) lack visual active state.
-- Editing a note does not apply changes.
-- Note delete animation is abrupt/poor.
+- [x] Toolbar buttons (bold, italic, underline, bullet/number list) lack visual active state.
+- [x] Editing a note does not apply changes.
+- [x] Note delete animation is abrupt/poor.
+- [x] Fixed editor list buttons (CSS conflict resolved).
 - Notes should display as tile cards (like workflow cards).
 - Add skeleton loaders for async content.
 - Improve error handling and user feedback.
