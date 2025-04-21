@@ -2,6 +2,11 @@
 
 ## ✅ Completed Features
 
+### Notes UI Improvements (`ProjectNotes.jsx`) (2025-04-21)
+- [x] Restyled note cards to match workflow card styling (`bg-teal-light`, `border`, `rounded-lg`).
+- [x] Implemented responsive grid layout (`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4`).
+- [x] Reduced size of Add/Cancel buttons in the note form (`px-3 py-1` instead of `px-4 py-2`).
+
 ### Landing Page Redesign & Fixes
 - [x] Replaced background image with solid color (`#032934`).
 - [x] Added logo as foreground `<img>` element (`h-40`).
@@ -283,6 +288,7 @@
 2025-04-15: Consolidated and updated documentation for the enhanced Character Workflow system implementation, including config-driven engine, step-by-step UI, project linking/unlinking, view mode, autosave, resume logic fixes, layout adjustments, and associated new components. Marked previous workflow tasks as superseded or complete.
 2025-04-15: Documented the implementation of the "Retro Space" theme overhaul, including the new color palette (teal, orange, cream), updated component styling, and associated UI fixes (sidebar logo, removed emojis/borders). Marked previous UI/UX Phase 2 as superseded. Updated Recent Updates section.
 2025-04-17: Added entry for "Landing Page Redesign & Fixes" under Completed Features. Marked previous landing page layout task as resolved. Added Password Reset flow to completed features. Updated consolidated recent updates list. Updated Upcoming Work section to reflect Password Reset as next priority.
+2025-04-21: Added entry for "Notes UI Improvements (`ProjectNotes.jsx`)" under Completed Features, detailing card restyling, grid layout, and smaller form buttons.
 
 ### UI Polish & Note Editing Refactor
 - [x] Added note deletion animation (`ProjectNotes.jsx`).

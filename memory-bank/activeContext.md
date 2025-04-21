@@ -12,6 +12,11 @@ Phase 2: Authentication & Landing Page
 - UI is clean, intuitive, and matches the intended design.
 
 ### Recent Completions
+1. **Notes UI Improvements (`ProjectNotes.jsx`)**
+   - ✅ Restyled note cards to match workflow card styling (`bg-teal-light`, `border`, `rounded-lg`).
+   - ✅ Implemented responsive grid layout (`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4`).
+   - ✅ Reduced size of Add/Cancel buttons in the note form (`px-3 py-1` instead of `px-4 py-2`).
+
 1. **Landing Page Redesign & Fixes**
    - ✅ Replaced background image with solid color (`#032934`).
    - ✅ Added logo as foreground `<img>` element (`h-40`).
@@ -422,6 +427,7 @@ Phase 2: Authentication & Landing Page
 2025-04-15: Consolidated and updated entries for the enhanced Character Workflow system, including config-driven engine, step-by-step UI, project linking/unlinking, view mode, autosave, resume logic fixes, layout adjustments, and associated new components. Removed `WorkflowSection.jsx` details as it was refactored out.
 2025-04-15: Updated documentation to reflect the new "Retro Space" theme overhaul. Replaced previous color system (purple/blue/gradients) with deep teal, vibrant orange, and cream/yellow palette. Updated background, text, and accent color usage across components. Documented UI fixes including sidebar logo header, removal of sidebar emojis and borders, and workflow card button fix. Marked previous UI/UX Phase 2 as superseded where applicable.
 2025-04-17: Documented completion of Landing Page Redesign & Fixes, including solid background color, logo placement, tagline, scroll fix, and Google button inline styling. Updated current focus and next steps to Password Reset. Marked previous landing page tasks as superseded/resolved.
+2025-04-21: Documented Notes UI improvements (card styling, grid layout, smaller form buttons) in `ProjectNotes.jsx`.
 
 1. **UI Polish & Note Editing Refactor**
    - ✅ Added note deletion animation (`ProjectNotes.jsx`).

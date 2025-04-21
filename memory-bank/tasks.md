@@ -81,7 +81,7 @@ This document outlines the remaining tasks required to complete and polish the W
 
 ---
 
-### 3.5. Notes Section Refactor & Outstanding Issues (2025-04-21)
+### 3.5. Notes Section Refactor & Outstanding Issues (Updated 2025-04-21)
 
 **Summary of Completed Work:**
 - Implemented note saving with autosave and error handling.
@@ -94,7 +94,7 @@ This document outlines the remaining tasks required to complete and polish the W
 - [x] Editing a note does not apply changes.
 - [x] Note delete animation is abrupt/poor.
 - [x] Fixed editor list buttons (CSS conflict resolved).
-- Notes should display as tile cards (like workflow cards).
+- [x] Notes should display as tile cards (like workflow cards). (Implemented responsive grid and card styling matching workflows)
 - Add skeleton loaders for async content.
 - Improve error handling and user feedback.
 - General UI polish and accessibility improvements.
@@ -367,3 +367,4 @@ All loading and skeleton state tasks for the Project Detail View and its sidebar
 2025-04-15: Marked Character Workflow Restructuring/Linking tasks (1.4) as complete/superseded. Added new section (1.5) detailing the completion of the Enhanced Character Workflow implementation. Updated AI Integration (4.3), Testing (5.1, 5.3), and Polish (6.1) tasks to reflect the new workflow components and structure.
 2025-04-15: Added new section (1.6) marking the "Retro Space" theme implementation and associated UI fixes as complete. Updated related polish tasks (6.1) to reflect this completion.
 2025-04-17: Marked "(Optional) Password Reset" task (2.3) as incomplete and designated it as the **(Next Priority)**. Updated Landing Page section (3.0) to reflect completion of the redesign and fixes, superseding previous refinement tasks.
+2025-04-21: Updated Notes Section Refactor (3.5) to mark task "Notes should display as tile cards" as complete, reflecting the implementation of responsive grid layout and workflow-style card styling in `ProjectNotes.jsx`.

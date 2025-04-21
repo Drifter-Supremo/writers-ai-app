@@ -63,14 +63,13 @@ export default function ProjectNotes({
 
   return (
     <div>
-      <h2 className="text-2xl font-bold text-cream-yellow mb-6">Notes</h2>
+      <h2 className="text-2xl font-bold text-text-primary mb-6">Notes</h2>
 
       {/* Note Editor Form */}
       <form onSubmit={handleSaveNote} className="mb-6">
         <input
           type="text"
-          className="w-full !bg-teal-light border border-cream-yellow/30 rounded-md p-3 text-cream-yellow min-h-[44px] mb-3 placeholder-cream-gray focus:ring-orange-vibrant focus:border-orange-vibrant shadow-sm"
-          style={{ backgroundColor: '#1a4c5d' }}
+          className="input-creative min-h-[44px] mb-3"
           placeholder="Note title"
           value={noteTitle}
           onChange={(e) => setNoteTitle(e.target.value)} // Simplified onChange
@@ -83,7 +82,7 @@ export default function ProjectNotes({
         <div className="flex gap-2 mt-3">
           <button
             type="submit"
-            className="bg-orange-vibrant text-white px-4 py-2 rounded-md font-medium hover:brightness-110 transition duration-200 disabled:opacity-60"
+            className="btn-creative px-3 py-1.5 text-sm"
             // No validation: always enabled
           >
             {editingNote ? "Save Changes" : "Add Note"} {/* Updated button text */}
@@ -91,7 +90,7 @@ export default function ProjectNotes({
           {editingNote && ( // Show cancel button only when editing
             <button
               type="button"
-              className="border border-cream-yellow text-cream-yellow px-4 py-2 rounded-md font-medium hover:bg-teal-deep transition duration-200"
+              className="btn-creative-secondary px-3 py-1.5 text-sm"
               onClick={handleCancelEdit}
             >
               Cancel
@@ -101,48 +100,57 @@ export default function ProjectNotes({
       </form>
 
       {/* Notes List (below editor) */}
-      <div>
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
         {loadingNotes ? (
-          // Skeleton loaders
-          <div>
-            {[1, 2, 3].map((i) => (
+          // Skeleton loaders - grid layout
+          <>
+            {[1, 2, 3, 4].map((i) => (
               <div
                 key={i}
-                className="bg-teal-light/50 rounded p-4 mb-4 animate-pulse h-16"
-              />
+                className="card-creative p-4 h-[180px] animate-pulse"
+              >
+                <div className="h-5 bg-card-bg/70 rounded w-3/4 mb-2"></div> {/* Title */}
+                <div className="h-3 bg-card-bg/50 rounded w-1/2 mb-2"></div> {/* Date */}
+                <div className="h-3 bg-card-bg/50 rounded w-full"></div> {/* Content */}
+              </div>
             ))}
-          </div>
+          </>
         ) : notes.length === 0 ? (
-          <div className="text-cream-gray text-sm italic">No notes added yet.</div>
+          <div className="text-text-secondary text-sm italic">No notes added yet.</div>
         ) : (
           notes.map((note) => (
             <div
               key={note.id}
-              className={`relative group mb-4 ${deletingNoteId === note.id ? 'animate-fade-out' : 'animate-fade-in'}`}
+              className={`card-creative relative group h-[180px] ${deletingNoteId === note.id ? 'animate-fade-out' : 'animate-fade-in'}`}
             >
               <button
-                className={`w-full text-left bg-teal-light p-4 rounded-md border border-cream-yellow/20 hover:bg-teal-deep transition-colors duration-150 focus:outline-none focus:ring-2 focus:ring-orange-vibrant ${
-                  editingNote?.id === note.id ? "ring-2 ring-orange-vibrant" : "" // Highlight based on editingNote.id
+                className={`w-full h-full text-left p-4 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-accent-orange overflow-hidden ${
+                  editingNote?.id === note.id ? "ring-2 ring-accent-orange" : "" // Highlight based on editingNote.id
                 }`}
                 onClick={() => handleNoteClick(note)}
                 type="button"
                 tabIndex={0}
               >
-                <div className="font-semibold text-cream-yellow mb-1 truncate">
+                <div className="font-semibold text-text-primary text-lg mb-1 truncate">
                   {typeof note.title === "string" ? note.title : ""}
                 </div>
+                {note.lastUpdated && (
+                  <div className="text-text-secondary text-xs mb-2">
+                    Updated: {note.lastUpdated.toDate ? note.lastUpdated.toDate().toLocaleString() : "Unknown"}
+                  </div>
+                )}
                 <div
-                  className="prose prose-invert prose-sm max-w-none prose-p:text-cream-yellow prose-strong:text-cream-yellow prose-em:text-cream-yellow prose-ul:text-cream-yellow prose-ol:text-cream-yellow prose-li:text-cream-yellow line-clamp-2"
+                  className="text-text-secondary text-sm line-clamp-3"
                 >
                   {typeof note.content === "string"
-                    ? note.content.replace(/<[^>]+>/g, "").trim().slice(0, 120)
+                    ? note.content.replace(/<[^>]+>/g, "").trim().slice(0, 100)
                     : ""}
                 </div>
               </button>
               {/* Delete button, visible on hover or always for accessibility */}
               <button
                 type="button"
-                className="absolute top-2 right-2 opacity-80 group-hover:opacity-100 bg-orange-vibrant text-white rounded px-2 py-1 text-xs font-semibold shadow hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-vibrant transition"
+                className="absolute top-2 right-2 opacity-80 group-hover:opacity-100 bg-accent-orange text-primary-bg rounded px-2 py-1 text-xs font-semibold shadow-card hover:bg-accent-orange-hover focus:outline-none focus:ring-2 focus:ring-accent-orange transition-all duration-200"
                 title="Delete note"
                 onClick={(e) => {
                   e.stopPropagation();
