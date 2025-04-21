@@ -78,6 +78,12 @@
 - [x] File management
   - Upload with type restrictions
   - Storage in Firebase
+
+### Notes Section Improvements (2025-04-21)
+- [x] Implemented note saving with autosave and error handling.
+- [x] Added note delete functionality.
+- [x] Updated note title color to match theme.
+- [x] General UI/UX improvements for the Notes section.
   - File deletion
   - Download links
   - Enhanced UI with feedback
@@ -146,7 +152,14 @@
 - [x] Added skeleton loaders for workflow list and link modal project list.
 - [x] Replaced `alert()` with custom `Notification.jsx` component for feedback.
 
-## 🚧 In Progress
+## Recent Progress
+
+### Login/Signup Form Refactor & Storage Rules Completion (2025-04-18)
+- Refactored the authentication form on the landing page to eliminate duplicate/nested submit buttons and ensure a single, intuitive login/signup experience.
+- Top button row now serves as both the mode switcher and the submit action, improving clarity and accessibility.
+- Fixed all JSX and lint errors related to form structure.
+- Checked off the Storage Rules task in `tasks.md`.
+- Storage rules are now deployed, ensuring users can only access their own files and all access is authenticated.
 
 ### (Resolved) Landing Page Layout Refinement
 - [x] Issues addressed by the "Landing Page Redesign & Fixes" above.

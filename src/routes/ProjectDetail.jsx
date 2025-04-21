@@ -25,6 +25,17 @@ export default function ProjectDetail() {
   const [deletingFileId, setDeletingFileId] = useState(null);
   const [uploading, setUploading] = useState(false);
 
+  // Notification state for errors
+  const [notification, setNotification] = useState(null);
+
+  // On mount, set activeSection from hash if present
+  useEffect(() => {
+    const hash = window.location.hash.replace('#', '');
+    if (hash && ['overview', 'files', 'notes', 'settings'].includes(hash)) {
+      setActiveSection(hash);
+    }
+  }, []);
+
   useEffect(() => {
     async function fetchProject() {
       try {
@@ -147,7 +158,10 @@ export default function ProjectDetail() {
                 ? 'btn-creative' // Active state uses .btn-creative
                 : 'text-text-secondary hover:bg-accent-orange/20' // Inactive state uses text-secondary and orange hover
             }`}
-            onClick={() => setActiveSection('overview')}
+            onClick={() => {
+              setActiveSection('overview');
+              window.location.hash = 'overview';
+            }}
           >
             Overview
           </button>
@@ -157,7 +171,10 @@ export default function ProjectDetail() {
                 ? 'btn-creative'
                 : 'text-text-secondary hover:bg-accent-orange/20'
             }`}
-            onClick={() => setActiveSection('files')}
+            onClick={() => {
+              setActiveSection('files');
+              window.location.hash = 'files';
+            }}
           >
             Files
           </button>
@@ -167,7 +184,10 @@ export default function ProjectDetail() {
                 ? 'btn-creative'
                 : 'text-text-secondary hover:bg-accent-orange/20'
             }`}
-            onClick={() => setActiveSection('notes')}
+            onClick={() => {
+              setActiveSection('notes');
+              window.location.hash = 'notes';
+            }}
           >
             Notes
           </button>
@@ -177,7 +197,10 @@ export default function ProjectDetail() {
                 ? 'btn-creative'
                 : 'text-text-secondary hover:bg-accent-orange/20'
             }`}
-            onClick={() => setActiveSection('settings')}
+            onClick={() => {
+              setActiveSection('settings');
+              window.location.hash = 'settings';
+            }}
           >
             Settings
           </button>
@@ -187,6 +210,20 @@ export default function ProjectDetail() {
       {/* Main Content - Inherits primary-bg */}
       <div className="p-8 overflow-auto"> {/* Added overflow-auto */}
         <div className="max-w-5xl mx-auto">
+          {notification && (
+            <div
+              className={`mb-4 px-4 py-3 rounded-md font-medium ${
+                notification.type === "error"
+                  ? "bg-red-900 text-red-100 border border-red-400"
+                  : "bg-green-900 text-green-100 border border-green-400"
+              }`}
+              role="alert"
+              onClick={() => setNotification(null)}
+              style={{ cursor: "pointer" }}
+            >
+              {notification.message}
+            </div>
+          )}
           {activeSection === 'overview' && (
             <ProjectOverview // Assumes ProjectOverview uses correct theme styles
               project={project}
@@ -230,12 +267,13 @@ export default function ProjectDetail() {
             <ProjectNotes
               notes={notes}
               loadingNotes={loadingNotes}
-              onAddNote={async (content) => {
+              onAddNote={async ({ title, content }) => {
                 if (!user?.uid) return;
                 setLoadingNotes(true);
                 try {
                   await addDoc(collection(db, `projects/${id}/notes`), {
-                    content,
+                    title: typeof title === "string" ? title : "",
+                    content: typeof content === "string" ? content : "",
                     createdAt: serverTimestamp(),
                     userId: user.uid
                   });
@@ -253,7 +291,29 @@ export default function ProjectDetail() {
                   setLoadingNotes(false);
                 }
               }}
-            />
+            onDeleteNote={async (noteId) => {
+              if (!user?.uid) return;
+              setLoadingNotes(true);
+              try {
+                await deleteDoc(doc(db, `projects/${id}/notes`, noteId));
+                // Refresh notes
+                const q = query(collection(db, `projects/${id}/notes`), where("userId", "==", user.uid));
+                const notesSnap = await getDocs(q);
+                setNotes(
+                  notesSnap.docs
+                    .map(doc => ({ id: doc.id, ...doc.data() }))
+                    .sort((a, b) => (b.createdAt?.seconds || 0) - (a.createdAt?.seconds || 0))
+                );
+              } catch (error) {
+                setNotification({
+                  type: "error",
+                  message: "Failed to delete note. Please try again."
+                });
+              } finally {
+                setLoadingNotes(false);
+              }
+            }}
+          />
           )}
           {activeSection === 'settings' && (
             <ProjectSettings />

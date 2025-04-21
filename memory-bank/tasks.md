@@ -78,6 +78,26 @@ This document outlines the remaining tasks required to complete and polish the W
 
 ### 1.5. Enhanced Character Workflow Implementation
 - [x] **New Structure:** Created `/src/workflows/`, `/src/workflows/components/`, `/src/workflows/configs/`.
+
+---
+
+### 3.5. Notes Section Refactor & Outstanding Issues (2025-04-21)
+
+**Summary of Completed Work:**
+- Implemented note saving with autosave and error handling.
+- Added note delete functionality.
+- Updated note title color to match theme.
+- General UI/UX improvements for the Notes section.
+
+**Remaining Issues & Next Steps:**
+- Toolbar buttons (bold, italic, underline, bullet/number list) lack visual active state.
+- Editing a note does not apply changes.
+- Note delete animation is abrupt/poor.
+- Notes should display as tile cards (like workflow cards).
+- Add skeleton loaders for async content.
+- Improve error handling and user feedback.
+- General UI polish and accessibility improvements.
+- Review for any other known issues.
 - [x] **Config-Driven:** Implemented `src/workflows/configs/characterWorkflowConfig.js` to define workflow structure.
 - [x] **Core Engine:** Developed `WorkflowEngine.jsx` for logic, state management, Firestore load/save (debounced autosave).
 - [x] **UI Components:** Created `WorkflowSection.jsx` and `QuestionCard.jsx` for rendering UI based on config.
@@ -329,15 +349,15 @@ All loading and skeleton state tasks for the Project Detail View and its sidebar
 - [ ] **README.md:** Update the main `README.md` with final setup instructions, feature overview, and deployment notes.
 - [ ] **Code Comments:** Review and add necessary code comments, especially for complex logic.
 - [ ] **.clinerules:** Populate the `.clinerules` file with learned patterns and project intelligence.
-
-### 6.4. Deployment (Target: Railway)
-- [ ] **Railway Project Setup:** Configure project on Railway, connecting to the GitHub repository.
-- [ ] **Build Configuration:** Ensure Railway uses the correct build command (`npm run build`) and publish directory (`dist`).
+### 6.4. Deployment (Target: Vercel)
+- [ ] **Vercel Project Setup:** Configure project on Vercel, connecting to the GitHub repository.
+- [ ] **Build Configuration:** Ensure Vercel uses the correct build command (`npm run build`) and publish directory (`dist`).
 - [ ] **Build Process:** Verify the `npm run build` command generates the production-ready assets correctly in the `dist` folder.
 - [ ] **Firebase Security Rules:** Finalize and deploy Firestore and Storage security rules (as Firebase services are still used).
-- [ ] **Environment Variables:** Manage API keys and environment-specific configurations securely within Railway's environment variable settings.
-- [ ] **Custom Domain (Optional):** Configure a custom domain on Railway if needed.
-- [ ] **CI/CD Pipeline (Optional):** Set up a CI/CD pipeline (e.g., using GitHub Actions) for automated testing and deployment triggers if Railway's default GitHub integration isn't sufficient.
+- [ ] **Environment Variables:** Manage API keys and environment-specific configurations securely within Vercel's environment variable settings.
+- [ ] **Custom Domain (Optional):** Configure a custom domain on Vercel if needed.
+- [ ] **CI/CD Pipeline (Optional):** Set up a CI/CD pipeline (e.g., using GitHub Actions) for automated testing and deployment triggers if Vercel's default GitHub integration isn't sufficient.
+
 
 
 ---

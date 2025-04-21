@@ -3,7 +3,13 @@
 ## Current Development Focus
 
 ### Active Phase
-Phase 2: Authentication & User Management - Password Reset
+Phase 2: Authentication & Landing Page
+
+- Login/signup form refactored: single form, no duplicate/nested buttons.
+- Top button row (Sign In/Sign Up) now acts as both mode switcher and submit.
+- All lint/JSX errors resolved.
+- Storage rules for Firebase are complete and deployed, ensuring user file isolation and security.
+- UI is clean, intuitive, and matches the intended design.
 
 ### Recent Completions
 1. **Landing Page Redesign & Fixes**
