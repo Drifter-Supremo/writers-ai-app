@@ -92,7 +92,7 @@ export default function ProjectFiles({ files, onDeleteFile, deletingFileId, proj
         className="flex flex-col items-start gap-2 mb-8"
       >
         {/* Use .btn-creative */}
-        <label className="btn-creative cursor-pointer text-center w-auto min-w-[140px]">
+        <label className="btn-creative px-3 py-1.5 text-sm cursor-pointer text-center w-auto min-w-[140px]">
           <input
             type="file"
             ref={fileInputRef}
@@ -110,7 +110,7 @@ export default function ProjectFiles({ files, onDeleteFile, deletingFileId, proj
         {/* Use .btn-creative */}
         <button
           type="submit"
-          className="btn-creative w-auto min-w-[140px]"
+          className="btn-creative px-3 py-1.5 text-sm w-auto min-w-[140px]"
           disabled={uploading || !selectedFileName}
         >
           {uploading ? "Uploading..." : "Upload"}
@@ -152,7 +152,7 @@ export default function ProjectFiles({ files, onDeleteFile, deletingFileId, proj
                 href={file.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn-creative mt-2 w-full text-center"
+                className="btn-creative px-3 py-1.5 text-sm mt-2 w-full text-center"
               >
                 View File
               </a>

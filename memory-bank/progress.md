@@ -7,6 +7,15 @@
 - [x] Implemented responsive grid layout (`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4`).
 - [x] Reduced size of Add/Cancel buttons in the note form (`px-3 py-1` instead of `px-4 py-2`).
 
+### Notes Functionality & UX Enhancements (2025-04-21)
+- [x] Fixed editor toolbar button active states (`EditorToolbar.jsx`).
+- [x] Implemented debounced autosave for note content changes (`ProjectNotes.jsx`).
+- [x] Replaced direct delete button on note cards with a 3-dot menu containing the delete action.
+- [x] Removed content preview and metadata (timestamps) from note cards for a cleaner look.
+- [x] Implemented auto-dismissing notifications (`Notification.jsx`) for feedback (e.g., save, delete).
+- [x] Disabled "Add Note" / "Save Changes" buttons when title or content is empty.
+- [x] Standardized button sizes across Notes and Files sections for consistency.
+
 ### Landing Page Redesign & Fixes
 - [x] Replaced background image with solid color (`#032934`).
 - [x] Added logo as foreground `<img>` element (`h-40`).
@@ -191,6 +200,7 @@
 6. **UI/UX Phase 1 Overhaul:** Replaced top navbar with sidebar navigation and implemented a split-view layout.
 7. **Landing Page Redesign & Fixes:** Replaced background image with solid color, added logo/tagline, fixed scrolling, restyled Google button.
 8. **Authentication:** Added password reset flow.
+9. **Notes Section Polish:** Fixed toolbar states, added autosave, replaced delete button with menu, removed card previews/metadata, added notifications, improved button states, and standardized button sizes.
 
 ### Dashboard Enhancement
 - [ ] Advanced filtering
@@ -289,6 +299,7 @@
 2025-04-15: Documented the implementation of the "Retro Space" theme overhaul, including the new color palette (teal, orange, cream), updated component styling, and associated UI fixes (sidebar logo, removed emojis/borders). Marked previous UI/UX Phase 2 as superseded. Updated Recent Updates section.
 2025-04-17: Added entry for "Landing Page Redesign & Fixes" under Completed Features. Marked previous landing page layout task as resolved. Added Password Reset flow to completed features. Updated consolidated recent updates list. Updated Upcoming Work section to reflect Password Reset as next priority.
 2025-04-21: Added entry for "Notes UI Improvements (`ProjectNotes.jsx`)" under Completed Features, detailing card restyling, grid layout, and smaller form buttons.
+2025-04-21: Documented major Notes section functionality and UX enhancements (autosave, 3-dot menu, cleaner cards, notifications, button states, button size standardization) under Completed Features and updated Recent Updates.
 
 ### UI Polish & Note Editing Refactor
 - [x] Added note deletion animation (`ProjectNotes.jsx`).

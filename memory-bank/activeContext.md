@@ -12,6 +12,16 @@ Phase 2: Authentication & Landing Page
 - UI is clean, intuitive, and matches the intended design.
 
 ### Recent Completions
+
+1. **Notes Section Overhaul (2025-04-21)**
+   - ✅ Implemented robust autosave for note content changes.
+   - ✅ Fixed editor toolbar button active state highlighting.
+   - ✅ Replaced direct delete button on note cards with a 3-dot menu containing the delete action.
+   - ✅ Simplified note card appearance by removing content previews and metadata (timestamps).
+   - ✅ Added auto-dismissing notifications for actions like save and delete.
+   - ✅ Improved form validation: Add Note/Save Changes buttons are disabled until both title and content are provided.
+   - ✅ Standardized button sizes across Notes and Files sections for UI consistency.
+
 1. **Notes UI Improvements (`ProjectNotes.jsx`)**
    - ✅ Restyled note cards to match workflow card styling (`bg-teal-light`, `border`, `rounded-lg`).
    - ✅ Implemented responsive grid layout (`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4`).

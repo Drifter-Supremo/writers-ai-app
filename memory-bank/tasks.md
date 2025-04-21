@@ -95,9 +95,9 @@ This document outlines the remaining tasks required to complete and polish the W
 - [x] Note delete animation is abrupt/poor.
 - [x] Fixed editor list buttons (CSS conflict resolved).
 - [x] Notes should display as tile cards (like workflow cards). (Implemented responsive grid and card styling matching workflows)
-- Add skeleton loaders for async content.
-- Improve error handling and user feedback.
-- General UI polish and accessibility improvements.
+- [x] Add skeleton loaders for async content. (Confirmed already implemented)
+- [x] Improve error handling and user feedback. (Implemented auto-dismissing notifications)
+- [x] General UI polish and accessibility improvements. (Multiple UI improvements made)
 - Review for any other known issues.
 - [x] **Config-Driven:** Implemented `src/workflows/configs/characterWorkflowConfig.js` to define workflow structure.
 - [x] **Core Engine:** Developed `WorkflowEngine.jsx` for logic, state management, Firestore load/save (debounced autosave).
@@ -368,3 +368,4 @@ All loading and skeleton state tasks for the Project Detail View and its sidebar
 2025-04-15: Added new section (1.6) marking the "Retro Space" theme implementation and associated UI fixes as complete. Updated related polish tasks (6.1) to reflect this completion.
 2025-04-17: Marked "(Optional) Password Reset" task (2.3) as incomplete and designated it as the **(Next Priority)**. Updated Landing Page section (3.0) to reflect completion of the redesign and fixes, superseding previous refinement tasks.
 2025-04-21: Updated Notes Section Refactor (3.5) to mark task "Notes should display as tile cards" as complete, reflecting the implementation of responsive grid layout and workflow-style card styling in `ProjectNotes.jsx`.
+2025-04-21: Marked remaining Notes Section Refactor (3.5) tasks (skeleton loaders, error handling, UI polish) as complete based on recent implementations (autosave, notifications, UI tweaks, button standardization).

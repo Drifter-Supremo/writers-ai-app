@@ -116,7 +116,7 @@ flowchart TD
 
     ButtonPrimary[Primary Buttons] --> BgColor4[bg-orange-vibrant]
     ButtonPrimary --> Text[text-white]
-    ButtonPrimary --> Size[px-4 py-2]
+    ButtonPrimary --> Size[px-3 py-1.5 text-sm]
     ButtonPrimary --> Round2[rounded-md]
     ButtonPrimary --> Hover[hover:brightness-110]
     ButtonPrimary --> Trans[transition-all]
@@ -124,7 +124,7 @@ flowchart TD
     ButtonSecondary[Secondary Buttons] --> Border2[border border-cream-yellow]
     ButtonSecondary --> Text2[text-cream-yellow]
     ButtonSecondary --> Hover2[hover:bg-cream-yellow/10]
-    ButtonSecondary --> Size
+    ButtonSecondary --> Size[px-3 py-1.5 text-sm]
     ButtonSecondary --> Round2
     ButtonSecondary --> Trans
 
@@ -164,6 +164,14 @@ flowchart TD
         AIButton --> AIModal[AIHelperModal]
     end
 ```
+
+**Button Size Standardization:**
+
+To ensure visual consistency across different application sections (like Notes and Files), buttons have been standardized to use the following size and text classes:
+- **Primary Buttons:** `bg-orange-vibrant text-white px-3 py-1.5 text-sm rounded-md ...`
+- **Secondary Buttons:** `border border-cream-yellow text-cream-yellow px-3 py-1.5 text-sm rounded-md ...`
+
+This smaller size (`px-3 py-1.5 text-sm`) provides a more compact and uniform appearance for actions within content areas.
 
 ### 4. Styling Strategy ("Retro Space" Theme)
 - Tailwind CSS with custom theme extensions defined in `tailwind.config.js`.
