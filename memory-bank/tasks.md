@@ -200,30 +200,6 @@ All loading and skeleton state tasks for the Project Detail View and its sidebar
     - [x] Ensure existing notes are correctly loaded and displayed in the editor.
     - [x] Handle potential data format changes if migrating from plain text.
 
-### 3.2. Dynamic Document Viewer
-- [ ] **Choose Viewer Library:** Research and select a suitable library for rendering common document types (PDF, DOCX, TXT) in the browser (e.g., `react-pdf`, `mammoth.js` for DOCX).
-- [ ] **Integrate Viewer:**
-    - [ ] Create a new component (e.g., `DocumentViewer.jsx`).
-    - [ ] Add logic to fetch the file content/URL from Firebase Storage based on the selected file.
-    - [ ] Implement conditional rendering based on file type (PDF viewer, DOCX-to-HTML converter, plain text display).
-- [ ] **UI Integration:**
-    - [ ] Modify the Files section in `ProjectDetail.jsx`.
-    - [ ] Add a "View" button or make file names clickable.
-    - [ ] Display the `DocumentViewer` component, potentially in a modal or a dedicated panel within the Project Detail view.
-    - [ ] Add loading state while fetching/rendering the document.
-    - [ ] Add error handling if a document fails to load or render.
-
-### 3.3. Drag-and-Drop Functionality
-- [ ] **File Upload:**
-    - [ ] Implement a drag-and-drop zone for file uploads in the Files section.
-    - [ ] Provide visual feedback during drag-over and on drop.
-    - [ ] Integrate with the existing file upload logic.
-- [ ] **(Optional) Note Reordering:**
-    - [ ] Implement drag-and-drop reordering for notes within the Notes section.
-    - [ ] Update Firestore data (potentially add an `order` field) to persist the new order.
-- [ ] **(Optional) Project Card Reordering:**
-    - [ ] Implement drag-and-drop reordering for project cards on the dashboard.
-    - [ ] Update Firestore data to persist the order.
 
 ### 3.4. Homepage Revamp Tasks
 - [ ] **Implement Welcome & Quickstart Section:**
