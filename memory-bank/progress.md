@@ -30,6 +30,18 @@
 - [x] Password reset flow (email link via Firebase Auth)
 
 ### "Retro Space" Theme & UI Overhaul
+
+### UI Button Standardization & Consistency (2025-04-22)
+- [x] Standardized all main action buttons across the app to use `btn-creative px-3 py-1.5 text-sm` (or `btn-creative-secondary px-3 py-1.5 text-sm` where appropriate):
+  - Projects page: "New Project" button
+  - Workflows page: Resume/View buttons on workflow cards
+  - Workflow question screens: Previous, Next, and "Need AI Help?" buttons
+  - Workflow engine navigation: Previous, Next, and Start Workflow buttons
+  - Settings page: Save Preferences, Reset Form, Clear Preferences buttons
+- [x] Ensured no layout or unrelated style changes were made
+- [x] Verified no parent or wrapper components were overriding button styles
+- [x] Confirmed visual consistency across all user-facing action buttons
+
 - [x] Implemented new "Retro Space" dark theme.
   - **Color Palette:** Deep teal/green (`#0f303d`), vibrant orange (`#f58a07`), cream/yellow (`#f9f4d9`).
   - **Backgrounds:** Solid deep teal/lighter teal for main, sidebar, cards, inputs. Removed gradients and white backgrounds.

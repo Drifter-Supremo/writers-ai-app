@@ -114,7 +114,7 @@ export default function Projects() {
         {/* Use .btn-creative */}
         <button
           onClick={handleNewProject}
-          className="btn-creative flex items-center space-x-2 group mt-6 sm:mt-0"
+          className="btn-creative px-3 py-1.5 text-sm flex items-center space-x-2 group mt-6 sm:mt-0"
         >
           <span className="text-xl transition-transform duration-200 group-hover:rotate-90">+</span>
           <span>New Project</span>

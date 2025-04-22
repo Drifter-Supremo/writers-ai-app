@@ -79,10 +79,10 @@ export default function Layout({ children }) {
                   {user.displayName || user.email}
                 </div>
                 <button
-                  className="btn-creative-secondary w-full"
+                  className="btn-creative px-3 py-1.5 text-sm w-full"
                   onClick={async () => {
                     await logout();
-navigate('/');
+                    navigate('/');
                   }}
                 >
                   Logout

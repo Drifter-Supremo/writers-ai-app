@@ -113,7 +113,7 @@ function QuestionCard({
               <button
                 type="button"
                 onClick={handleAiButtonClick}
-                className="btn-creative-secondary text-sm"
+                className="btn-creative-secondary px-3 py-1.5 text-sm"
               >
                 ✨ Need AI Help?
               </button>

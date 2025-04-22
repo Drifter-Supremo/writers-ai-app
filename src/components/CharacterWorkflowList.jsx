@@ -185,17 +185,15 @@ export default function CharacterWorkflowList() {
               <div className="flex gap-2 items-center"> {/* Added items-center for vertical alignment */}
                 {/* Use .btn-creative */}
                 {wf.completed ? (
-                  // Add min-width to prevent resize
                   <button
-                    className="btn-creative min-w-[80px]" 
+                    className="btn-creative px-3 py-1.5 text-sm"
                     onClick={() => navigate(`/character-workflow?id=${wf.id}&view=1`)}
                   >
                     View
                   </button>
                 ) : (
-                  // Add min-width to prevent resize
                   <button
-                    className="btn-creative min-w-[80px]" 
+                    className="btn-creative px-3 py-1.5 text-sm"
                     onClick={() => navigate(`/character-workflow?id=${wf.id}`)}
                   >
                     Resume

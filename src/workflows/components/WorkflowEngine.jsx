@@ -324,7 +324,7 @@ const WorkflowEngine = ({ config, workflowId, projectId, isViewMode = false }) =
              onClick={handlePrevious}
              // Disable if it's the first question (index 0 or 1 depending on intro)
              disabled={currentStepIndex === (config?.introduction ? 1 : 0)}
-             className={`btn-creative-secondary disabled:opacity-50`}
+             className={`btn-creative-secondary px-3 py-1.5 text-sm disabled:opacity-50`}
            >
              Previous
            </button>
@@ -336,7 +336,7 @@ const WorkflowEngine = ({ config, workflowId, projectId, isViewMode = false }) =
            {/* Use .btn-creative */}
            <button
              onClick={handleNext}
-             className={`btn-creative disabled:opacity-50`}
+             className={`btn-creative px-3 py-1.5 text-sm disabled:opacity-50`}
            >
              {nextButtonText}
            </button>
@@ -354,7 +354,7 @@ const WorkflowEngine = ({ config, workflowId, projectId, isViewMode = false }) =
              {/* Add a 'Start' or 'Next' button specifically for the intro step */}
              <div className="mt-6 text-right">
                  {/* Use .btn-creative */}
-                 <button onClick={handleNext} className="btn-creative">
+                 <button onClick={handleNext} className="btn-creative px-3 py-1.5 text-sm">
                      Start Workflow
                  </button>
              </div>

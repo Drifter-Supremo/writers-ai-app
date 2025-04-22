@@ -186,7 +186,7 @@ export default function Settings() {
           <button
             type="submit"
             disabled={!preferences.name.trim() || saving || Object.keys(errors).length > 0}
-            className="btn-creative"
+            className="btn-creative px-3 py-1.5 text-sm"
           >
             {saving ? (
               <svg className="animate-spin h-5 w-5 inline-block mr-2" viewBox="0 0 24 24">
@@ -217,7 +217,7 @@ export default function Settings() {
               setSaveSuccess(true);
               setTimeout(() => setSaveSuccess(false), 3000);
             }}
-            className="btn-creative-secondary"
+            className="btn-creative-secondary px-3 py-1.5 text-sm"
           >
             Reset Form
           </button>
@@ -239,7 +239,7 @@ export default function Settings() {
                 setClearing(false);
               }
             }}
-            className="btn-creative-secondary"
+            className="btn-creative-secondary px-3 py-1.5 text-sm"
             disabled={clearing}
           >
             {clearing ? (

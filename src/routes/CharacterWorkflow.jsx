@@ -227,19 +227,19 @@ export default function CharacterWorkflow() {
           <button
             type="button"
             onClick={handleBack}
-            className="btn-creative-secondary"
+            className="btn-creative-secondary px-3 py-1.5 text-sm"
             disabled={step === 0}
           >
             Back
           </button>
           {step < QUESTIONS.length - 1 ? (
-            <button type="submit" className="btn-creative">
+            <button type="submit" className="btn-creative px-3 py-1.5 text-sm">
               Next
             </button>
           ) : (
             <button
               type="button"
-              className="btn-creative"
+              className="btn-creative px-3 py-1.5 text-sm"
               onClick={() => handleSave(true)}
               disabled={saving}
             >
@@ -270,7 +270,7 @@ export default function CharacterWorkflow() {
           )}
           <button
             type="button"
-            className="btn-creative"
+            className="btn-creative px-3 py-1.5 text-sm"
             onClick={() => handleSave(false)}
             disabled={saving}
           >
