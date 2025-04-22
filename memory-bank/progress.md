@@ -25,9 +25,13 @@
 - [x] Ensured layout stability on resize.
 - [x] *Supersedes previous "Landing Page Implementation (Initial)" and related layout fixes.*
 
-### Authentication System Additions
-- [x] Password reset flow: Added "Forgot password?" button to login form, new `/reset-password` route, Firebase Auth integration, robust error handling, and user feedback. Adjusted landing page spacing to accommodate the new button.
-- [x] Password reset flow (email link via Firebase Auth)
+### Authentication
+- [x] Password reset system implemented (2025-04-22)
+  - "Forgot password?" link on login form
+  - `/reset-password` route with validation
+  - Firebase email reset flow integration
+  - Error handling and user notifications
+  - Landing page layout adjustments
 
 ### "Retro Space" Theme & UI Overhaul
 
@@ -306,12 +310,9 @@
 - Planning regular performance audits
 - Establishing consistent UI patterns
 
-## Updates
-2025-04-15: Consolidated and updated documentation for the enhanced Character Workflow system implementation, including config-driven engine, step-by-step UI, project linking/unlinking, view mode, autosave, resume logic fixes, layout adjustments, and associated new components. Marked previous workflow tasks as superseded or complete.
-2025-04-15: Documented the implementation of the "Retro Space" theme overhaul, including the new color palette (teal, orange, cream), updated component styling, and associated UI fixes (sidebar logo, removed emojis/borders). Marked previous UI/UX Phase 2 as superseded. Updated Recent Updates section.
-2025-04-17: Added entry for "Landing Page Redesign & Fixes" under Completed Features. Marked previous landing page layout task as resolved. Added Password Reset flow to completed features. Updated consolidated recent updates list. Updated Upcoming Work section to reflect Password Reset as next priority.
-2025-04-21: Added entry for "Notes UI Improvements (`ProjectNotes.jsx`)" under Completed Features, detailing card restyling, grid layout, and smaller form buttons.
+" under Completed Features, detailing card restyling, grid layout, and smaller form buttons.
 2025-04-21: Documented major Notes section functionality and UX enhancements (autosave, 3-dot menu, cleaner cards, notifications, button states, button size standardization) under Completed Features and updated Recent Updates.
+2025-04-22: Home Page cycling quote and stats panel — implemented creative quote cycling (Migra font, accent-cream, top-left, fade animation, 6s interval, no repeats) and began stats/activity panel structure below quote for future features. See also `activeContext.md` and `tasks.md` for details.
 
 ### UI Polish & Note Editing Refactor
 - [x] Added note deletion animation (`ProjectNotes.jsx`).

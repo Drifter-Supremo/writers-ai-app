@@ -55,7 +55,8 @@ This document outlines the remaining tasks required to complete and polish the W
 - [x] **Implement Content:** Build the React component (`src/routes/Home.jsx`) with the chosen content.
     - [x] Replace static welcome message with a cycling creative quote, styled in Migra font and accent-cream color, placed at the top left of the main content area.
     - [x] The quote cycles randomly every 6 seconds, never repeating twice in a row, with a smooth fade animation.
-    - [x] Future homepage features (user stats, activity feed, etc.) will be added below this quote.
+    - [x] Implement real-time stats panel (projects, workflows, files, notes) below this quote.
+    - [x] Implement recent activity feed (pending).
     - [x] Ensure styling aligns with the rest of the application and does not interfere with sidebar or future content.
     - [x] Remove Character Workflow dashboard UI (moved to `/workflows`).
 
@@ -346,3 +347,4 @@ All loading and skeleton state tasks for the Project Detail View and its sidebar
 2025-04-17: Marked "(Optional) Password Reset" task (2.3) as incomplete and designated it as the **(Next Priority)**. Updated Landing Page section (3.0) to reflect completion of the redesign and fixes, superseding previous refinement tasks.
 2025-04-21: Updated Notes Section Refactor (3.5) to mark task "Notes should display as tile cards" as complete, reflecting the implementation of responsive grid layout and workflow-style card styling in `ProjectNotes.jsx`.
 2025-04-21: Marked remaining Notes Section Refactor (3.5) tasks (skeleton loaders, error handling, UI polish) as complete based on recent implementations (autosave, notifications, UI tweaks, button standardization).
+2025-04-22: Home Page cycling quote and stats panel — implemented animated creative quote cycling (Migra font, accent-cream, top-left, 6s, fade, no repeats) and began stats/activity panel structure below quote for future features. See also `activeContext.md` and `progress.md` for details.

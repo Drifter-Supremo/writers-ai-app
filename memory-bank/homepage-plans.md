@@ -37,14 +37,10 @@ Small, visual stat cards or icon pills showing the user’s creative activity.
   
 
 - Projects Created: X
-
-- Characters Defined: X
-
-- Notes Written: X
-
 - Workflows Completed: X
-
+- Workflows In Progress: X
 - Files Uploaded: X
+- Notes Written: X
 
   
 
