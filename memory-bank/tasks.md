@@ -51,11 +51,12 @@ This document outlines the remaining tasks required to complete and polish the W
     - [x] Disable "Save Preferences" button if the form is invalid.
 
 ### 1.3. Home Page Implementation
-- [x] **Define Purpose:** Define the content and function of the Home page (e.g., welcome message, quick stats, recent projects, getting started guide). (Workflow UI moved to dedicated page).
+- [x] **Define Purpose:** Define the content and function of the Home page (e.g., creative cycling quote, quick stats, recent projects, getting started guide). (Workflow UI moved to dedicated page).
 - [x] **Implement Content:** Build the React component (`src/routes/Home.jsx`) with the chosen content.
-    - [x] Add welcoming text and brief app description.
-    - [x] Potentially display quick links or summary information (e.g., number of projects).
-    - [x] Ensure styling aligns with the rest of the application.
+    - [x] Replace static welcome message with a cycling creative quote, styled in Migra font and accent-cream color, placed at the top left of the main content area.
+    - [x] The quote cycles randomly every 6 seconds, never repeating twice in a row, with a smooth fade animation.
+    - [x] Future homepage features (user stats, activity feed, etc.) will be added below this quote.
+    - [x] Ensure styling aligns with the rest of the application and does not interfere with sidebar or future content.
     - [x] Remove Character Workflow dashboard UI (moved to `/workflows`).
 
 ### 1.4. Character Workflow Restructuring & Linking (Partially Superseded)

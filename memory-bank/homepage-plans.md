@@ -1,4 +1,4 @@
-﻿# 🧠 Writers AI Assistant – Home Page & Workflow Design Plan
+# 🧠 Writers AI Assistant – Home Page & Workflow Design Plan
 
   
 
@@ -18,23 +18,11 @@ Building the **Home Page** and designing the **Screenplay Workflows** starting w
 
 ### 1. Welcome & Quickstart Section
 
-Display a friendly greeting and quick access buttons.
+**Implemented:** The welcome message is now a cycling creative quote, chosen from a set of branded taglines (e.g., "Where stories find structure.", "Ink meets intelligence.", etc.).
 
-  
-
-- Welcome message:
-
-> "Welcome back, [userName]"
-
-  
-
-- Quick action buttons:
-
-- **Start New Workflow**
-
-- **Resume Saved Workflow**
-
-- **Go to Projects**
+- The quote is styled in Migra font and accent-cream color, placed at the top left of the main content area (just inside the sidebar), with a fade animation and random order (never repeating twice in a row).
+- This serves as the homepage "hero" and sets the creative tone for the app.
+- Quick action buttons (Start New Workflow, Resume Saved Workflow, Go to Projects) will be added below in future steps.
 
   
 
