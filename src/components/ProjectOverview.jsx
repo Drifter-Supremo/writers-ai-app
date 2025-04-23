@@ -25,7 +25,7 @@ export default function ProjectOverview({ project, onSave }) {
     <div>
       {editing ? (
         // Use .card-creative and new text colors
-        <form onSubmit={handleSave} className="card-creative p-8 max-w-2xl mx-auto mb-8 break-words">
+        <form onSubmit={handleSave} className="card-creative p-8 max-w-2xl mb-8 break-words">
           <div className="space-y-4">
             <div>
               {/* Use new text colors */}
@@ -110,7 +110,7 @@ export default function ProjectOverview({ project, onSave }) {
         </form>
       ) : (
         // Use .card-creative
-        <div className="card-creative p-8 max-w-2xl mx-auto mb-8 break-words">
+        <div className="card-creative p-8 max-w-2xl mb-8 break-words">
           <div className="flex justify-between items-start mb-6">
             {/* Use new text colors, remove text-gradient */}
             <h1 className="text-3xl font-bold text-text-primary break-words max-w-full">{project.name}</h1>

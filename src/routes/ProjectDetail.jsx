@@ -295,7 +295,7 @@ export default function ProjectDetail() {
       <div className="flex flex-col h-full"> {/* Use flex-col and ensure full height */}
 
         {/* Outer wrapper for max-width and horizontal padding */}
-        <div className="max-w-5xl mx-auto px-8 flex flex-col flex-grow"> {/* Apply constraints here */}
+        <div className="max-w-4xl px-8 flex flex-col flex-grow"> {/* Apply constraints here */}
 
           {/* Scrollable Content Area - Keep flex-grow, overflow. Remove p-8, add pb-8 */}
           <div className="overflow-y-auto flex-grow pb-8">

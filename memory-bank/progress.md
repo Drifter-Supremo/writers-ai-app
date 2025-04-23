@@ -2,6 +2,15 @@
 
 ## ✅ Completed Features
 
+### Project Progress Dropdown (2025-04-23)
+- [x] Created new component `src/components/ProjectProgressDropdown.jsx`.
+- [x] Integrated dropdown into `src/routes/ProjectDetail.jsx`.
+- [x] Allows users to select project status: "Brainstorming", "Crafting", "First Draft Done", "Rewriting", "Done".
+- [x] Saves selected status to new `progressStatus` field in the Firestore `projects` document.
+- [x] Positioned dropdown below the overview card, outside the overflow container.
+- [x] Adjusted layout in `ProjectDetail.jsx` and `ProjectOverview.jsx` for correct alignment.
+- [x] Removed placeholder text "(Edit and advanced...)" from `ProjectOverview.jsx`.
+
 ### Notes UI Improvements (`ProjectNotes.jsx`) (2025-04-21)
 - [x] Restyled note cards to match workflow card styling (`bg-teal-light`, `border`, `rounded-lg`).
 - [x] Implemented responsive grid layout (`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4`).

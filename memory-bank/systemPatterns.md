@@ -72,7 +72,7 @@ flowchart TD
     - Basic content layout
   - Workflows: Character workflow dashboard (`Workflows.jsx` - displays start card & `CharacterWorkflowList.jsx`).
   - CharacterWorkflow: Top-level route component for the enhanced workflow engine (`CharacterWorkflow.jsx`). Renders `WorkflowEngine.jsx`.
-- **Feature Components**: Business logic containers (ProjectCard, CharacterWorkflowList, LinkWorkflowModal, LinkedProjectDisplay).
+- **Feature Components**: Business logic containers (ProjectCard, CharacterWorkflowList, LinkWorkflowModal, LinkedProjectDisplay, ProjectProgressDropdown).
 - **Workflow Engine Components**: Specific to the enhanced character workflow (`/src/workflows/components/`)
   - `WorkflowEngine.jsx`: Core logic, state management (current step, answers), Firestore load/save (autosave), config processing, renders current step (intro or QuestionCard), renders navigation buttons.
   - `QuestionCard.jsx`: Displays question, image, textarea (consistent size); handles local input state and triggers debounced autosave via `onAnswerChange` prop. Renders AI placeholder button & modal. Handles view mode display.
@@ -315,6 +315,7 @@ projects/
   │  ├─ description: string
   │  ├─ createdAt: timestamp
   │  ├─ updatedAt: timestamp
+  │  ├─ progressStatus: string    <-- Added for Project Progress Dropdown
   │  ├─ characters/
   │  │  └─ {characterId}/
   │  ├─ notes/

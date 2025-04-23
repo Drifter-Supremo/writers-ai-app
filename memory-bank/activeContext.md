@@ -13,7 +13,14 @@ Phase 2: Authentication & Landing Page
 
 ### Recent Completions
 
-1. **Notes Section Overhaul (2025-04-21)**
+1. **Project Progress Dropdown (2025-04-23)**
+   - ✅ Added `ProjectProgressDropdown.jsx` component to `ProjectDetail.jsx`.
+   - ✅ Allows selecting project status (Brainstorming, Crafting, First Draft Done, Rewriting, Done).
+   - ✅ Saves selected status to new `progressStatus` field in Firestore `projects` document.
+   - ✅ Positioned dropdown below overview card, outside overflow container, ensuring proper alignment.
+   - ✅ Removed placeholder text "(Edit and advanced...)" from `ProjectOverview.jsx`.
+
+2. **Notes Section Overhaul (2025-04-21)**
    - ✅ Implemented robust autosave for note content changes.
    - ✅ Fixed editor toolbar button active state highlighting.
    - ✅ Replaced direct delete button on note cards with a 3-dot menu containing the delete action.

@@ -310,6 +310,7 @@ All loading and skeleton state tasks for the Project Detail View and its sidebar
     - [ ] Check color contrast ratios (using new "Retro Space" theme palette).
 - [ ] **Empty States:** Ensure all areas with dynamic content have well-designed empty states (e.g., no projects, no files, no notes).
 - [ ] **Feedback States:** Enhance visual feedback for user actions (e.g., clearer success messages, more distinct loading indicators).
+- [x] **Project Progress Dropdown:** Added dropdown to `ProjectDetail.jsx` (using `ProjectProgressDropdown.jsx`) to view/update project status (`progressStatus` field in Firestore). Included related layout fixes in `ProjectDetail.jsx` and `ProjectOverview.jsx`.
 - [ ] **Workflow UI Enhancements:**
    - [ ] Add fading animations/transitions between workflow questions in `WorkflowEngine`.
    - [ ] Consider adding a progress indicator (e.g., step count, progress bar) to `WorkflowEngine`.

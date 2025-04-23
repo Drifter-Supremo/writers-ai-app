@@ -210,6 +210,21 @@ if (questionId === 'name') {
   const workflowRef = doc(db, 'characterWorkflows', workflowId);
   await updateDoc(workflowRef, { name: value || 'Untitled Character Workflow' });
 }
+
+// Project Progress Status Update (ProjectDetail.jsx / ProjectProgressDropdown.jsx)
+import { doc, updateDoc } from "firebase/firestore";
+// ... inside component or handler function ...
+const updateProjectStatus = async (projectId, newStatus) => {
+  const projectRef = doc(db, 'projects', projectId);
+  try {
+    await updateDoc(projectRef, { progressStatus: newStatus });
+    console.log("Project status updated successfully to:", newStatus);
+    // Optionally trigger UI feedback (e.g., Notification)
+  } catch (error) {
+    console.error("Error updating project status:", error);
+    // Optionally trigger error feedback
+  }
+};
 ```
 
 ### 5. Workflow Configuration Pattern
