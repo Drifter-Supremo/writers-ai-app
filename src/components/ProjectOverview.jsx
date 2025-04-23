@@ -140,9 +140,6 @@ export default function ProjectOverview({ project, onSave }) {
         </div>
       )}
       {/* Use new text colors */}
-      <div className="text-text-secondary text-sm text-center">
-        (Edit and advanced overview features coming soon.)
-      </div>
     </div>
   );
 }

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { useParams } from 'react-router-dom';
-import { doc, getDoc, collection, getDocs, deleteDoc, query, where, updateDoc } from 'firebase/firestore'; // Added updateDoc
+import { doc, getDoc, collection, getDocs, deleteDoc, query, where, updateDoc } from 'firebase/firestore';
 import { db } from '../services/firebase';
 import { ref as storageRef, deleteObject } from 'firebase/storage';
 import { storage } from '../services/firebase';
@@ -12,6 +12,7 @@ import Notification from '../components/Notification'; // Import Notification co
 import ProjectSettings from '../components/ProjectSettings';
 import ProjectOverview from '../components/ProjectOverview';
 import ProjectOverviewSkeleton from '../components/ProjectOverviewSkeleton';
+import ProjectProgressDropdown from '../components/ProjectProgressDropdown';
 
 export default function ProjectDetail() {
   const { id } = useParams();
@@ -59,12 +60,13 @@ export default function ProjectDetail() {
           if (data.userId && user && data.userId !== user.uid) {
             setProject("notfound");
           } else {
-            setProject(data);
+            setProject({ ...data, progressStatus: data.progressStatus || 'Brainstorming' });
           }
         } else {
           setProject(null);
         }
       } catch (error) {
+        console.error("Error fetching project:", error);
         setProject("notfound");
       }
     }
@@ -198,6 +200,23 @@ export default function ProjectDetail() {
     }
   };
 
+  // Handle project progress status update
+  const handleProgressStatusUpdate = async (newStatus) => {
+    if (!user?.uid || !project?.id) return;
+    try {
+      const docRef = doc(db, "projects", project.id);
+      await updateDoc(docRef, {
+        progressStatus: newStatus,
+        lastUpdated: serverTimestamp(), // Optional: add a timestamp for the update
+      });
+      setProject(prev => ({ ...prev, progressStatus: newStatus }));
+      setNotification({ type: "success", message: `Project status updated to "${newStatus}"` });
+    } catch (error) {
+      console.error("Error updating project status:", error);
+      setNotification({ type: "error", message: "Failed to update project status. Please try again." });
+    }
+  };
+
   if (project === "notfound") {
     return (
       <div className="p-6 text-center">
@@ -272,89 +291,98 @@ export default function ProjectDetail() {
         </nav>
       </div>
 
-      {/* Main Content - Inherits primary-bg */}
-      <div className="p-8 overflow-auto"> {/* Added overflow-auto */}
-        <div className="max-w-5xl mx-auto">
-          {/* Use Notification component */}
-          <Notification
-            message={notification?.message}
-            type={notification?.type}
-            onClose={() => setNotification(null)} // Manual close still possible
-          />
-          {activeSection === 'overview' && (
-            <ProjectOverview // Assumes ProjectOverview uses correct theme styles
-              project={project}
-              onSave={async (updated) => {
-                // Save to Firestore
-                const docRef = doc(db, "projects", id);
-                await docRef.update
-                  ? await docRef.update(updated)
-                  : await import('firebase/firestore').then(({ updateDoc }) =>
-                      updateDoc(docRef, updated)
+      {/* Main Content Area Column */}
+      <div className="flex flex-col h-full"> {/* Use flex-col and ensure full height */}
+
+        {/* Outer wrapper for max-width and horizontal padding */}
+        <div className="max-w-5xl mx-auto px-8 flex flex-col flex-grow"> {/* Apply constraints here */}
+
+          {/* Scrollable Content Area - Keep flex-grow, overflow. Remove p-8, add pb-8 */}
+          <div className="overflow-y-auto flex-grow pb-8">
+            {/* Notification component */}
+            <Notification
+              message={notification?.message}
+              type={notification?.type}
+              onClose={() => setNotification(null)}
+            />
+
+            {/* Conditional Section Rendering */}
+            {activeSection === 'overview' && (
+              <ProjectOverview
+                project={project}
+                onSave={async (updated) => {
+                  const docRef = doc(db, "projects", id);
+                  try {
+                    await updateDoc(docRef, updated); // Use updateDoc directly
+                    setProject((prev) => ({ ...prev, ...updated }));
+                    setNotification({ type: "success", message: "Project details saved." });
+                  } catch (error) {
+                    console.error("Error saving project details:", error);
+                    setNotification({ type: "error", message: "Failed to save project details." });
+                  }
+                }}
+              />
+            )}
+            {activeSection === 'files' && (
+              <ProjectFiles
+                files={files}
+                onDeleteFile={handleDeleteFile}
+                deletingFileId={deletingFileId}
+                projectId={id}
+                refreshFiles={async () => {
+                  if (!user?.uid) { setFiles([]); return; }
+                  const q = query(collection(db, `projects/${id}/files`), where("userId", "==", user.uid));
+                  const filesSnap = await getDocs(q);
+                  setFiles(filesSnap.docs.map(doc => ({ id: doc.id, ...doc.data() })));
+                }}
+              />
+            )}
+            {activeSection === 'notes' && (
+              <ProjectNotes
+                notes={notes}
+                loadingNotes={loadingNotes}
+                onSaveNote={handleSaveNote}
+                onDeleteNote={async (noteId) => {
+                  if (!user?.uid) return;
+                  setLoadingNotes(true);
+                  try {
+                    await deleteDoc(doc(db, `projects/${id}/notes`, noteId));
+                    setNotification({ type: "success", message: "Note deleted successfully" });
+                    const q = query(collection(db, `projects/${id}/notes`), where("userId", "==", user.uid));
+                    const notesSnap = await getDocs(q);
+                    setNotes(
+                      notesSnap.docs
+                        .map(doc => ({ id: doc.id, ...doc.data() }))
+                        .sort((a, b) => (b.createdAt?.seconds || 0) - (a.createdAt?.seconds || 0))
                     );
-                setProject((prev) => ({
-                  ...prev,
-                  ...updated,
-                  tags: updated.tags,
-                }));
-              }}
-            />
-          )}
-          {activeSection === 'files' && (
-            <ProjectFiles
-              files={files}
-              onDeleteFile={handleDeleteFile}
-              deletingFileId={deletingFileId}
-              projectId={id}
-              refreshFiles={async () => {
-                if (!user?.uid) {
-                  setFiles([]);
-                  return;
-                }
-                const q = query(collection(db, `projects/${id}/files`), where("userId", "==", user.uid));
-                const filesSnap = await getDocs(q);
-                setFiles(filesSnap.docs.map(doc => ({
-                  id: doc.id,
-                  ...doc.data()
-                })));
-              }}
-            />
-          )}
-          {activeSection === 'notes' && (
-            <ProjectNotes
-              notes={notes}
-              loadingNotes={loadingNotes}
-              onSaveNote={handleSaveNote} // Use the unified save handler
-              onDeleteNote={async (noteId) => {
-              if (!user?.uid) return;
-              setLoadingNotes(true);
-              try {
-                await deleteDoc(doc(db, `projects/${id}/notes`, noteId));
-                setNotification({ type: "success", message: "Note deleted successfully" });
-                // Refresh notes
-                const q = query(collection(db, `projects/${id}/notes`), where("userId", "==", user.uid));
-                const notesSnap = await getDocs(q);
-                setNotes(
-                  notesSnap.docs
-                    .map(doc => ({ id: doc.id, ...doc.data() }))
-                    .sort((a, b) => (b.createdAt?.seconds || 0) - (a.createdAt?.seconds || 0))
-                );
-              } catch (error) {
-                setNotification({
-                  type: "error",
-                  message: "Failed to delete note. Please try again."
-                });
-              } finally {
-                setLoadingNotes(false);
-              }
-            }}
-          />
-          )}
-          {activeSection === 'settings' && (
-            <ProjectSettings />
-          )}
-        </div>
-      </div>
-    </div>
+                  } catch (error) {
+                    setNotification({ type: "error", message: "Failed to delete note." });
+                  } finally {
+                    setLoadingNotes(false);
+                  }
+                }}
+              />
+            )}
+            {activeSection === 'settings' && (
+              <ProjectSettings />
+            )}
+          </div> {/* End Scrollable Content Area */}
+
+        {/* Project Progress Dropdown (Now inside the outer wrapper) */}
+        {activeSection === 'overview' && project && (
+          /* Remove max-width, mx-auto, px-8. Keep pb-8, w-full */
+          <div className="pb-8 w-full mt-0">
+            <div className="max-w-xs"> {/* Constrain dropdown width, left-aligned */}
+              <ProjectProgressDropdown
+                currentStatus={project.progressStatus}
+                projectId={id}
+                onStatusChange={handleProgressStatusUpdate}
+              />
+            </div>
+          </div>
+        )}
+      </div> {/* End Outer wrapper (Moved after conditional block) */}
+      </div> {/* End Main Content Area Column */}
+    </div> /* End Grid */
   );
 }
