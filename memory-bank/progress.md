@@ -227,6 +227,27 @@
 8. **Authentication:** Added password reset flow.
 9. **Notes Section Polish:** Fixed toolbar states, added autosave, replaced delete button with menu, removed card previews/metadata, added notifications, improved button states, and standardized button sizes.
 
+---
+
+## 2025-04-29: Linked Workflows Dropdown Integration
+
+### ✅ Linked Workflows Dropdown
+- Added `LinkedWorkflowsDropdown.jsx` (reusable, styled to match ProjectProgressDropdown).
+- Queries all Character Workflows with `linkedProjectId` matching the current project.
+- Displays workflow name and completion status (green/yellow dot).
+- Navigates to workflow on click, closes menu after navigation.
+- Loading and empty states handled with spinner and disabled text.
+
+### ✅ Project Page Integration
+- Imported and rendered `LinkedWorkflowsDropdown` below the status dropdown in `ProjectDetail.jsx`.
+- Used `flex gap-4 flex-wrap` container for responsive layout.
+- Ensured dropdowns are visually aligned and stack on mobile.
+
+### 🔒 Security
+- Firestore rules already allow read access for user-owned `characterWorkflows`.
+
+---
+
 ### Dashboard Enhancement
 - [ ] Advanced filtering
 - [ ] Batch operations

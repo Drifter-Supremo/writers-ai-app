@@ -31,11 +31,13 @@ flowchart TD
         WLPage --> WLList[CharacterWorkflowList.jsx]
         WLList --> LinkModal[LinkWorkflowModal.jsx]
         WLList --> LinkDisplay[LinkedProjectDisplay.jsx]
+        WLList --> LinkedDropdown[LinkedWorkflowsDropdown.jsx]
         WLList --> FirestoreDB2[(Firestore: Read Workflows)]
         LinkModal --> FirestoreDB3[(Firestore: Read Projects)]
         LinkModal --> FirestoreDB4[(Firestore: Update Workflow Link)]
         WLList --> FirestoreDB5[(Firestore: Update Workflow Link)]
         LinkDisplay --> FirestoreDB6[(Firestore: Read Project Name)]
+        LinkedDropdown --> FirestoreDB7[(Firestore: Query Linked Workflows)]
     end
 
 
@@ -72,7 +74,7 @@ flowchart TD
     - Basic content layout
   - Workflows: Character workflow dashboard (`Workflows.jsx` - displays start card & `CharacterWorkflowList.jsx`).
   - CharacterWorkflow: Top-level route component for the enhanced workflow engine (`CharacterWorkflow.jsx`). Renders `WorkflowEngine.jsx`.
-- **Feature Components**: Business logic containers (ProjectCard, CharacterWorkflowList, LinkWorkflowModal, LinkedProjectDisplay, ProjectProgressDropdown).
+- **Feature Components**: Business logic containers (ProjectCard, CharacterWorkflowList, LinkWorkflowModal, LinkedProjectDisplay, ProjectProgressDropdown, LinkedWorkflowsDropdown).
 - **Workflow Engine Components**: Specific to the enhanced character workflow (`/src/workflows/components/`)
   - `WorkflowEngine.jsx`: Core logic, state management (current step, answers), Firestore load/save (autosave), config processing, renders current step (intro or QuestionCard), renders navigation buttons.
   - `QuestionCard.jsx`: Displays question, image, textarea (consistent size); handles local input state and triggers debounced autosave via `onAnswerChange` prop. Renders AI placeholder button & modal. Handles view mode display.
@@ -91,6 +93,9 @@ flowchart TD
 - **Shared Components**: Cross-cutting concerns (ErrorBoundary, Notification)
 
 ### 3. UI Component Patterns ("Retro Space" Theme)
+
+- **Dropdown Menus**: ProjectProgressDropdown and LinkedWorkflowsDropdown share visual style and responsive flex container for alignment on project pages.
+
 ```mermaid
 flowchart TD
     Layout[Layout Component] --> Split[grid-cols-[250px,1fr]]

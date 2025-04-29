@@ -13,6 +13,7 @@ import ProjectSettings from '../components/ProjectSettings';
 import ProjectOverview from '../components/ProjectOverview';
 import ProjectOverviewSkeleton from '../components/ProjectOverviewSkeleton';
 import ProjectProgressDropdown from '../components/ProjectProgressDropdown';
+import LinkedWorkflowsDropdown from '../components/LinkedWorkflowsDropdown';
 
 export default function ProjectDetail() {
   const { id } = useParams();
@@ -370,14 +371,18 @@ export default function ProjectDetail() {
 
         {/* Project Progress Dropdown (Now inside the outer wrapper) */}
         {activeSection === 'overview' && project && (
-          /* Remove max-width, mx-auto, px-8. Keep pb-8, w-full */
           <div className="pb-8 w-full mt-0">
-            <div className="max-w-xs"> {/* Constrain dropdown width, left-aligned */}
-              <ProjectProgressDropdown
-                currentStatus={project.progressStatus}
-                projectId={id}
-                onStatusChange={handleProgressStatusUpdate}
-              />
+            <div className="flex gap-4 flex-wrap max-w-xl">
+              <div className="max-w-xs">
+                <ProjectProgressDropdown
+                  currentStatus={project.progressStatus}
+                  projectId={id}
+                  onStatusChange={handleProgressStatusUpdate}
+                />
+              </div>
+              <div className="max-w-xs">
+                <LinkedWorkflowsDropdown projectId={project.id} userId={user?.uid} />
+              </div>
             </div>
           </div>
         )}
